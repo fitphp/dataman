@@ -14,8 +14,8 @@ class HomeController extends Controller
     public function index(Content $content)
     {
         return $content
-            ->header('Dashboard')
-            ->description('Description...')
+            ->header('控制台')
+            ->description('用于展示当前系统中的统计数据、统计报表及重要实时数据')
             ->body(function (Row $row) {
                 $row->column(6, function (Column $column) {
                     $column->row(Dashboard::title());

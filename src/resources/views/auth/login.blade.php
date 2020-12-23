@@ -1,7 +1,5 @@
 <div class="login-page">
-    <div class="left background">
-
-    </div>
+    <div class="left background"></div>
     <div class="right bg-white">
         <div class="login-box">
             <div class="login-logo mb-2">

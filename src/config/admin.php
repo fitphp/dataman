@@ -11,7 +11,7 @@ return [
     | login page.
     |
     */
-    'name' => env('ADMIN_NAME', 'FastAdmin'),
+    'name' => env('ADMIN_NAME', 'laveman'),
 
     /*
     |--------------------------------------------------------------------------
@@ -22,7 +22,7 @@ return [
     | `img` tag, eg '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo' => '<img src="/static/images/logo.png" width="35"> &nbsp;'.env('ADMIN_NAME', 'FastAdmin'),
+    'logo' => env('ADMIN_NAME', 'laveman'),
 
     /*
     |--------------------------------------------------------------------------
@@ -85,7 +85,7 @@ return [
     | Html title for all pages.
     |
     */
-    'title' => env('ADMIN_NAME', 'FastAdmin'),
+    'title' => env('ADMIN_NAME', 'laveman'),
 
     /*
     |--------------------------------------------------------------------------
