@@ -19,7 +19,7 @@ services:
         restart: always 
         volumes:  
             - ./src:/var/www/html
-            - ./php-fpm/php.ini:/usr/local/etc/php/conf.d/
+            #- ./php-fpm/php.ini:/usr/local/etc/php/conf.d/
             - ./php-fpm/www.conf:/usr/local/etc/php-fpm.d/www.conf
         ports:  
             - "9000:9000/tcp"
