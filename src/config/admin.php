@@ -11,7 +11,7 @@ return [
     | login page.
     |
     */
-    'name' => env('ADMIN_NAME', 'laveman'),
+    'name' => env('APP_NAME', 'laveman'),
 
     /*
     |--------------------------------------------------------------------------
@@ -22,7 +22,7 @@ return [
     | `img` tag, eg '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo' => env('ADMIN_NAME', 'laveman'),
+    'logo' => env('APP_NAME', 'laveman'),
 
     /*
     |--------------------------------------------------------------------------
@@ -85,7 +85,7 @@ return [
     | Html title for all pages.
     |
     */
-    'title' => env('ADMIN_NAME', 'laveman'),
+    'title' => env('APP_NAME', 'laveman'),
 
     /*
     |--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return [
     |--------------------------------------------------------------------------
     |
    */
-    'assets_server' => env('ADMIN_ASSETS_SERVER'),
+    'assets_server' => env('ADMIN_ASSETS_SERVER', ''),
 
     /*
     |--------------------------------------------------------------------------
