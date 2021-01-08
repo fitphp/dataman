@@ -890,11 +890,11 @@
         },
         {
             "name": "fitphp/laravel-admin",
-            "version": "2.0.15-beta",
+            "version": "2.0.15",
             "source": {
                 "type": "git",
                 "url": "https://gitee.com/fitphp/laravel-admin.git",
-                "reference": "9e566f43df4d5b4ab09b7815c12fb3bd8d7c2ec8"
+                "reference": "5304cc922eb7e4873f11e7a713a51dc9969f640b"
             },
             "require": {
                 "doctrine/dbal": "2.*",
@@ -932,21 +932,21 @@
             ],
             "authors": [
                 {
-                    "name": "jqh",
-                    "email": "841324345@qq.com"
+                    "name": "boolean",
+                    "email": "hongbin.hsu@qq.com"
                 }
             ],
-            "description": "dcat admin",
-            "homepage": "https://github.com/jqhph/dcat-admin",
+            "description": "fitphp admin",
+            "homepage": "https://gitee.com/fitphp/laravel-admin",
             "keywords": [
                 "admin",
-                "dcat",
+                "fitphp",
                 "form",
                 "grid",
                 "laravel",
                 "laravel admin"
             ],
-            "time": "2021-01-03T14:37:12+00:00"
+            "time": "2021-01-08T12:42:19+00:00"
         },
         {
             "name": "fruitcake/laravel-cors",
