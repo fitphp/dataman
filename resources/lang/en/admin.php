@@ -222,4 +222,6 @@ return [
         'minlength' => 'The :attribute must be at least :min characters.',
         'maxlength' => 'The :attribute may not be greater than :max characters.',
     ],
+    'environment'              => 'Environment',
+    'develop_team'             => 'Develop Team',
 ];

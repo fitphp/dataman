@@ -223,4 +223,6 @@ return [
         'minlength' => ':attribute 字符长度不能少于 :min。',
         'maxlength' => ':attribute 字符长度不能超出 :max。',
     ],
+    'environment'              => '运行环境',
+    'develop_team'             => '开发团队',
 ];

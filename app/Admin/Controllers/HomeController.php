@@ -16,12 +16,12 @@ class HomeController extends Controller
             ->header('控制台')
             ->description('当前系统基本信息')
             ->body(function (Row $row) {
-                $row->column(4, function (Column $column) {
-                    $column->row($this->dependencies());
+                $row->column(6, function (Column $column) {
+                    $column->row($this->environment());
                 });
 
-                $row->column(8, function (Column $column) {
-                    $column->row($this->environment());
+                $row->column(6, function (Column $column) {
+                    $column->row($this->teaminfo());
                 });
             });
     }
@@ -33,14 +33,25 @@ class HomeController extends Controller
             ['name' => '框架版本',   'value' => 'Laravel '.app()->version()],
             ['name' => '操作系统',   'value' => php_uname()],
             ['name' => '软件配置',   'value' => $_SERVER["SERVER_SOFTWARE"]],
-            ['name' => '缓存驱动',   'value' => config('cache.default')],
-            ['name' => '会话驱动',   'value' => config('session.driver')],
-            ['name' => '队列驱动',   'value' => config('queue.default')],
             ['name' => '系统时区',   'value' => config('app.timezone')],
             ['name' => '区域设置',   'value' => config('app.locale')],
         ];
 
-        return view('admin::dashboard.environment', compact('envs'));
+        return view('dashboard.environment', compact('envs'));
+    }
+
+    public function teaminfo()
+    {
+        $teams = [
+            ['name' => '项目管理',   'value' => ''],
+            ['name' => '系统架构',   'value' => ''],
+            ['name' => '产品需求',   'value' => ''],
+            ['name' => '研发交付',   'value' => ''],
+            ['name' => '交互设计',   'value' => ''],
+            ['name' => '质量管理',   'value' => '']
+        ];
+
+        return view('dashboard.team', compact('teams'));
     }
 
     public function dependencies()
