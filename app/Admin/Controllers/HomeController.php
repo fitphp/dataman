@@ -31,7 +31,7 @@ class HomeController extends Controller
         $envs = [
             ['name' => 'PHP版本',   'value' => 'PHP/'.PHP_VERSION],
             ['name' => '框架版本',   'value' => 'Laravel '.app()->version()],
-            ['name' => '操作系统',   'value' => php_uname()],
+            ['name' => '操作系统',   'value' => php_uname('s').' '.php_uname('r')],
             ['name' => '软件配置',   'value' => $_SERVER["SERVER_SOFTWARE"]],
             ['name' => '系统时区',   'value' => config('app.timezone')],
             ['name' => '区域设置',   'value' => config('app.locale')],
