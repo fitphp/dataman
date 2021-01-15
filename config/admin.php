@@ -85,7 +85,7 @@ return [
     | Html title for all pages.
     |
     */
-    'title' => env('APP_NAME', 'laveman'),
+    'title' => env('APP_NAME', 'dataman'),
 
     /*
     |--------------------------------------------------------------------------
@@ -318,6 +318,6 @@ return [
     'extension' => [
         // When you use command `php artisan admin:ext-make` to generate extensions,
         // the extension files will be generated in this directory.
-        'dir' => base_path('dcat-admin-extensions'),
+        'dir' => base_path('extensions'),
     ],
 ];
