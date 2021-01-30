@@ -1,3 +1,0 @@
-[submodule "extensions/fitphp"]
-	path = extensions/fitphp
-	url = git@gitee.com:fitphp/laravel-admin-extensions.git
