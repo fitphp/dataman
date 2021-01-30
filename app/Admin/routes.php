@@ -19,4 +19,5 @@ Route::group([
     $router->resource('/platform', 'PlatformController');
     $router->resource('/category', 'CategoryController');
     $router->resource('/region', 'ChinaRegionController');
+    $router->resource('/channel', 'ChannelController');
 });

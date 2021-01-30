@@ -25,7 +25,7 @@ class CreateCategoryTable extends Migration
                 $table->string('image');
                 $table->string('title');
                 $table->string('name');
-                $table->unsignedInteger('order', false);
+                $table->unsignedTinyInteger('order')->default('0')->comment('排序');
                 $table->timestamps();
                 $table->index('id');
             });
