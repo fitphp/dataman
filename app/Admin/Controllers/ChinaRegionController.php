@@ -7,7 +7,7 @@ use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
 use Dcat\Admin\Http\Controllers\AdminController;
 
-class RegionController extends AdminController
+class ChinaRegionController extends AdminController
 {
     /**
      * Make a grid builder.

@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Providers\OperationLogServiceProvider;
 use Dcat\Admin\Admin;
 use App\Models\OperationLog as OperationLogModel;
 use Dcat\Admin\Support\Helper;
@@ -76,7 +77,7 @@ class LogOperation
      */
     protected function setting($key, $default = null)
     {
-        //return OperationLogServiceProvider::setting($key, $default);
+        return OperationLogServiceProvider::setting($key, $default);
     }
 
     /**
