@@ -15,16 +15,6 @@ use Dcat\Admin\Http\Controllers\AdminController;
 
 class CategoryController extends AdminController
 {
-    /**
-     * Get content title.
-     *
-     * @return string
-     */
-//    protected function title()
-//    {
-//        return $this->trans('category.title');
-//    }
-
     public function index(Content $content)
     {
         return $content->title(trans('category.title'))
