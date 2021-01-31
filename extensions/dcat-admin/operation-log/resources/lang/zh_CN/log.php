@@ -8,4 +8,7 @@ return [
         'OperationLogs' => '操作日志',
         'operation-logs' => '操作日志',
     ],
+
+    'options' => [
+    ],
 ];

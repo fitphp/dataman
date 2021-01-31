@@ -1,27 +1,28 @@
 <?php
 
-namespace App\Admin\Controllers;
+namespace Dcat\Admin\OperationLog\Http\Controllers;
 
 use Dcat\Admin\Grid;
 use Dcat\Admin\Http\JsonResponse;
 use Dcat\Admin\Layout\Content;
+use Dcat\Admin\OperationLog\Models\OperationLog;
+use Dcat\Admin\OperationLog\OperationLogServiceProvider;
 use Dcat\Admin\Support\Helper;
 use Illuminate\Support\Arr;
-use App\Models\OperationLog as Models;
 
 class LogController
 {
     public function index(Content $content)
     {
         return $content
-            ->title(trans('log.title'))
+            ->title(OperationLogServiceProvider::trans('log.title'))
             ->description(trans('admin.list'))
             ->body($this->grid());
     }
 
     protected function grid()
     {
-        return new Grid(Models::with('user'), function (Grid $grid) {
+        return new Grid(OperationLog::with('user'), function (Grid $grid) {
             $grid->column('id', 'ID')->sortable();
             $grid->column('user', trans('admin.user'))
                 ->display(function ($user) {
@@ -40,7 +41,7 @@ class LogController
                 });
 
             $grid->column('method', trans('admin.method'))
-                ->label(Models::$methodColors)
+                ->label(OperationLog::$methodColors)
                 ->filterByValue();
 
             $grid->column('path', trans('admin.uri'))->display(function ($v) {
@@ -84,7 +85,7 @@ class LogController
 
                 $filter->equal('method', trans('admin.method'))
                     ->select(
-                        array_combine(Models::$methods, Models::$methods)
+                        array_combine(OperationLog::$methods, OperationLog::$methods)
                     );
 
                 $filter->like('path', trans('admin.uri'));
@@ -98,7 +99,7 @@ class LogController
     {
         $ids = explode(',', $id);
 
-        Models::destroy(array_filter($ids));
+        OperationLog::destroy(array_filter($ids));
 
         return JsonResponse::make()
             ->success(trans('admin.delete_succeeded'))

@@ -13,8 +13,6 @@ Route::group([
 ], function (Router $router) {
 
     $router->get('/', 'HomeController@index');
-    $router->get('auth/log', 'LogController@index')->name('auth.log.index');
-    $router->delete('auth/log/{id}', 'LogController@destroy')->name('auth.log.destroy');
 
     $router->resource('/dict/type', 'DictTypeController');
     $router->resource('/dict/data', 'DictDataController');
