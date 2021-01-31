@@ -13,45 +13,68 @@ class HomeController extends Controller
     public function index(Content $content)
     {
         return $content
-            ->header('控制台')
-            ->description('当前系统基本信息')
+            ->header(trans('home.title'))
+            ->description(trans('home.description'))
             ->body(function (Row $row) {
-                $row->column(6, function (Column $column) {
-                    $column->row($this->environment());
+                $row->column(12, function (Column $column) {
+                    $column->row($this->server());
                 });
 
                 $row->column(6, function (Column $column) {
-                    $column->row($this->teaminfo());
+                    $column->row($this->env());
+                });
+
+                $row->column(6, function (Column $column) {
+                    $column->row($this->team());
                 });
             });
     }
 
-    public function environment()
+    public function env()
     {
         $envs = [
-            ['name' => 'PHP版本',   'value' => 'PHP/'.PHP_VERSION],
-            ['name' => '框架版本',   'value' => 'Laravel '.app()->version()],
-            ['name' => '操作系统',   'value' => php_uname('s').' '.php_uname('r')],
-            ['name' => '软件配置',   'value' => $_SERVER["SERVER_SOFTWARE"]],
-            ['name' => '系统时区',   'value' => config('app.timezone')],
-            ['name' => '区域设置',   'value' => config('app.locale')],
+            ['name' => trans('home.env.php_version'),   'value' => 'PHP/'.PHP_VERSION],
+            ['name' => trans('home.env.framework_version'),   'value' => 'Laravel '.app()->version()],
+            ['name' => trans('home.env.soft_config'),   'value' => $_SERVER["SERVER_SOFTWARE"]],
+            ['name' => trans('home.env.timezone'),   'value' => config('app.timezone')],
+            ['name' => trans('home.env.region'),   'value' => config('app.locale')],
         ];
 
-        return view('dashboard.environment', compact('envs'));
+        return view('dashboard.env', compact('envs'));
     }
 
-    public function teaminfo()
+    public function team()
     {
         $teams = [
-            ['name' => '项目管理',   'value' => ''],
-            ['name' => '系统架构',   'value' => ''],
-            ['name' => '产品需求',   'value' => ''],
-            ['name' => '研发交付',   'value' => ''],
-            ['name' => '交互设计',   'value' => ''],
-            ['name' => '质量管理',   'value' => '']
+            ['name' => trans('home.team.pm'), 'value' => [
+                'Boolean' => 'hongbin.hsu@qq.com'
+            ]],
+            ['name' => trans('home.team.sa'), 'value' => [
+                'Boolean' => 'hongbin.hsu@qq.com'
+            ]],
+            ['name' => trans('home.team.dev'), 'value' => [
+                'Boolean' => 'hongbin.hsu@qq.com'
+            ]],
+            ['name' => trans('home.team.design'), 'value' => [
+                'Boolean' => 'hongbin.hsu@qq.com'
+            ]],
+            ['name' => trans('home.team.qa'), 'value' => [
+                'Boolean' => 'hongbin.hsu@qq.com'
+            ]],
         ];
 
         return view('dashboard.team', compact('teams'));
+    }
+
+    public function server()
+    {
+        $server = [
+            ['name' => trans('home.server.name'), 'value' => $_SERVER['SERVER_NAME']],
+            ['name' => trans('home.server.os'), 'value' => php_uname('s').' '.php_uname('r')],
+            ['name' => trans('home.server.ip'), 'value' => $_SERVER['SERVER_ADDR']],
+        ];
+
+        return view('dashboard.server', compact('server'));
     }
 
     public function dependencies()

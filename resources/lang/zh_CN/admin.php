@@ -10,8 +10,6 @@ return [
         'repository'        => '数据仓库',
         'add_field'         => '添加字段',
         'pk'                => '主键',
-        'created_at'        => '创建时间',
-        'updated_at'        => '更新时间',
         'soft_delete'       => '软删除',
         'create_migration'  => '创建表迁移文件',
         'create_model'      => '创建模型',
@@ -225,6 +223,4 @@ return [
         'minlength' => ':attribute 字符长度不能少于 :min。',
         'maxlength' => ':attribute 字符长度不能超出 :max。',
     ],
-    'environment'              => '运行环境',
-    'develop_team'             => '开发团队',
 ];
