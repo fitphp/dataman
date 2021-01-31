@@ -15,12 +15,12 @@ class CreateChannelTable extends Migration
     {
         Schema::create('channel', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('parent_id')->default('0')->comment('父ID');
-            $table->unsignedInteger('platform_id')->default('0')->comment('平台ID');
-            $table->string('name')->default('NULL')->nullable()->comment('名称');
-            $table->string('title')->default('')->comment('标题');
-            $table->string('image')->default('NULL')->nullable()->comment('图标');
-            $table->unsignedTinyInteger('order')->default('0')->comment('排序');
+            $table->unsignedInteger('parent_id')->default(0)->comment('父ID');
+            $table->unsignedInteger('platform_id')->default(0)->comment('平台ID');
+            $table->string('name', 50)->default('NULL')->nullable()->comment('名称');
+            $table->string('title', 50)->default('')->comment('标题');
+            $table->string('image', 255)->default('NULL')->nullable()->comment('图标');
+            $table->unsignedTinyInteger('order')->default(0)->comment('排序');
             $table->timestamps();
         });
     }

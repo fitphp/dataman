@@ -2,13 +2,13 @@
 
 namespace App\Admin\Controllers;
 
-use App\Admin\Repositories\SystemConfig;
+use App\Admin\Repositories\DictType;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
 use Dcat\Admin\Http\Controllers\AdminController;
 
-class SystemConfigController extends AdminController
+class DictTypeController extends AdminController
 {
     /**
      * Make a grid builder.
@@ -17,18 +17,24 @@ class SystemConfigController extends AdminController
      */
     protected function grid()
     {
-        return Grid::make(new SystemConfig(), function (Grid $grid) {
+        return Grid::make(new DictType(), function (Grid $grid) {
             $grid->column('id')->sortable();
             $grid->column('name');
-            $grid->column('key');
-            $grid->column('value');
-            $grid->type()->using([0 => '否', 1 => '是']);
+            $grid->column('key')->link(function () {
+                if ($this->id) {
+                    return admin_url('dict/data/?type_id='.$this->id);
+                }
+            }, '_self');
+            $grid->status()->using([0 => '停用', 1 => '正常'])->label([
+                0 => 'danger',
+                1 => 'primary'
+            ]);
             $grid->column('updated_at')->sortable();
 
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
-                $filter->like('name', trans('system-config.fields.name'));
-                $filter->like('key', trans('system-config.fields.key'));
+                $filter->like('name', trans('dict-type.fields.name'));
+                $filter->like('key', trans('dict-type.fields.key'));
             });
         });
     }
@@ -42,12 +48,11 @@ class SystemConfigController extends AdminController
      */
     protected function detail($id)
     {
-        return Show::make($id, new SystemConfig(), function (Show $show) {
+        return Show::make($id, new DictType(), function (Show $show) {
             $show->field('id');
             $show->field('name');
             $show->field('key');
-            $show->field('value');
-            $show->type()->using([0 => '否', 1 => '是']);
+            $show->status()->using([0 => '停用', 1 => '正常']);
             $show->field('remark');
             $show->field('created_at');
             $show->field('updated_at');
@@ -61,12 +66,11 @@ class SystemConfigController extends AdminController
      */
     protected function form()
     {
-        return Form::make(new SystemConfig(), function (Form $form) {
+        return Form::make(new DictType(), function (Form $form) {
             $form->display('id');
             $form->text('name')->required();
-            $form->text('key')->required()->placeholder('请输入唯一键值');
-            $form->text('value');
-            $form->radio('type')->options([0=>'否', 1=>'是'])->default(0);
+            $form->text('key')->required();
+            $form->radio('status')->options([0=>'停用', 1=>'正常'])->default(1);
             $form->text('remark');
 
             $form->display('created_at');

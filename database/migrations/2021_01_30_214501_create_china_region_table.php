@@ -25,11 +25,11 @@ class CreateChinaRegionTable extends Migration
                 $table->bigInteger('parent_code', false, true);
                 $table->unsignedTinyInteger('level', false, true);
                 $table->unsignedInteger('zip_code', false, true);
-                $table->string('city_code');
-                $table->string('name');
-                $table->string('short_name');
-                $table->string('merger_name');
-                $table->string('pinyin');
+                $table->string('city_code', 255);
+                $table->string('name',255);
+                $table->string('short_name',255);
+                $table->string('merger_name',255);
+                $table->string('pinyin',255);
                 $table->unsignedDouble('lng');
                 $table->unsignedDouble('lat');
                 $table->index(['level','parent_code', 'area_code', 'zip_code','city_code']);

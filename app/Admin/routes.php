@@ -16,6 +16,8 @@ Route::group([
     $router->get('auth/log', 'LogController@index')->name('auth.log.index');
     $router->delete('auth/log/{id}', 'LogController@destroy')->name('auth.log.destroy');
 
+    $router->resource('/dict/type', 'DictTypeController');
+    $router->resource('/dict/data', 'DictDataController');
     $router->resource('/system/config', 'SystemConfigController');
     $router->resource('/platform', 'PlatformController');
     $router->resource('/category', 'CategoryController');

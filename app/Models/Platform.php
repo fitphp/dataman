@@ -12,4 +12,8 @@ class Platform extends Model
 	use HasDateTimeFormatter;
     protected $table = 'platform';
 
+    public function channel()
+    {
+        return $this->hasOne(Channel::class);
+    }
 }

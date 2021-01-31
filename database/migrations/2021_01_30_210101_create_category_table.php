@@ -22,10 +22,10 @@ class CreateCategoryTable extends Migration
             Schema::create('categories', function (Blueprint $table) {
                 $table->increments('id');
                 $table->unsignedInteger('parent_id', false);
-                $table->string('image');
-                $table->string('title');
-                $table->string('name');
-                $table->unsignedTinyInteger('order')->default('0')->comment('排序');
+                $table->string('image',255);
+                $table->string('title',64);
+                $table->string('name',64);
+                $table->unsignedTinyInteger('order')->default(0)->comment('排序');
                 $table->timestamps();
                 $table->index('id');
             });

@@ -27,12 +27,13 @@ class PlatformController extends AdminController
                 1 => 'primary'
             ]);
 
-
             $grid->column('created_at');
             $grid->column('updated_at')->sortable();
 
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
+                $filter->like('name', trans('platform.fields.name'));
+                $filter->like('app_id', trans('platform.fields.app_id'));
 
             });
         });

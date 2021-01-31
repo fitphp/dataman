@@ -15,11 +15,11 @@ class CreateSystemConfigTable extends Migration
     {
         Schema::create('system_config', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->default('NULL')->nullable()->comment('名称');
-            $table->string('key')->default('NULL')->nullable()->comment('键名');
-            $table->string('value')->default('''')->nullable()->comment('键值');
-            $table->unsignedTinyInteger('type')->default('0')->comment('内置 （0否 1是）');
-            $table->string('remark')->default('''')->comment('备注');
+            $table->string('name', 64)->default('')->nullable()->comment('名称');
+            $table->string('key',64)->default('')->nullable()->comment('键名');
+            $table->string('value',255)->default('')->nullable()->comment('键值');
+            $table->unsignedTinyInteger('type')->default(0)->comment('内置 （0否 1是）');
+            $table->string('remark',255)->default('')->comment('备注');
             $table->timestamps();
         });
     }

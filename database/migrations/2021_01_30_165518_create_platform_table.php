@@ -15,9 +15,9 @@ class CreatePlatformTable extends Migration
     {
         Schema::create('platform', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->default('')->comment('名称');
-            $table->string('app_id')->default('NULL')->nullable()->comment('App ID');
-            $table->string('app_secret')->default('NULL')->nullable()->comment('App Secret');
+            $table->string('name',255)->default('')->comment('名称');
+            $table->string('app_id',64)->default('')->nullable()->comment('App ID');
+            $table->string('app_secret',64)->default('')->nullable()->comment('App Secret');
             $table->unsignedTinyInteger('switch')->default('1')->comment('开关');
             $table->timestamps();
         });
