@@ -2,13 +2,13 @@
 
 namespace App\Admin\Controllers;
 
-use App\Admin\Repositories\Platform;
+use App\Admin\Repositories\SystemConfig;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
 use Dcat\Admin\Http\Controllers\AdminController;
 
-class PlatformController extends AdminController
+class SystemConfigController extends AdminController
 {
     /**
      * Make a grid builder.
@@ -17,17 +17,12 @@ class PlatformController extends AdminController
      */
     protected function grid()
     {
-        return Grid::make(new Platform(), function (Grid $grid) {
+        return Grid::make(new SystemConfig(), function (Grid $grid) {
             $grid->column('id')->sortable();
             $grid->column('name');
-            $grid->column('app_id');
-            $grid->status()->using([0 => '关闭', 1 => '正常'])->label([
-                'default' => 'primary', // 设置默认颜色，不设置则默认为 default
-                0 => 'danger',
-                1 => 'primary'
-            ]);
-
-
+            $grid->column('key');
+            $grid->column('value');
+            $grid->type()->using([0 => '否', 1 => '是']);
             $grid->column('created_at');
             $grid->column('updated_at')->sortable();
 
@@ -47,12 +42,13 @@ class PlatformController extends AdminController
      */
     protected function detail($id)
     {
-        return Show::make($id, new Platform(), function (Show $show) {
+        return Show::make($id, new SystemConfig(), function (Show $show) {
             $show->field('id');
             $show->field('name');
-            $show->field('app_id');
-            $show->field('app_secret');
-            $show->status()->using([0 => '关闭', 1 => '正常']);
+            $show->field('key');
+            $show->field('value');
+            $show->type()->using([0 => '否', 1 => '是']);
+            $show->field('remark');
             $show->field('created_at');
             $show->field('updated_at');
         });
@@ -65,12 +61,13 @@ class PlatformController extends AdminController
      */
     protected function form()
     {
-        return Form::make(new Platform(), function (Form $form) {
+        return Form::make(new SystemConfig(), function (Form $form) {
             $form->display('id');
-            $form->text('name');
-            $form->text('app_id')->required()->placeholder('请输入唯一值');
-            $form->text('app_secret');
-            $form->switch('status');
+            $form->text('name')->required();
+            $form->text('key')->required()->placeholder('请输入唯一键值');
+            $form->text('value');
+            $form->radio('type')->options([0=>'否', 1=>'是'])->default(0);
+            $form->editor('remark');
 
             $form->display('created_at');
             $form->display('updated_at');

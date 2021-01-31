@@ -24,3 +24,15 @@ use Dcat\Admin\Show;
  * Admin::js('/packages/prettydocs/js/main.js');
  *
  */
+use Dcat\Admin\Form\Field\Editor;
+
+Editor::resolving(function (Editor $editor) {
+    // 设置默认配置
+    $editor->options([
+        'toolbar'=> 'styleselect | fontsizeselect bold italic blockquote | link image | bullist numlist code removeformat ',   // 配置工具栏
+        //'plugins'=> 'advlist autolink link image lists preview code help fullscreen table autoresize ',   // 插件
+    ]);
+
+    // 设置编辑器图片默认上传到七牛云
+    //$editor->disk('qiniu');
+});

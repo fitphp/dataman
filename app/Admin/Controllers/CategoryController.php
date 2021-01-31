@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use App\Admin\Repositories;
+use App\Admin\Repositories\Category;
 use App\Models\Category as Models;
 use Dcat\Admin\Show;
 use Dcat\Admin\Tree;
@@ -20,7 +20,7 @@ class CategoryController extends AdminController
         return $content->title(trans('category.title'))
             ->description(trans('admin.list'))
             ->body(function (Row $row) {
-                $tree = new Tree(new Repositories\Category);
+                $tree = new Tree(new Category());
                 $tree->disableCreateButton();
                 $tree->disableQuickCreateButton();
                 $row->column(6, $tree);
@@ -35,7 +35,7 @@ class CategoryController extends AdminController
      */
     protected function grid()
     {
-        return Grid::make(new Repositories\Category(), function (Grid $grid) {
+        return Grid::make(new Category(), function (Grid $grid) {
             $grid->column('parent_id', trans('category.fields.pid'))->sortable();
             $grid->column('image', trans('category.fields.image'));
             $grid->column('title', trans('category.fields.title'));
@@ -61,7 +61,7 @@ class CategoryController extends AdminController
      */
     protected function detail($id)
     {
-        return Show::make($id, new Repositories\Category(), function (Show $show) {
+        return Show::make($id, new Category(), function (Show $show) {
             $show->field('id', 'ID');
             $show->field('parent_id', trans('category.fields.parent_id'));
             $show->field('image', trans('category.fields.image'));
@@ -80,8 +80,7 @@ class CategoryController extends AdminController
      */
     protected function form()
     {
-        return Form::make(new Repositories\Category(), function (Form $form) {
-            $form->action(admin_url('category'));
+        return Form::make(new Category(), function (Form $form) {
             $form->display('id', 'ID');
             $form->select('parent_id', trans('category.fields.parent_id'))
                 ->options(Models::selectOptions())->default(0)->required();;

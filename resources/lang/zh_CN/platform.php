@@ -8,7 +8,7 @@ return [
         'name' => '名称',
         'app_id' => 'App ID',
         'app_secret' => 'App Secret',
-        'switch' => '开关',
+        'status' => '状态',
     ],
     'options' => [
     ],

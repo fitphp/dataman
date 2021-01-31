@@ -11,7 +11,7 @@ namespace Dcat\Admin {
     use Illuminate\Support\Collection;
 
     /**
-     * @property Grid\Column|Collection switch
+     * @property Grid\Column|Collection status
      * @property Grid\Column|Collection role_id
      * @property Grid\Column|Collection menu_id
      * @property Grid\Column|Collection created_at
@@ -55,6 +55,8 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection method
      * @property Grid\Column|Collection ip
      * @property Grid\Column|Collection input
+     * @property Grid\Column|Collection key
+     * @property Grid\Column|Collection remark
      * @property Grid\Column|Collection token
      * @property Grid\Column|Collection icon
      * @property Grid\Column|Collection uri
@@ -65,7 +67,7 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection http_method
      * @property Grid\Column|Collection http_path
      *
-     * @method Grid\Column|Collection switch(string $label = null)
+     * @method Grid\Column|Collection status(string $label = null)
      * @method Grid\Column|Collection role_id(string $label = null)
      * @method Grid\Column|Collection menu_id(string $label = null)
      * @method Grid\Column|Collection created_at(string $label = null)
@@ -109,6 +111,8 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection method(string $label = null)
      * @method Grid\Column|Collection ip(string $label = null)
      * @method Grid\Column|Collection input(string $label = null)
+     * @method Grid\Column|Collection key(string $label = null)
+     * @method Grid\Column|Collection remark(string $label = null)
      * @method Grid\Column|Collection token(string $label = null)
      * @method Grid\Column|Collection icon(string $label = null)
      * @method Grid\Column|Collection uri(string $label = null)
@@ -124,7 +128,7 @@ namespace Dcat\Admin {
     class MiniGrid extends Grid {}
 
     /**
-     * @property Show\Field|Collection switch
+     * @property Show\Field|Collection status
      * @property Show\Field|Collection role_id
      * @property Show\Field|Collection menu_id
      * @property Show\Field|Collection created_at
@@ -168,6 +172,8 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection method
      * @property Show\Field|Collection ip
      * @property Show\Field|Collection input
+     * @property Show\Field|Collection key
+     * @property Show\Field|Collection remark
      * @property Show\Field|Collection token
      * @property Show\Field|Collection icon
      * @property Show\Field|Collection uri
@@ -178,7 +184,7 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection http_method
      * @property Show\Field|Collection http_path
      *
-     * @method Show\Field|Collection switch(string $label = null)
+     * @method Show\Field|Collection status(string $label = null)
      * @method Show\Field|Collection role_id(string $label = null)
      * @method Show\Field|Collection menu_id(string $label = null)
      * @method Show\Field|Collection created_at(string $label = null)
@@ -222,6 +228,8 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection method(string $label = null)
      * @method Show\Field|Collection ip(string $label = null)
      * @method Show\Field|Collection input(string $label = null)
+     * @method Show\Field|Collection key(string $label = null)
+     * @method Show\Field|Collection remark(string $label = null)
      * @method Show\Field|Collection token(string $label = null)
      * @method Show\Field|Collection icon(string $label = null)
      * @method Show\Field|Collection uri(string $label = null)
