@@ -71,20 +71,15 @@ class DictDataController extends AdminController
     {
 
         return Form::make(new DictData(), function (Form $form) {
-            $form->display('id');
             $form->select('type_id', trans('dict-type.fields.name'))
                 ->options(DictTypeModels::all()->pluck('key','id'))
                 ->required();
-            //->default($_GET['type_id'])->disable()
             $form->text('key')->required();
             $form->text('value');
             $form->text('order')->default(0);
             $form->radio('is_default')->options([0=>'否', 1=>'是'])->default(0);
             $form->radio('status')->options([0=>'停用', 1=>'正常'])->default(1);
             $form->text('remark');
-
-            $form->display('created_at');
-            $form->display('updated_at');
         });
     }
 }

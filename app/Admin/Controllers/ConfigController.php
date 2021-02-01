@@ -2,13 +2,13 @@
 
 namespace App\Admin\Controllers;
 
-use App\Admin\Repositories\SystemConfig;
+use App\Admin\Repositories\Config;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
 use Dcat\Admin\Http\Controllers\AdminController;
 
-class SystemConfigController extends AdminController
+class ConfigController extends AdminController
 {
     /**
      * Make a grid builder.
@@ -17,7 +17,7 @@ class SystemConfigController extends AdminController
      */
     protected function grid()
     {
-        return Grid::make(new SystemConfig(), function (Grid $grid) {
+        return Grid::make(new Config(), function (Grid $grid) {
             $grid->column('id')->sortable();
             $grid->column('name');
             $grid->column('key');
@@ -42,7 +42,7 @@ class SystemConfigController extends AdminController
      */
     protected function detail($id)
     {
-        return Show::make($id, new SystemConfig(), function (Show $show) {
+        return Show::make($id, new Config(), function (Show $show) {
             $show->field('id');
             $show->field('name');
             $show->field('key');
@@ -61,16 +61,13 @@ class SystemConfigController extends AdminController
      */
     protected function form()
     {
-        return Form::make(new SystemConfig(), function (Form $form) {
-            $form->display('id');
+        return Form::make(new Config(), function (Form $form) {
+
             $form->text('name')->required();
             $form->text('key')->required()->placeholder('请输入唯一键值');
             $form->text('value');
             $form->radio('type')->options([0=>'否', 1=>'是'])->default(0);
             $form->text('remark');
-
-            $form->display('created_at');
-            $form->display('updated_at');
         });
     }
 }

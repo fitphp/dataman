@@ -2,10 +2,10 @@
 
 namespace App\Admin\Repositories;
 
-use App\Models\SystemConfig as Model;
+use App\Models\Config as Model;
 use Dcat\Admin\Repositories\EloquentRepository;
 
-class SystemConfig extends EloquentRepository
+class Config extends EloquentRepository
 {
     /**
      * Model.

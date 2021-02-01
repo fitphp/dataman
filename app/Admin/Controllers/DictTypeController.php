@@ -67,14 +67,10 @@ class DictTypeController extends AdminController
     protected function form()
     {
         return Form::make(new DictType(), function (Form $form) {
-            $form->display('id');
             $form->text('name')->required();
             $form->text('key')->required();
             $form->radio('status')->options([0=>'停用', 1=>'正常'])->default(1);
             $form->text('remark');
-
-            $form->display('created_at');
-            $form->display('updated_at');
         });
     }
 }

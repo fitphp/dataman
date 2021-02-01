@@ -79,9 +79,6 @@ class NoticeController extends AdminController
                 $form->width(4)->switch('top')->default(0);
                 $form->width(4)->switch('status')->default(1);
             });
-
-            $form->display('created_at');
-            $form->display('updated_at');
         });
     }
 }

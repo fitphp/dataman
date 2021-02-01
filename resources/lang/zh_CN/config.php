@@ -1,7 +1,7 @@
 <?php
 return [
     'labels' => [
-        'SystemConfig' => '参数设置',
+        'Config' => '参数设置',
         'config' => '参数设置',
     ],
     'fields' => [

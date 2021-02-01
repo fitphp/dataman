@@ -6,9 +6,9 @@ use Dcat\Admin\Traits\HasDateTimeFormatter;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SystemConfig extends Model
+class Config extends Model
 {
 	use HasDateTimeFormatter;
     protected $table = 'system_config';
-    
+
 }

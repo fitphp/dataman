@@ -14,8 +14,8 @@ Route::group([
 
     $router->get('/', 'HomeController@index');
 
-    $router->resource('/system/notice', 'NoticeController');
-    $router->resource('/system/config', 'SystemConfigController');
+    $router->resource('/notice', 'NoticeController');
+    $router->resource('/config', 'ConfigController');
     $router->resource('/dict/type', 'DictTypeController');
     $router->resource('/dict/data', 'DictDataController');
     $router->resource('/platform', 'PlatformController');

@@ -2,6 +2,7 @@
 namespace App\Admin\Controllers;
 
 use App\Admin\Repositories\ChinaRegion;
+use App\Models\DictType as DictTypeModel;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
@@ -19,7 +20,8 @@ class ChinaRegionController extends AdminController
         return Grid::make(new ChinaRegion(), function (Grid $grid) {
             $grid->column('area_code', trans('china-region.fields.area_code'));
             $grid->column('parent_code', trans('china-region.fields.parent_code'));
-            $grid->column('level', trans('china-region.fields.level'))->sortable();
+            $grid->level()->using(DictTypeModel::getDataItemByTypeKey('china_region_level')
+                ->pluck('value','key')->toArray())->sortable();
             $grid->column('zip_code', trans('china-region.fields.zip_code'));
             $grid->column('city_code', trans('china-region.fields.city_code'));
             $grid->column('name', trans('china-region.fields.name'));
@@ -73,12 +75,15 @@ class ChinaRegionController extends AdminController
     {
         return Form::make(new ChinaRegion(), function (Form $form) {
             $form->display('id', 'ID');
-            $form->text('level', trans('china-region.fields.level'));
-            $form->text('parent_code', trans('china-region.fields.parent_code'));
-            $form->text('area_code', trans('china-region.fields.area_code'));
+            $form->select('level', trans('china-region.fields.level'))
+                ->options([0 => '省级', 1 => '市级', 2 => '区级', 3 => '街道/镇', 4 => '居委/村'])
+                ->required();
+            $form->text('area_code', trans('china-region.fields.area_code'))
+                ->required();
+            $form->text('parent_code', trans('china-region.fields.parent_code'))->default(0);
             $form->text('zip_code', trans('china-region.fields.zip_code'));
             $form->text('city_code', trans('china-region.fields.city_code'));
-            $form->text('name', trans('china-region.fields.name'));
+            $form->text('name', trans('china-region.fields.name'))->required();
             $form->text('short_name', trans('china-region.fields.short_name'));
             $form->text('merger_name', trans('china-region.fields.merger_name'));
             $form->text('pinyin', trans('china-region.fields.pinyin'));
