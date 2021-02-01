@@ -20,10 +20,11 @@ class AdvertPinController extends AdminController
     {
         return Grid::make(new AdvertPin(['channel']), function (Grid $grid) {
             $grid->column('id')->sortable();
-            $grid->column('name');
-            $grid->column('desc');
             $grid->column('channel.title', trans('advert-pin.fields.channel'));
+            $grid->column('name');
+            $grid->column('flag');
             $grid->column('order');
+            $grid->column('desc');
             $grid->column('updated_at')->sortable();
 
             $grid->filter(function (Grid\Filter $filter) {
@@ -45,6 +46,7 @@ class AdvertPinController extends AdminController
         return Show::make($id, new AdvertPin(['channel']), function (Show $show) {
             $show->field('id');
             $show->field('name');
+            $show->field('flag');
             $show->field('desc');
             $show->field('channel.title', trans('advert-pin.fields.channel'));
             $show->field('order');
@@ -66,6 +68,7 @@ class AdvertPinController extends AdminController
                 ChannelModels::selectOptions()
             )->default(0)->required();
             $form->text('name')->required();
+            $form->text('flag')->required();
             $form->text('desc');
             $form->text('order')->default(0);
         });

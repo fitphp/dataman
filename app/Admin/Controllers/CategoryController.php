@@ -80,12 +80,14 @@ class CategoryController extends AdminController
     protected function form()
     {
         return Form::make(new Category(), function (Form $form) {
+            $form->action(admin_url('category'));
+
             $form->display('id', 'ID');
             $form->select('parent_id', trans('category.fields.parent_id'))
                 ->options(Models::selectOptions())->default(0)->required();;
             $form->image('image', trans('category.fields.image'));
             $form->text('title', trans('category.fields.title'))->required();
-            $form->text('name', trans('category.fields.name'));
+            $form->text('name', trans('category.fields.name'))->required();
             $form->text('order', trans('category.fields.order'))
                 ->default(0)->required();
             $form->disableListButton();

@@ -21,9 +21,9 @@ class AdvertDataController extends AdminController
     {
         return Grid::make(new AdvertData(['pin']), function (Grid $grid) {
             $grid->column('id')->sortable();
+            $grid->column('pin.name', trans('advert-data.type.name'));
             $grid->column('image');
             $grid->column('title');
-            $grid->column('pin.name', trans('advert-data.type.name'));
             $grid->type()->using(DictTypeModel::getDataItemByTypeKey('link_type')
                 ->pluck('value','key')->toArray());
             $grid->column('url');

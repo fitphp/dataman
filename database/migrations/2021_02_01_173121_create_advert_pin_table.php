@@ -16,6 +16,7 @@ class CreateAdvertPinTable extends Migration
         Schema::create('advert_pin', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->default('')->comment('名称');
+            $table->string('flag')->default('')->comment('标识');
             $table->string('desc')->default('')->nullable()->comment('描述');
             $table->unsignedInteger('channel_id')->default('0')->comment('栏目ID');
             $table->unsignedTinyInteger('order')->default('0')->comment('排序');

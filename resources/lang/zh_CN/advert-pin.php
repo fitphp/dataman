@@ -6,6 +6,7 @@ return [
     ],
     'fields' => [
         'name' => '名称',
+        'flag' => '标识',
         'desc' => '描述',
         'channel' => '栏目',
         'channel_id' => '栏目ID',
