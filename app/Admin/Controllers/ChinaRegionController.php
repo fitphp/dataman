@@ -76,7 +76,8 @@ class ChinaRegionController extends AdminController
         return Form::make(new ChinaRegion(), function (Form $form) {
             $form->display('id', 'ID');
             $form->select('level', trans('china-region.fields.level'))
-                ->options([0 => '省级', 1 => '市级', 2 => '区级', 3 => '街道/镇', 4 => '居委/村'])
+                ->options(DictTypeModel::getDataItemByTypeKey('china_region_level')
+                    ->pluck('value','key')->toArray())
                 ->required();
             $form->text('area_code', trans('china-region.fields.area_code'))
                 ->required();

@@ -11,9 +11,12 @@ namespace Dcat\Admin {
     use Illuminate\Support\Collection;
 
     /**
+     * @property Grid\Column|Collection from
+     * @property Grid\Column|Collection top
      * @property Grid\Column|Collection status
-     * @property Grid\Column|Collection is_default
      * @property Grid\Column|Collection type
+     * @property Grid\Column|Collection is_default
+     * @property Grid\Column|Collection level
      * @property Grid\Column|Collection role_id
      * @property Grid\Column|Collection menu_id
      * @property Grid\Column|Collection created_at
@@ -29,7 +32,6 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection value
      * @property Grid\Column|Collection order
      * @property Grid\Column|Collection remark
-     * @property Grid\Column|Collection level
      * @property Grid\Column|Collection parent_code
      * @property Grid\Column|Collection area_code
      * @property Grid\Column|Collection zip_code
@@ -45,8 +47,6 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection slug
      * @property Grid\Column|Collection permission_id
      * @property Grid\Column|Collection is_enabled
-     * @property Grid\Column|Collection from
-     * @property Grid\Column|Collection top
      * @property Grid\Column|Collection content
      * @property Grid\Column|Collection email
      * @property Grid\Column|Collection email_verified_at
@@ -58,6 +58,13 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection failed_at
      * @property Grid\Column|Collection parent_id
      * @property Grid\Column|Collection image
+     * @property Grid\Column|Collection desc
+     * @property Grid\Column|Collection platform_id
+     * @property Grid\Column|Collection channel_id
+     * @property Grid\Column|Collection pin_id
+     * @property Grid\Column|Collection url
+     * @property Grid\Column|Collection start_at
+     * @property Grid\Column|Collection end_at
      * @property Grid\Column|Collection path
      * @property Grid\Column|Collection method
      * @property Grid\Column|Collection ip
@@ -66,15 +73,17 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection icon
      * @property Grid\Column|Collection uri
      * @property Grid\Column|Collection extension
-     * @property Grid\Column|Collection platform_id
      * @property Grid\Column|Collection app_id
      * @property Grid\Column|Collection app_secret
      * @property Grid\Column|Collection http_method
      * @property Grid\Column|Collection http_path
      *
+     * @method Grid\Column|Collection from(string $label = null)
+     * @method Grid\Column|Collection top(string $label = null)
      * @method Grid\Column|Collection status(string $label = null)
-     * @method Grid\Column|Collection is_default(string $label = null)
      * @method Grid\Column|Collection type(string $label = null)
+     * @method Grid\Column|Collection is_default(string $label = null)
+     * @method Grid\Column|Collection level(string $label = null)
      * @method Grid\Column|Collection role_id(string $label = null)
      * @method Grid\Column|Collection menu_id(string $label = null)
      * @method Grid\Column|Collection created_at(string $label = null)
@@ -90,7 +99,6 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection value(string $label = null)
      * @method Grid\Column|Collection order(string $label = null)
      * @method Grid\Column|Collection remark(string $label = null)
-     * @method Grid\Column|Collection level(string $label = null)
      * @method Grid\Column|Collection parent_code(string $label = null)
      * @method Grid\Column|Collection area_code(string $label = null)
      * @method Grid\Column|Collection zip_code(string $label = null)
@@ -106,8 +114,6 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection slug(string $label = null)
      * @method Grid\Column|Collection permission_id(string $label = null)
      * @method Grid\Column|Collection is_enabled(string $label = null)
-     * @method Grid\Column|Collection from(string $label = null)
-     * @method Grid\Column|Collection top(string $label = null)
      * @method Grid\Column|Collection content(string $label = null)
      * @method Grid\Column|Collection email(string $label = null)
      * @method Grid\Column|Collection email_verified_at(string $label = null)
@@ -119,6 +125,13 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection failed_at(string $label = null)
      * @method Grid\Column|Collection parent_id(string $label = null)
      * @method Grid\Column|Collection image(string $label = null)
+     * @method Grid\Column|Collection desc(string $label = null)
+     * @method Grid\Column|Collection platform_id(string $label = null)
+     * @method Grid\Column|Collection channel_id(string $label = null)
+     * @method Grid\Column|Collection pin_id(string $label = null)
+     * @method Grid\Column|Collection url(string $label = null)
+     * @method Grid\Column|Collection start_at(string $label = null)
+     * @method Grid\Column|Collection end_at(string $label = null)
      * @method Grid\Column|Collection path(string $label = null)
      * @method Grid\Column|Collection method(string $label = null)
      * @method Grid\Column|Collection ip(string $label = null)
@@ -127,7 +140,6 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection icon(string $label = null)
      * @method Grid\Column|Collection uri(string $label = null)
      * @method Grid\Column|Collection extension(string $label = null)
-     * @method Grid\Column|Collection platform_id(string $label = null)
      * @method Grid\Column|Collection app_id(string $label = null)
      * @method Grid\Column|Collection app_secret(string $label = null)
      * @method Grid\Column|Collection http_method(string $label = null)
@@ -138,9 +150,12 @@ namespace Dcat\Admin {
     class MiniGrid extends Grid {}
 
     /**
+     * @property Show\Field|Collection from
+     * @property Show\Field|Collection top
      * @property Show\Field|Collection status
-     * @property Show\Field|Collection is_default
      * @property Show\Field|Collection type
+     * @property Show\Field|Collection is_default
+     * @property Show\Field|Collection level
      * @property Show\Field|Collection role_id
      * @property Show\Field|Collection menu_id
      * @property Show\Field|Collection created_at
@@ -156,7 +171,6 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection value
      * @property Show\Field|Collection order
      * @property Show\Field|Collection remark
-     * @property Show\Field|Collection level
      * @property Show\Field|Collection parent_code
      * @property Show\Field|Collection area_code
      * @property Show\Field|Collection zip_code
@@ -172,8 +186,6 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection slug
      * @property Show\Field|Collection permission_id
      * @property Show\Field|Collection is_enabled
-     * @property Show\Field|Collection from
-     * @property Show\Field|Collection top
      * @property Show\Field|Collection content
      * @property Show\Field|Collection email
      * @property Show\Field|Collection email_verified_at
@@ -185,6 +197,13 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection failed_at
      * @property Show\Field|Collection parent_id
      * @property Show\Field|Collection image
+     * @property Show\Field|Collection desc
+     * @property Show\Field|Collection platform_id
+     * @property Show\Field|Collection channel_id
+     * @property Show\Field|Collection pin_id
+     * @property Show\Field|Collection url
+     * @property Show\Field|Collection start_at
+     * @property Show\Field|Collection end_at
      * @property Show\Field|Collection path
      * @property Show\Field|Collection method
      * @property Show\Field|Collection ip
@@ -193,15 +212,17 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection icon
      * @property Show\Field|Collection uri
      * @property Show\Field|Collection extension
-     * @property Show\Field|Collection platform_id
      * @property Show\Field|Collection app_id
      * @property Show\Field|Collection app_secret
      * @property Show\Field|Collection http_method
      * @property Show\Field|Collection http_path
      *
+     * @method Show\Field|Collection from(string $label = null)
+     * @method Show\Field|Collection top(string $label = null)
      * @method Show\Field|Collection status(string $label = null)
-     * @method Show\Field|Collection is_default(string $label = null)
      * @method Show\Field|Collection type(string $label = null)
+     * @method Show\Field|Collection is_default(string $label = null)
+     * @method Show\Field|Collection level(string $label = null)
      * @method Show\Field|Collection role_id(string $label = null)
      * @method Show\Field|Collection menu_id(string $label = null)
      * @method Show\Field|Collection created_at(string $label = null)
@@ -217,7 +238,6 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection value(string $label = null)
      * @method Show\Field|Collection order(string $label = null)
      * @method Show\Field|Collection remark(string $label = null)
-     * @method Show\Field|Collection level(string $label = null)
      * @method Show\Field|Collection parent_code(string $label = null)
      * @method Show\Field|Collection area_code(string $label = null)
      * @method Show\Field|Collection zip_code(string $label = null)
@@ -233,8 +253,6 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection slug(string $label = null)
      * @method Show\Field|Collection permission_id(string $label = null)
      * @method Show\Field|Collection is_enabled(string $label = null)
-     * @method Show\Field|Collection from(string $label = null)
-     * @method Show\Field|Collection top(string $label = null)
      * @method Show\Field|Collection content(string $label = null)
      * @method Show\Field|Collection email(string $label = null)
      * @method Show\Field|Collection email_verified_at(string $label = null)
@@ -246,6 +264,13 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection failed_at(string $label = null)
      * @method Show\Field|Collection parent_id(string $label = null)
      * @method Show\Field|Collection image(string $label = null)
+     * @method Show\Field|Collection desc(string $label = null)
+     * @method Show\Field|Collection platform_id(string $label = null)
+     * @method Show\Field|Collection channel_id(string $label = null)
+     * @method Show\Field|Collection pin_id(string $label = null)
+     * @method Show\Field|Collection url(string $label = null)
+     * @method Show\Field|Collection start_at(string $label = null)
+     * @method Show\Field|Collection end_at(string $label = null)
      * @method Show\Field|Collection path(string $label = null)
      * @method Show\Field|Collection method(string $label = null)
      * @method Show\Field|Collection ip(string $label = null)
@@ -254,7 +279,6 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection icon(string $label = null)
      * @method Show\Field|Collection uri(string $label = null)
      * @method Show\Field|Collection extension(string $label = null)
-     * @method Show\Field|Collection platform_id(string $label = null)
      * @method Show\Field|Collection app_id(string $label = null)
      * @method Show\Field|Collection app_secret(string $label = null)
      * @method Show\Field|Collection http_method(string $label = null)

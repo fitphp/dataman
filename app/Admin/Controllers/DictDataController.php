@@ -25,7 +25,7 @@ class DictDataController extends AdminController
             $grid->column('value');
             $grid->column('order');
             $grid->is_default()->using([0 => '否', 1 => '是']);
-            $grid->status()->using([0 => '停用', 1 => '正常']);
+            $grid->status()->using([0 => '关闭', 1 => '正常'])->label([ 0 => 'danger', 1 => 'primary']);
             $grid->column('updated_at')->sortable();
 
             $grid->filter(function (Grid\Filter $filter) {
@@ -72,7 +72,7 @@ class DictDataController extends AdminController
 
         return Form::make(new DictData(), function (Form $form) {
             $form->select('type_id', trans('dict-type.fields.name'))
-                ->options(DictTypeModels::all()->pluck('key','id'))
+                ->options(DictTypeModels::all()->pluck('name','id'))
                 ->required();
             $form->text('key')->required();
             $form->text('value');
