@@ -41,7 +41,6 @@ class CategoryController extends AdminController
             $grid->column('title', trans('category.fields.title'));
             $grid->column('name', trans('category.fields.name'));
             $grid->column('order', trans('category.fields.order'));
-            $grid->column('created_at', admin_trans('category.fields.created_at'));
             $grid->column('updated_at', admin_trans('category.fields.updated_at'));
 
             $grid->filter(function (Grid\Filter $filter) {

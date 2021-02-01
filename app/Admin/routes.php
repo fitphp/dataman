@@ -14,9 +14,10 @@ Route::group([
 
     $router->get('/', 'HomeController@index');
 
+    $router->resource('/system/notice', 'NoticeController');
+    $router->resource('/system/config', 'SystemConfigController');
     $router->resource('/dict/type', 'DictTypeController');
     $router->resource('/dict/data', 'DictDataController');
-    $router->resource('/system/config', 'SystemConfigController');
     $router->resource('/platform', 'PlatformController');
     $router->resource('/category', 'CategoryController');
     $router->resource('/region', 'ChinaRegionController');

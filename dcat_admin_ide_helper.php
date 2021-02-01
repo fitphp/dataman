@@ -11,8 +11,9 @@ namespace Dcat\Admin {
     use Illuminate\Support\Collection;
 
     /**
-     * @property Grid\Column|Collection type
      * @property Grid\Column|Collection status
+     * @property Grid\Column|Collection is_default
+     * @property Grid\Column|Collection type
      * @property Grid\Column|Collection role_id
      * @property Grid\Column|Collection menu_id
      * @property Grid\Column|Collection created_at
@@ -27,7 +28,6 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection key
      * @property Grid\Column|Collection value
      * @property Grid\Column|Collection order
-     * @property Grid\Column|Collection is_default
      * @property Grid\Column|Collection remark
      * @property Grid\Column|Collection level
      * @property Grid\Column|Collection parent_code
@@ -45,6 +45,9 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection slug
      * @property Grid\Column|Collection permission_id
      * @property Grid\Column|Collection is_enabled
+     * @property Grid\Column|Collection from
+     * @property Grid\Column|Collection top
+     * @property Grid\Column|Collection content
      * @property Grid\Column|Collection email
      * @property Grid\Column|Collection email_verified_at
      * @property Grid\Column|Collection uuid
@@ -69,8 +72,9 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection http_method
      * @property Grid\Column|Collection http_path
      *
-     * @method Grid\Column|Collection type(string $label = null)
      * @method Grid\Column|Collection status(string $label = null)
+     * @method Grid\Column|Collection is_default(string $label = null)
+     * @method Grid\Column|Collection type(string $label = null)
      * @method Grid\Column|Collection role_id(string $label = null)
      * @method Grid\Column|Collection menu_id(string $label = null)
      * @method Grid\Column|Collection created_at(string $label = null)
@@ -85,7 +89,6 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection key(string $label = null)
      * @method Grid\Column|Collection value(string $label = null)
      * @method Grid\Column|Collection order(string $label = null)
-     * @method Grid\Column|Collection is_default(string $label = null)
      * @method Grid\Column|Collection remark(string $label = null)
      * @method Grid\Column|Collection level(string $label = null)
      * @method Grid\Column|Collection parent_code(string $label = null)
@@ -103,6 +106,9 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection slug(string $label = null)
      * @method Grid\Column|Collection permission_id(string $label = null)
      * @method Grid\Column|Collection is_enabled(string $label = null)
+     * @method Grid\Column|Collection from(string $label = null)
+     * @method Grid\Column|Collection top(string $label = null)
+     * @method Grid\Column|Collection content(string $label = null)
      * @method Grid\Column|Collection email(string $label = null)
      * @method Grid\Column|Collection email_verified_at(string $label = null)
      * @method Grid\Column|Collection uuid(string $label = null)
@@ -132,8 +138,9 @@ namespace Dcat\Admin {
     class MiniGrid extends Grid {}
 
     /**
-     * @property Show\Field|Collection type
      * @property Show\Field|Collection status
+     * @property Show\Field|Collection is_default
+     * @property Show\Field|Collection type
      * @property Show\Field|Collection role_id
      * @property Show\Field|Collection menu_id
      * @property Show\Field|Collection created_at
@@ -148,7 +155,6 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection key
      * @property Show\Field|Collection value
      * @property Show\Field|Collection order
-     * @property Show\Field|Collection is_default
      * @property Show\Field|Collection remark
      * @property Show\Field|Collection level
      * @property Show\Field|Collection parent_code
@@ -166,6 +172,9 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection slug
      * @property Show\Field|Collection permission_id
      * @property Show\Field|Collection is_enabled
+     * @property Show\Field|Collection from
+     * @property Show\Field|Collection top
+     * @property Show\Field|Collection content
      * @property Show\Field|Collection email
      * @property Show\Field|Collection email_verified_at
      * @property Show\Field|Collection uuid
@@ -190,8 +199,9 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection http_method
      * @property Show\Field|Collection http_path
      *
-     * @method Show\Field|Collection type(string $label = null)
      * @method Show\Field|Collection status(string $label = null)
+     * @method Show\Field|Collection is_default(string $label = null)
+     * @method Show\Field|Collection type(string $label = null)
      * @method Show\Field|Collection role_id(string $label = null)
      * @method Show\Field|Collection menu_id(string $label = null)
      * @method Show\Field|Collection created_at(string $label = null)
@@ -206,7 +216,6 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection key(string $label = null)
      * @method Show\Field|Collection value(string $label = null)
      * @method Show\Field|Collection order(string $label = null)
-     * @method Show\Field|Collection is_default(string $label = null)
      * @method Show\Field|Collection remark(string $label = null)
      * @method Show\Field|Collection level(string $label = null)
      * @method Show\Field|Collection parent_code(string $label = null)
@@ -224,6 +233,9 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection slug(string $label = null)
      * @method Show\Field|Collection permission_id(string $label = null)
      * @method Show\Field|Collection is_enabled(string $label = null)
+     * @method Show\Field|Collection from(string $label = null)
+     * @method Show\Field|Collection top(string $label = null)
+     * @method Show\Field|Collection content(string $label = null)
      * @method Show\Field|Collection email(string $label = null)
      * @method Show\Field|Collection email_verified_at(string $label = null)
      * @method Show\Field|Collection uuid(string $label = null)
