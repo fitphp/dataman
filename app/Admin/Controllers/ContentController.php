@@ -62,7 +62,10 @@ class ContentController extends AdminController
             $show->field('category_id');
             $show->field('image');
             $show->field('content');
-            $show->field('type');
+            $show->field('type')->using(
+                DictTypeModel::getDataItemByTypeKey('link_type')
+                    ->pluck('value','key')->toArray()
+            );
             $show->field('appid');
             $show->field('url');
             $show->field('order');

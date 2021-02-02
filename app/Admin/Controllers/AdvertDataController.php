@@ -54,7 +54,10 @@ class AdvertDataController extends AdminController
             $show->field('image');
             $show->field('pin_id');
             $show->field('desc');
-            $show->field('type');
+            $show->field('type')->using(
+                DictTypeModel::getDataItemByTypeKey('link_type')
+                    ->pluck('value','key')->toArray()
+            );
             $show->field('appid');
             $show->field('url');
             $show->field('status');

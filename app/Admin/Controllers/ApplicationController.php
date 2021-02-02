@@ -21,21 +21,35 @@ class ApplicationController extends AdminController
     {
         return Grid::make(new Application(), function (Grid $grid) {
             $grid->column('id')->sortable();
-            $grid->column('category.title', trans('application.category.title'))->label();
+            $grid->column('category_ids', trans('application.category.title'))
+                ->display(function ($category_ids) {
+                    return CategoryModels::whereIn('id', explode(',', $category_ids))
+                        ->get(['title'])->toArray();
+                })->pluck('title')->map('ucwords')->label();
             $grid->column('image')->width(40);
             $grid->column('title');
             $grid->type()->using(DictTypeModel::getDataItemByTypeKey('link_type')
                 ->pluck('value','key')->toArray())->label();
             $grid->column('url')->link();
             $grid->column('order')->sortable();;
-            $grid->column('auth');
-            $grid->switch();
+            $grid->column('auth')->using(
+                DictTypeModel::getDataItemByTypeKey('auth_level')
+                    ->pluck('value','key')->toArray()
+            )->label();
             $grid->status()->using([0 => '关闭', 1 => '正常'])->label([ 0 => 'danger', 1 => 'primary']);
 
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
                 $filter->like('title');
-                $filter->like('status')->using([0 => '关闭', 1 => '正常']);
+                $filter->equal('category_id', trans('content.category.title'))->select(
+                    CategoryModels::selectOptions()
+                );
+                $filter->equal('type')->select(
+                    DictTypeModel::getDataItemByTypeKey('link_type')
+                        ->pluck('value','key')->toArray()
+                );
+                $filter->like('url');
+                $filter->equal('status')->select([0 => '关闭', 1 => '正常']);
             });
         });
     }
@@ -55,13 +69,16 @@ class ApplicationController extends AdminController
             $show->field('subtitle');
             $show->field('image');
             $show->field('category_ids');
-            $show->field('type');
+            $show->field('type')->using(
+                DictTypeModel::getDataItemByTypeKey('link_type')
+                ->pluck('value','key')->toArray()
+            );
             $show->field('appid');
             $show->field('url');
             $show->field('order');
-            $show->field('auth');
-            $show->field('switch');
-            $show->field('status');
+            $show->auth()->using(DictTypeModel::getDataItemByTypeKey('auth_level')
+                ->pluck('value','key')->toArray());
+            $show->status()->using([0 => '关闭', 1 => '正常']);
             $show->field('created_at');
             $show->field('updated_at');
         });
@@ -77,10 +94,10 @@ class ApplicationController extends AdminController
         return Form::make(new Application(), function (Form $form) {
             $form->text('title')->required();
             $form->text('subtitle');
-            $form->text('image');
-            $form->select('category_id')->options(
+            $form->image('image');
+            $form->multipleSelect('category_ids')->options(
                 CategoryModels::selectOptions()
-            )->default(0)->required();
+            )->required();
             $form->radio('type')->options(
                 DictTypeModel::getDataItemByTypeKey('link_type')
                     ->pluck('value','key')->toArray()
@@ -88,9 +105,11 @@ class ApplicationController extends AdminController
             $form->text('appid');
             $form->url('url')->required();;
             $form->text('order')->default(0);
-            $form->text('auth');
-            $form->switch('switch')->default(1);
-            $form->radio('status')->options([0 => '停用', 1 => '正常'])->default(1);
+            $form->select('auth')->options(
+                DictTypeModel::getDataItemByTypeKey('auth_level')
+                    ->pluck('value','key')->toArray()
+            )->default(0);
+            $form->radio('status')->options([0 => '关闭', 1 => '正常'])->default(1);
         });
     }
 }

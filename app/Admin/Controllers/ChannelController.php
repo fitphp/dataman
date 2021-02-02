@@ -49,7 +49,7 @@ class ChannelController extends AdminController
      */
     protected function grid()
     {
-        return Grid::make(new Channel(), function (Grid $grid) {
+        return Grid::make(new Channel(['platform']), function (Grid $grid) {
             $grid->column('id')->sortable();
             $grid->column('parent_id');
             $grid->column('platform.name');
@@ -76,7 +76,7 @@ class ChannelController extends AdminController
      */
     protected function detail($id)
     {
-        return Show::make($id, new Channel(), function (Show $show) {
+        return Show::make($id, new Channel(['platform']), function (Show $show) {
             $show->field('id');
             $show->field('parent_id');
             $show->field('platform.name');

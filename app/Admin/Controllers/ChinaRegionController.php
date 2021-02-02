@@ -52,7 +52,9 @@ class ChinaRegionController extends AdminController
     {
         return Show::make($id, new ChinaRegion(), function (Show $show) {
             $show->field('id', 'ID');
-            $show->field('level', trans('china-region.fields.level'));
+            $show->field('level', trans('china-region.fields.level'))
+                ->using(DictTypeModel::getDataItemByTypeKey('china_region_level')
+                ->pluck('value','key')->toArray());
             $show->field('parent_code', trans('china-region.fields.parent_code'));
             $show->field('area_code', trans('china-region.fields.area_code'));
             $show->field('zip_code', trans('china-region.fields.zip_code'));
