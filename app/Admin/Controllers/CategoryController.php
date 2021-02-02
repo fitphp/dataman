@@ -23,6 +23,13 @@ class CategoryController extends AdminController
                 $tree = new Tree(new Category());
                 $tree->disableCreateButton();
                 $tree->disableQuickCreateButton();
+                $tree->branch(function ($branch) {
+                    if (empty($branch['name'])) {
+                        return "{$branch['id']} - {$branch['title']}";
+                    } else {
+                        return "{$branch['id']} - {$branch['title']}【{$branch['name']}】";
+                    }
+                });
                 $row->column(6, $tree);
                 $row->column(6, $this->form());
             });

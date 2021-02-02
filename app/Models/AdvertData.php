@@ -13,6 +13,6 @@ class AdvertData extends Model
 
     public function pin()
     {
-        return $this->belongsTo(AdvertPin::class);
+        return $this->hasOne(AdvertPin::class, 'id', 'pin_id');
     }
 }

@@ -15,8 +15,8 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection top
      * @property Grid\Column|Collection status
      * @property Grid\Column|Collection type
-     * @property Grid\Column|Collection is_default
      * @property Grid\Column|Collection level
+     * @property Grid\Column|Collection is_default
      * @property Grid\Column|Collection role_id
      * @property Grid\Column|Collection menu_id
      * @property Grid\Column|Collection created_at
@@ -58,13 +58,19 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection failed_at
      * @property Grid\Column|Collection parent_id
      * @property Grid\Column|Collection image
+     * @property Grid\Column|Collection subtitle
+     * @property Grid\Column|Collection category_id
+     * @property Grid\Column|Collection appid
+     * @property Grid\Column|Collection url
+     * @property Grid\Column|Collection flag
      * @property Grid\Column|Collection desc
-     * @property Grid\Column|Collection platform_id
      * @property Grid\Column|Collection channel_id
      * @property Grid\Column|Collection pin_id
-     * @property Grid\Column|Collection url
      * @property Grid\Column|Collection start_at
      * @property Grid\Column|Collection end_at
+     * @property Grid\Column|Collection category_ids
+     * @property Grid\Column|Collection auth
+     * @property Grid\Column|Collection switch
      * @property Grid\Column|Collection path
      * @property Grid\Column|Collection method
      * @property Grid\Column|Collection ip
@@ -73,6 +79,7 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection icon
      * @property Grid\Column|Collection uri
      * @property Grid\Column|Collection extension
+     * @property Grid\Column|Collection platform_id
      * @property Grid\Column|Collection app_id
      * @property Grid\Column|Collection app_secret
      * @property Grid\Column|Collection http_method
@@ -82,8 +89,8 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection top(string $label = null)
      * @method Grid\Column|Collection status(string $label = null)
      * @method Grid\Column|Collection type(string $label = null)
-     * @method Grid\Column|Collection is_default(string $label = null)
      * @method Grid\Column|Collection level(string $label = null)
+     * @method Grid\Column|Collection is_default(string $label = null)
      * @method Grid\Column|Collection role_id(string $label = null)
      * @method Grid\Column|Collection menu_id(string $label = null)
      * @method Grid\Column|Collection created_at(string $label = null)
@@ -125,13 +132,19 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection failed_at(string $label = null)
      * @method Grid\Column|Collection parent_id(string $label = null)
      * @method Grid\Column|Collection image(string $label = null)
+     * @method Grid\Column|Collection subtitle(string $label = null)
+     * @method Grid\Column|Collection category_id(string $label = null)
+     * @method Grid\Column|Collection appid(string $label = null)
+     * @method Grid\Column|Collection url(string $label = null)
+     * @method Grid\Column|Collection flag(string $label = null)
      * @method Grid\Column|Collection desc(string $label = null)
-     * @method Grid\Column|Collection platform_id(string $label = null)
      * @method Grid\Column|Collection channel_id(string $label = null)
      * @method Grid\Column|Collection pin_id(string $label = null)
-     * @method Grid\Column|Collection url(string $label = null)
      * @method Grid\Column|Collection start_at(string $label = null)
      * @method Grid\Column|Collection end_at(string $label = null)
+     * @method Grid\Column|Collection category_ids(string $label = null)
+     * @method Grid\Column|Collection auth(string $label = null)
+     * @method Grid\Column|Collection switch(string $label = null)
      * @method Grid\Column|Collection path(string $label = null)
      * @method Grid\Column|Collection method(string $label = null)
      * @method Grid\Column|Collection ip(string $label = null)
@@ -140,6 +153,7 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection icon(string $label = null)
      * @method Grid\Column|Collection uri(string $label = null)
      * @method Grid\Column|Collection extension(string $label = null)
+     * @method Grid\Column|Collection platform_id(string $label = null)
      * @method Grid\Column|Collection app_id(string $label = null)
      * @method Grid\Column|Collection app_secret(string $label = null)
      * @method Grid\Column|Collection http_method(string $label = null)
@@ -154,8 +168,8 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection top
      * @property Show\Field|Collection status
      * @property Show\Field|Collection type
-     * @property Show\Field|Collection is_default
      * @property Show\Field|Collection level
+     * @property Show\Field|Collection is_default
      * @property Show\Field|Collection role_id
      * @property Show\Field|Collection menu_id
      * @property Show\Field|Collection created_at
@@ -197,13 +211,19 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection failed_at
      * @property Show\Field|Collection parent_id
      * @property Show\Field|Collection image
+     * @property Show\Field|Collection subtitle
+     * @property Show\Field|Collection category_id
+     * @property Show\Field|Collection appid
+     * @property Show\Field|Collection url
+     * @property Show\Field|Collection flag
      * @property Show\Field|Collection desc
-     * @property Show\Field|Collection platform_id
      * @property Show\Field|Collection channel_id
      * @property Show\Field|Collection pin_id
-     * @property Show\Field|Collection url
      * @property Show\Field|Collection start_at
      * @property Show\Field|Collection end_at
+     * @property Show\Field|Collection category_ids
+     * @property Show\Field|Collection auth
+     * @property Show\Field|Collection switch
      * @property Show\Field|Collection path
      * @property Show\Field|Collection method
      * @property Show\Field|Collection ip
@@ -212,6 +232,7 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection icon
      * @property Show\Field|Collection uri
      * @property Show\Field|Collection extension
+     * @property Show\Field|Collection platform_id
      * @property Show\Field|Collection app_id
      * @property Show\Field|Collection app_secret
      * @property Show\Field|Collection http_method
@@ -221,8 +242,8 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection top(string $label = null)
      * @method Show\Field|Collection status(string $label = null)
      * @method Show\Field|Collection type(string $label = null)
-     * @method Show\Field|Collection is_default(string $label = null)
      * @method Show\Field|Collection level(string $label = null)
+     * @method Show\Field|Collection is_default(string $label = null)
      * @method Show\Field|Collection role_id(string $label = null)
      * @method Show\Field|Collection menu_id(string $label = null)
      * @method Show\Field|Collection created_at(string $label = null)
@@ -264,13 +285,19 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection failed_at(string $label = null)
      * @method Show\Field|Collection parent_id(string $label = null)
      * @method Show\Field|Collection image(string $label = null)
+     * @method Show\Field|Collection subtitle(string $label = null)
+     * @method Show\Field|Collection category_id(string $label = null)
+     * @method Show\Field|Collection appid(string $label = null)
+     * @method Show\Field|Collection url(string $label = null)
+     * @method Show\Field|Collection flag(string $label = null)
      * @method Show\Field|Collection desc(string $label = null)
-     * @method Show\Field|Collection platform_id(string $label = null)
      * @method Show\Field|Collection channel_id(string $label = null)
      * @method Show\Field|Collection pin_id(string $label = null)
-     * @method Show\Field|Collection url(string $label = null)
      * @method Show\Field|Collection start_at(string $label = null)
      * @method Show\Field|Collection end_at(string $label = null)
+     * @method Show\Field|Collection category_ids(string $label = null)
+     * @method Show\Field|Collection auth(string $label = null)
+     * @method Show\Field|Collection switch(string $label = null)
      * @method Show\Field|Collection path(string $label = null)
      * @method Show\Field|Collection method(string $label = null)
      * @method Show\Field|Collection ip(string $label = null)
@@ -279,6 +306,7 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection icon(string $label = null)
      * @method Show\Field|Collection uri(string $label = null)
      * @method Show\Field|Collection extension(string $label = null)
+     * @method Show\Field|Collection platform_id(string $label = null)
      * @method Show\Field|Collection app_id(string $label = null)
      * @method Show\Field|Collection app_secret(string $label = null)
      * @method Show\Field|Collection http_method(string $label = null)

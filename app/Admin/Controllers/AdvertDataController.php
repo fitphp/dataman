@@ -25,12 +25,12 @@ class AdvertDataController extends AdminController
             $grid->column('image');
             $grid->column('title');
             $grid->type()->using(DictTypeModel::getDataItemByTypeKey('link_type')
-                ->pluck('value','key')->toArray());
-            $grid->column('url');
+                ->pluck('value','key')->toArray())->label();
+            $grid->column('url')->link();
             $grid->status()->using([0 => '关闭', 1 => '正常'])->label([ 0 => 'danger', 1 => 'primary']);
-            $grid->column('order');
+            $grid->column('order')->sortable();
             $grid->column('start_at');
-            $grid->column('end_at')->sortable();
+            $grid->column('end_at');
 
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
@@ -55,6 +55,7 @@ class AdvertDataController extends AdminController
             $show->field('pin_id');
             $show->field('desc');
             $show->field('type');
+            $show->field('appid');
             $show->field('url');
             $show->field('status');
             $show->field('order');
@@ -88,6 +89,7 @@ class AdvertDataController extends AdminController
                     DictTypeModel::getDataItemByTypeKey('link_type')
                     ->pluck('value','key')->toArray()
                 )->default('h5');
+                $form->text('appid');
                 $form->url('url');
                 $form->radio('status')->options([0 => '停用', 1 => '正常'])->default(1);
                 $form->text('order')->default(0);

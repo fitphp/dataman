@@ -10,6 +10,7 @@ return [
         'pin_id' => '位置ID',
         'desc' => '描述',
         'type' => '链接类型',
+        'appid' => 'AppID',
         'url' => '链接URL',
         'status' => '状态',
         'order' => '排序',

@@ -30,7 +30,11 @@ class ChannelController extends AdminController
                         $image = "<img src='$src' style='max-width:30px;max-height:30px' class='img'/>";
                     }
 
-                    return "{$branch['id']}  - {$branch['platform']['name']} - {$image} {$branch['title']}";
+                    if (empty($branch['title'])) {
+                        return "{$branch['id']}  - {$branch['platform']['name']} - {$image} {$branch['title']}";
+                    } else {
+                        return "{$branch['id']}  - {$branch['platform']['name']} - {$image} {$branch['title']}【{$branch['name']}】";
+                    }
                 });
 
                 $row->column(6, $tree);

@@ -15,12 +15,14 @@ Route::group([
 
     $router->resource('/notice', 'NoticeController');
     $router->resource('/config', 'ConfigController');
+    $router->resource('/channel', 'ChannelController');
     $router->resource('/platform', 'PlatformController');
     $router->resource('/category', 'CategoryController');
+    $router->resource('/content', 'ContentController');
     $router->resource('/region', 'ChinaRegionController');
-    $router->resource('/channel', 'ChannelController');
     $router->resource('/dict/type', 'DictTypeController');
     $router->resource('/dict/data', 'DictDataController');
     $router->resource('/advert/pin', 'AdvertPinController');
     $router->resource('/advert/data', 'AdvertDataController');
+    $router->resource('/application', 'ApplicationController');
 });
