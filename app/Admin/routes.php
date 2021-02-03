@@ -13,9 +13,11 @@ Route::group([
 ], function (Router $router) {
     $router->get('/', 'HomeController@index');
 
-    $router->resource('/notice', 'NoticeController');
-    $router->resource('/config', 'ConfigController');
-    $router->resource('/channel', 'ChannelController');
+    $router->resource('/dict', 'DictController'); // 字典
+    $router->resource('/layout', 'LayoutController'); // 布局
+    $router->resource('/notice', 'NoticeController'); // 通知
+    $router->resource('/config', 'ConfigController'); // 配置
+    $router->resource('/channel', 'ChannelController');  // 栏目
     $router->resource('/platform', 'PlatformController');
     $router->resource('/category', 'CategoryController');
     $router->resource('/content', 'ContentController');

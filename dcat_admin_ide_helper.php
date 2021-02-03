@@ -11,27 +11,28 @@ namespace Dcat\Admin {
     use Illuminate\Support\Collection;
 
     /**
+     * @property Grid\Column|Collection status
      * @property Grid\Column|Collection from
      * @property Grid\Column|Collection top
-     * @property Grid\Column|Collection status
      * @property Grid\Column|Collection type
      * @property Grid\Column|Collection level
      * @property Grid\Column|Collection is_default
-     * @property Grid\Column|Collection role_id
-     * @property Grid\Column|Collection menu_id
+     * @property Grid\Column|Collection auth
+     * @property Grid\Column|Collection id
+     * @property Grid\Column|Collection name
+     * @property Grid\Column|Collection key
+     * @property Grid\Column|Collection value
+     * @property Grid\Column|Collection remark
      * @property Grid\Column|Collection created_at
      * @property Grid\Column|Collection updated_at
-     * @property Grid\Column|Collection id
+     * @property Grid\Column|Collection role_id
+     * @property Grid\Column|Collection menu_id
      * @property Grid\Column|Collection username
      * @property Grid\Column|Collection password
-     * @property Grid\Column|Collection name
      * @property Grid\Column|Collection avatar
      * @property Grid\Column|Collection remember_token
      * @property Grid\Column|Collection type_id
-     * @property Grid\Column|Collection key
-     * @property Grid\Column|Collection value
      * @property Grid\Column|Collection order
-     * @property Grid\Column|Collection remark
      * @property Grid\Column|Collection parent_code
      * @property Grid\Column|Collection area_code
      * @property Grid\Column|Collection zip_code
@@ -69,7 +70,6 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection start_at
      * @property Grid\Column|Collection end_at
      * @property Grid\Column|Collection category_ids
-     * @property Grid\Column|Collection auth
      * @property Grid\Column|Collection switch
      * @property Grid\Column|Collection path
      * @property Grid\Column|Collection method
@@ -79,33 +79,35 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection icon
      * @property Grid\Column|Collection uri
      * @property Grid\Column|Collection extension
+     * @property Grid\Column|Collection target
      * @property Grid\Column|Collection platform_id
      * @property Grid\Column|Collection app_id
      * @property Grid\Column|Collection app_secret
      * @property Grid\Column|Collection http_method
      * @property Grid\Column|Collection http_path
      *
+     * @method Grid\Column|Collection status(string $label = null)
      * @method Grid\Column|Collection from(string $label = null)
      * @method Grid\Column|Collection top(string $label = null)
-     * @method Grid\Column|Collection status(string $label = null)
      * @method Grid\Column|Collection type(string $label = null)
      * @method Grid\Column|Collection level(string $label = null)
      * @method Grid\Column|Collection is_default(string $label = null)
-     * @method Grid\Column|Collection role_id(string $label = null)
-     * @method Grid\Column|Collection menu_id(string $label = null)
+     * @method Grid\Column|Collection auth(string $label = null)
+     * @method Grid\Column|Collection id(string $label = null)
+     * @method Grid\Column|Collection name(string $label = null)
+     * @method Grid\Column|Collection key(string $label = null)
+     * @method Grid\Column|Collection value(string $label = null)
+     * @method Grid\Column|Collection remark(string $label = null)
      * @method Grid\Column|Collection created_at(string $label = null)
      * @method Grid\Column|Collection updated_at(string $label = null)
-     * @method Grid\Column|Collection id(string $label = null)
+     * @method Grid\Column|Collection role_id(string $label = null)
+     * @method Grid\Column|Collection menu_id(string $label = null)
      * @method Grid\Column|Collection username(string $label = null)
      * @method Grid\Column|Collection password(string $label = null)
-     * @method Grid\Column|Collection name(string $label = null)
      * @method Grid\Column|Collection avatar(string $label = null)
      * @method Grid\Column|Collection remember_token(string $label = null)
      * @method Grid\Column|Collection type_id(string $label = null)
-     * @method Grid\Column|Collection key(string $label = null)
-     * @method Grid\Column|Collection value(string $label = null)
      * @method Grid\Column|Collection order(string $label = null)
-     * @method Grid\Column|Collection remark(string $label = null)
      * @method Grid\Column|Collection parent_code(string $label = null)
      * @method Grid\Column|Collection area_code(string $label = null)
      * @method Grid\Column|Collection zip_code(string $label = null)
@@ -143,7 +145,6 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection start_at(string $label = null)
      * @method Grid\Column|Collection end_at(string $label = null)
      * @method Grid\Column|Collection category_ids(string $label = null)
-     * @method Grid\Column|Collection auth(string $label = null)
      * @method Grid\Column|Collection switch(string $label = null)
      * @method Grid\Column|Collection path(string $label = null)
      * @method Grid\Column|Collection method(string $label = null)
@@ -153,6 +154,7 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection icon(string $label = null)
      * @method Grid\Column|Collection uri(string $label = null)
      * @method Grid\Column|Collection extension(string $label = null)
+     * @method Grid\Column|Collection target(string $label = null)
      * @method Grid\Column|Collection platform_id(string $label = null)
      * @method Grid\Column|Collection app_id(string $label = null)
      * @method Grid\Column|Collection app_secret(string $label = null)
@@ -164,27 +166,28 @@ namespace Dcat\Admin {
     class MiniGrid extends Grid {}
 
     /**
+     * @property Show\Field|Collection status
      * @property Show\Field|Collection from
      * @property Show\Field|Collection top
-     * @property Show\Field|Collection status
      * @property Show\Field|Collection type
      * @property Show\Field|Collection level
      * @property Show\Field|Collection is_default
-     * @property Show\Field|Collection role_id
-     * @property Show\Field|Collection menu_id
+     * @property Show\Field|Collection auth
+     * @property Show\Field|Collection id
+     * @property Show\Field|Collection name
+     * @property Show\Field|Collection key
+     * @property Show\Field|Collection value
+     * @property Show\Field|Collection remark
      * @property Show\Field|Collection created_at
      * @property Show\Field|Collection updated_at
-     * @property Show\Field|Collection id
+     * @property Show\Field|Collection role_id
+     * @property Show\Field|Collection menu_id
      * @property Show\Field|Collection username
      * @property Show\Field|Collection password
-     * @property Show\Field|Collection name
      * @property Show\Field|Collection avatar
      * @property Show\Field|Collection remember_token
      * @property Show\Field|Collection type_id
-     * @property Show\Field|Collection key
-     * @property Show\Field|Collection value
      * @property Show\Field|Collection order
-     * @property Show\Field|Collection remark
      * @property Show\Field|Collection parent_code
      * @property Show\Field|Collection area_code
      * @property Show\Field|Collection zip_code
@@ -222,7 +225,6 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection start_at
      * @property Show\Field|Collection end_at
      * @property Show\Field|Collection category_ids
-     * @property Show\Field|Collection auth
      * @property Show\Field|Collection switch
      * @property Show\Field|Collection path
      * @property Show\Field|Collection method
@@ -232,33 +234,35 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection icon
      * @property Show\Field|Collection uri
      * @property Show\Field|Collection extension
+     * @property Show\Field|Collection target
      * @property Show\Field|Collection platform_id
      * @property Show\Field|Collection app_id
      * @property Show\Field|Collection app_secret
      * @property Show\Field|Collection http_method
      * @property Show\Field|Collection http_path
      *
+     * @method Show\Field|Collection status(string $label = null)
      * @method Show\Field|Collection from(string $label = null)
      * @method Show\Field|Collection top(string $label = null)
-     * @method Show\Field|Collection status(string $label = null)
      * @method Show\Field|Collection type(string $label = null)
      * @method Show\Field|Collection level(string $label = null)
      * @method Show\Field|Collection is_default(string $label = null)
-     * @method Show\Field|Collection role_id(string $label = null)
-     * @method Show\Field|Collection menu_id(string $label = null)
+     * @method Show\Field|Collection auth(string $label = null)
+     * @method Show\Field|Collection id(string $label = null)
+     * @method Show\Field|Collection name(string $label = null)
+     * @method Show\Field|Collection key(string $label = null)
+     * @method Show\Field|Collection value(string $label = null)
+     * @method Show\Field|Collection remark(string $label = null)
      * @method Show\Field|Collection created_at(string $label = null)
      * @method Show\Field|Collection updated_at(string $label = null)
-     * @method Show\Field|Collection id(string $label = null)
+     * @method Show\Field|Collection role_id(string $label = null)
+     * @method Show\Field|Collection menu_id(string $label = null)
      * @method Show\Field|Collection username(string $label = null)
      * @method Show\Field|Collection password(string $label = null)
-     * @method Show\Field|Collection name(string $label = null)
      * @method Show\Field|Collection avatar(string $label = null)
      * @method Show\Field|Collection remember_token(string $label = null)
      * @method Show\Field|Collection type_id(string $label = null)
-     * @method Show\Field|Collection key(string $label = null)
-     * @method Show\Field|Collection value(string $label = null)
      * @method Show\Field|Collection order(string $label = null)
-     * @method Show\Field|Collection remark(string $label = null)
      * @method Show\Field|Collection parent_code(string $label = null)
      * @method Show\Field|Collection area_code(string $label = null)
      * @method Show\Field|Collection zip_code(string $label = null)
@@ -296,7 +300,6 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection start_at(string $label = null)
      * @method Show\Field|Collection end_at(string $label = null)
      * @method Show\Field|Collection category_ids(string $label = null)
-     * @method Show\Field|Collection auth(string $label = null)
      * @method Show\Field|Collection switch(string $label = null)
      * @method Show\Field|Collection path(string $label = null)
      * @method Show\Field|Collection method(string $label = null)
@@ -306,6 +309,7 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection icon(string $label = null)
      * @method Show\Field|Collection uri(string $label = null)
      * @method Show\Field|Collection extension(string $label = null)
+     * @method Show\Field|Collection target(string $label = null)
      * @method Show\Field|Collection platform_id(string $label = null)
      * @method Show\Field|Collection app_id(string $label = null)
      * @method Show\Field|Collection app_secret(string $label = null)
