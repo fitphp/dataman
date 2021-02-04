@@ -4,7 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Admin\Repositories\Application;
 use App\Models\Category as CategoryModels;
-use App\Models\DictType as DictTypeModel;
+use App\Models\Dict as DictModel;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
@@ -28,14 +28,10 @@ class ApplicationController extends AdminController
                 })->pluck('title')->map('ucwords')->label();
             $grid->column('image')->width(40);
             $grid->column('title');
-            $grid->type()->using(DictTypeModel::getDataItemByTypeKey('link_type')
-                ->pluck('value','key')->toArray())->label();
+            $grid->type()->using(DictModel::getValueByKey('link_type'))->label();
             $grid->column('url')->link();
             $grid->column('order')->sortable();;
-            $grid->column('auth')->using(
-                DictTypeModel::getDataItemByTypeKey('auth_level')
-                    ->pluck('value','key')->toArray()
-            )->label();
+            $grid->column('auth')->using(DictModel::getValueByKey('auth_level'))->label();
             $grid->status()->using([0 => '关闭', 1 => '正常'])->label([ 0 => 'danger', 1 => 'primary']);
 
             $grid->filter(function (Grid\Filter $filter) {
@@ -44,10 +40,7 @@ class ApplicationController extends AdminController
                 $filter->equal('category_id', trans('content.category.title'))->select(
                     CategoryModels::selectOptions()
                 );
-                $filter->equal('type')->select(
-                    DictTypeModel::getDataItemByTypeKey('link_type')
-                        ->pluck('value','key')->toArray()
-                );
+                $filter->equal('type')->select(DictModel::getValueByKey('link_type'));
                 $filter->like('url');
                 $filter->equal('status')->select([0 => '关闭', 1 => '正常']);
             });
@@ -69,15 +62,11 @@ class ApplicationController extends AdminController
             $show->field('subtitle');
             $show->field('image');
             $show->field('category_ids');
-            $show->field('type')->using(
-                DictTypeModel::getDataItemByTypeKey('link_type')
-                ->pluck('value','key')->toArray()
-            );
+            $show->field('type')->using(DictModel::getValueByKey('link_type'));
             $show->field('appid');
             $show->field('url');
             $show->field('order');
-            $show->auth()->using(DictTypeModel::getDataItemByTypeKey('auth_level')
-                ->pluck('value','key')->toArray());
+            $show->auth()->using(DictModel::getValueByKey('auth_level'));
             $show->status()->using([0 => '关闭', 1 => '正常']);
             $show->field('created_at');
             $show->field('updated_at');
@@ -98,17 +87,11 @@ class ApplicationController extends AdminController
             $form->multipleSelect('category_ids')->options(
                 CategoryModels::selectOptions()
             )->required();
-            $form->radio('type')->options(
-                DictTypeModel::getDataItemByTypeKey('link_type')
-                    ->pluck('value','key')->toArray()
-            )->default('h5');
+            $form->radio('type')->options(DictModel::getValueByKey('link_type'))->default('h5');
             $form->text('appid');
             $form->url('url')->required();;
             $form->text('order')->default(0);
-            $form->select('auth')->options(
-                DictTypeModel::getDataItemByTypeKey('auth_level')
-                    ->pluck('value','key')->toArray()
-            )->default(0);
+            $form->select('auth')->options(DictModel::getValueByKey('auth_level'))->default(0);
             $form->radio('status')->options([0 => '关闭', 1 => '正常'])->default(1);
         });
     }

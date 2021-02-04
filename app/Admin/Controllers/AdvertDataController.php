@@ -4,7 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Admin\Repositories\AdvertData;
 use App\Models\AdvertPin as AdvertPinModels;
-use App\Models\DictType as DictTypeModel;
+use App\Models\Dict as DictModel;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
@@ -24,8 +24,7 @@ class AdvertDataController extends AdminController
             $grid->column('pin.name', trans('advert-data.type.name'));
             $grid->column('image');
             $grid->column('title');
-            $grid->type()->using(DictTypeModel::getDataItemByTypeKey('link_type')
-                ->pluck('value','key')->toArray())->label();
+            $grid->type()->using(DictModel::getValueByKey('link_type'))->label();
             $grid->column('url')->link();
             $grid->status()->using([0 => '关闭', 1 => '正常'])->label([ 0 => 'danger', 1 => 'primary']);
             $grid->column('order')->sortable();
@@ -54,10 +53,7 @@ class AdvertDataController extends AdminController
             $show->field('image');
             $show->field('pin_id');
             $show->field('desc');
-            $show->field('type')->using(
-                DictTypeModel::getDataItemByTypeKey('link_type')
-                    ->pluck('value','key')->toArray()
-            );
+            $show->field('type')->using(DictModel::getValueByKey('link_type'));
             $show->field('appid');
             $show->field('url');
             $show->field('status');
@@ -88,10 +84,7 @@ class AdvertDataController extends AdminController
             });
 
             $form->column(6, function (Form $form) {
-                $form->radio('type')->options(
-                    DictTypeModel::getDataItemByTypeKey('link_type')
-                    ->pluck('value','key')->toArray()
-                )->default('h5');
+                $form->radio('type')->options(DictModel::getValueByKey('link_type'))->default('h5');
                 $form->text('appid');
                 $form->url('url');
                 $form->radio('status')->options([0 => '停用', 1 => '正常'])->default(1);

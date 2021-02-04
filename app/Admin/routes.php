@@ -18,13 +18,11 @@ Route::group([
     $router->resource('/notice', 'NoticeController'); // 通知
     $router->resource('/config', 'ConfigController'); // 配置
     $router->resource('/channel', 'ChannelController');  // 栏目
-    $router->resource('/platform', 'PlatformController');
-    $router->resource('/category', 'CategoryController');
-    $router->resource('/content', 'ContentController');
-    $router->resource('/region', 'ChinaRegionController');
-    $router->resource('/dict/type', 'DictTypeController');
-    $router->resource('/dict/data', 'DictDataController');
-    $router->resource('/advert/pin', 'AdvertPinController');
-    $router->resource('/advert/data', 'AdvertDataController');
-    $router->resource('/application', 'ApplicationController');
+    $router->resource('/platform', 'PlatformController'); // 平台
+    $router->resource('/category', 'CategoryController'); // 分类
+    $router->resource('/content', 'ContentController'); // 内容
+    $router->resource('/region', 'ChinaRegionController'); // 中国区域
+    $router->resource('/advert/pin', 'AdvertPinController'); // 广告位置
+    $router->resource('/advert/data', 'AdvertDataController'); // 广告数据
+    $router->resource('/application', 'ApplicationController'); // 应用
 });

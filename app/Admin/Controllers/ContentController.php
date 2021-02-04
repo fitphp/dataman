@@ -3,7 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Admin\Repositories\Content;
-use App\Models\DictType as DictTypeModel;
+use App\Models\Dict as DictModel;
 use App\Models\Category as CategoryModels;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
@@ -24,8 +24,7 @@ class ContentController extends AdminController
             $grid->column('category.title', trans('content.category.title'))->label();
             $grid->column('image')->width(40);
             $grid->column('title');
-            $grid->type()->using(DictTypeModel::getDataItemByTypeKey('link_type')
-                ->pluck('value','key')->toArray())->label();
+            $grid->type()->using(DictModel::getValueByKey('link_type'))->label();
             $grid->column('url')->link();
             $grid->column('order')->sortable();
             $grid->status()->using([0 => '关闭', 1 => '正常'])->label([ 0 => 'danger', 1 => 'primary']);
@@ -36,10 +35,7 @@ class ContentController extends AdminController
                 $filter->equal('category_id', trans('content.category.title'))->select(
                     CategoryModels::selectOptions()
                 );
-                $filter->equal('type')->select(
-                    DictTypeModel::getDataItemByTypeKey('link_type')
-                    ->pluck('value','key')->toArray()
-                );
+                $filter->equal('type')->select(DictModel::getValueByKey('link_type'));
                 $filter->like('url');
                 $filter->equal('status')->select([0 => '关闭', 1 => '正常']);
             });
@@ -62,10 +58,7 @@ class ContentController extends AdminController
             $show->field('category_id');
             $show->field('image');
             $show->field('content');
-            $show->field('type')->using(
-                DictTypeModel::getDataItemByTypeKey('link_type')
-                    ->pluck('value','key')->toArray()
-            );
+            $show->field('type')->using(DictModel::getValueByKey('link_type'));
             $show->field('appid');
             $show->field('url');
             $show->field('order');
@@ -89,10 +82,7 @@ class ContentController extends AdminController
             $form->text('title')->required();
             $form->text('subtitle');
             $form->image('image');
-            $form->radio('type')->options(
-                DictTypeModel::getDataItemByTypeKey('link_type')
-                    ->pluck('value','key')->toArray()
-            )->default('h5');
+            $form->radio('type')->options(DictModel::getValueByKey('link_type'))->default('h5');
             $form->text('appid');
             $form->url('url')->required();
             $form->text('order')->default(0);
