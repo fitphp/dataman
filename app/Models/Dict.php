@@ -18,4 +18,10 @@ class Dict extends Model
     public function getValueAttribute($json) {
         return json_decode($json, true);
     }
+
+    public static function getValueByKey($key = null) {
+        return self::where('status', 1)
+            ->where('key', $key)
+            ->first()->value;
+    }
 }

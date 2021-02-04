@@ -9,7 +9,6 @@ use App\Models\Channel as ChannelModels;
 use App\Models\Application as ApplicationModels;
 
 use Dcat\Admin\Form;
-use Dcat\Admin\Form\NestedForm;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
 use Dcat\Admin\Http\Controllers\AdminController;
@@ -58,7 +57,7 @@ class LayoutController extends AdminController
             $show->field('title');
             $show->field('subtitle');
             $show->type()->using([0 => '应用', 1 => '内容', '2' => '通知']);
-            $show->field('target');
+            $show->field('target_ids');
             $show->status()->using([0 => '关闭', 1 => '正常']);
             $show->field('remark');
             $show->field('created_at');
@@ -85,22 +84,23 @@ class LayoutController extends AdminController
             $form->text('subtitle');
             $form->radio('type')
                 ->when(0, function (Form $form) {
-                    $form->multipleSelect('target')->options(
+                    $form->multipleSelect('target_ids', '应用')->options(
                         ApplicationModels::all()->pluck('title', 'id')
-                    )->default(0)->required();
+                    )->default(0);
                 })
                 ->when(1, function (Form $form) {
-                    $form->multipleSelect('target')->options(
+                    $form->multipleSelect('target_ids', '内容')->options(
                         ContentModels::all()->pluck('title', 'id')
-                    )->default(0)->required();
+                    )->default(0);
                 })
                 ->when(2, function (Form $form) {
-                    $form->multipleSelect('target')->options(
+                    $form->multipleSelect('target_ids', '通知')->options(
                         NoticeModels::all()->pluck('title', 'id')
-                    )->default(0)->required();
+                    )->default(0);
                 })
                 ->options([0 => '应用', 1 => '内容', 2 => '通知'])
                 ->default(0);
+
             $form->radio('status')
                 ->options([0 => '停用', 1 => '正常'])
                 ->default(1);

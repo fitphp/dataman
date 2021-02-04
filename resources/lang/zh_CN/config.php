@@ -1,8 +1,8 @@
 <?php
 return [
     'labels' => [
-        'Config' => '参数设置',
-        'config' => '参数设置',
+        'Config' => '配置管理',
+        'config' => '配置管理',
     ],
     'fields' => [
         'name' => '名称',

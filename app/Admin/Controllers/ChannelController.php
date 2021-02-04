@@ -100,12 +100,15 @@ class ChannelController extends AdminController
             $form->action(admin_url('channel'));
 
             $form->select('platform_id', trans('channel.fields.platform_id'))
-                ->options(PlatformModels::all()->pluck('name','id'))->default(0)->required();
+                ->options(PlatformModels::all()->pluck('name','id'))
+                ->default(0)->required();
             $form->select('parent_id', trans('channel.fields.parent_id'))
                 ->options(Models::selectOptions())->default(0)->required();
             $form->image('image', trans('channel.fields.image'));
             $form->text('title', trans('channel.fields.title'))->required();
-            $form->text('name', trans('channel.fields.name'))->required();;
+            $form->text('name', trans('channel.fields.name'))
+                ->help('必须为唯一值，不可重复', 'fa-info-circle')
+                ->required();;
             $form->text('order', trans('channel.fields.order'))
                 ->default(0)->required();
 

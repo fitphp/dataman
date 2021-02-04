@@ -20,7 +20,7 @@ class CreateLayoutTable extends Migration
             $table->string('title')->default('')->comment('标题');
             $table->string('subtitle')->default('')->nullable()->comment('副标题');
             $table->unsignedTinyInteger('type')->default(0)->comment('类型');
-            $table->longText('target')->default('NULL')->nullable()->comment('内容');
+            $table->longText('target_ids')->default('NULL')->nullable()->comment('目标ID');
             $table->unsignedTinyInteger('status')->default(1)->comment('状态');
             $table->string('remark')->default('')->nullable()->comment('备注');
             $table->timestamps();

@@ -9,7 +9,7 @@ return [
         'channel_id' => '栏目ID',
         'title' => '标题',
         'subtitle' => '副标题',
-        'target' => '内容',
+        'target_ids' => '目标ID',
         'status' => '状态',
         'remark' => '备注',
     ],
