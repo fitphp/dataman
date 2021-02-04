@@ -12,6 +12,9 @@ use Dcat\Admin\Http\Controllers\AdminController;
 
 class ContentController extends AdminController
 {
+    protected $status = [0 => '关闭', 1 => '正常'];
+    protected $status_label = [0 => 'danger', 1 => 'success'];
+
     /**
      * Make a grid builder.
      *
@@ -27,7 +30,7 @@ class ContentController extends AdminController
             $grid->type()->using(DictModel::getValueByKey('link_type'))->label();
             $grid->column('url')->link();
             $grid->column('order')->sortable();
-            $grid->status()->using([0 => '关闭', 1 => '正常'])->label([ 0 => 'danger', 1 => 'primary']);
+            $grid->status()->using($this->status)->dot($this->status_label);
 
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
@@ -37,7 +40,7 @@ class ContentController extends AdminController
                 );
                 $filter->equal('type')->select(DictModel::getValueByKey('link_type'));
                 $filter->like('url');
-                $filter->equal('status')->select([0 => '关闭', 1 => '正常']);
+                $filter->equal('status')->select($this->status);
             });
         });
     }
@@ -82,12 +85,19 @@ class ContentController extends AdminController
             $form->text('title')->required();
             $form->text('subtitle');
             $form->image('image');
-            $form->radio('type')->options(DictModel::getValueByKey('link_type'))->default('h5');
+            $form->radio('type')
+                ->options(DictModel::getValueByKey('link_type'))
+                ->default('h5')
+                ->required();
             $form->text('appid');
             $form->url('url')->required();
             $form->text('order')->default(0);
-            $form->radio('status')->options([0 => '停用', 1 => '正常'])->default(1);
+            $form->radio('status')->options($this->status)->default(1);
             $form->editor('content');
+
+            $form->disableCreatingCheck();
+            $form->disableEditingCheck();
+            $form->disableViewCheck();
         });
     }
 }

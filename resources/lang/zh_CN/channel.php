@@ -1,9 +1,9 @@
 <?php
 return [
-    'title' => '频道管理',
+    'title' => '栏目管理',
     'labels' => [
-        'Channel' => '频道管理',
-        'channel' => '频道管理',
+        'Channel' => '栏目管理',
+        'channel' => '栏目管理',
     ],
     'fields' => [
         'parent_id' => '父ID',

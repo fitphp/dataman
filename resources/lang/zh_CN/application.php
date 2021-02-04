@@ -15,6 +15,7 @@ return [
         'order' => '权重',
         'auth' => '认证级别',
         'status' => '状态',
+        'remark' => '备注',
     ],
     'category' => [
         'title' => '分类'

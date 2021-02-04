@@ -10,6 +10,9 @@ use Dcat\Admin\Http\Controllers\AdminController;
 
 class DictController extends AdminController
 {
+    protected $status = [0 => '关闭', 1 => '正常'];
+    protected $status_label = [0 => 'danger', 1 => 'success'];
+
     /**
      * Make a grid builder.
      *
@@ -23,10 +26,8 @@ class DictController extends AdminController
             $grid->column('key')->link(function () {
                 return admin_url('dict/'.$this->id);
             }, '_self');
-            $grid->status()->using([0 => '停用', 1 => '正常'])->label([
-                0 => 'danger',
-                1 => 'primary'
-            ]);
+            $grid->column('remark');
+            $grid->status()->using($this->status)->dot($this->status_label);
             $grid->column('updated_at')->sortable();
 
             $grid->filter(function (Grid\Filter $filter) {
@@ -51,7 +52,7 @@ class DictController extends AdminController
             $show->field('name');
             $show->field('key');
             $show->field('value')->view('dict.kv');
-            $show->status()->using([0 => '停用', 1 => '正常']);
+            $show->status()->using($this->status);
             $show->field('remark');
             $show->field('created_at');
             $show->field('updated_at');
@@ -71,7 +72,7 @@ class DictController extends AdminController
             $form->text('key')->required();
             $form->keyValue('value', '字典表');
             $form->radio('status')
-                ->options([0=>'停用', 1=>'正常'])
+                ->options($this->status)
                 ->default(1)
                 ->required();
             $form->text('remark');

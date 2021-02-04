@@ -25,6 +25,7 @@ class CreateApplicationTable extends Migration
             $table->unsignedTinyInteger('order')->default(0)->comment('权重');
             $table->unsignedTinyInteger('auth')->default(0)->comment('认证级别');
             $table->unsignedTinyInteger('status')->default(0)->comment('状态');
+            $table->string('remark')->default('')->comment('备注');
             $table->timestamps();
         });
     }

@@ -97,6 +97,7 @@ class CategoryController extends AdminController
             $form->text('name', trans('category.fields.name'))->required();
             $form->text('order', trans('category.fields.order'))
                 ->default(0)->required();
+
             $form->disableListButton();
             $form->disableViewCheck();
             $form->disableEditingCheck();

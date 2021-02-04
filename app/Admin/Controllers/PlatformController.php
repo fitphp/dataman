@@ -10,6 +10,9 @@ use Dcat\Admin\Http\Controllers\AdminController;
 
 class PlatformController extends AdminController
 {
+    protected $status = [0 => '关闭', 1 => '正常'];
+    protected $status_label = [0 => 'danger', 1 => 'success'];
+
     /**
      * Make a grid builder.
      *
@@ -21,13 +24,8 @@ class PlatformController extends AdminController
             $grid->column('id')->sortable();
             $grid->column('name');
             $grid->column('app_id');
-            $grid->status()->using([0 => '关闭', 1 => '正常'])->label([
-                'default' => 'primary', // 设置默认颜色，不设置则默认为 default
-                0 => 'danger',
-                1 => 'primary'
-            ]);
+            $grid->status()->using($this->status)->dot($this->status_label);
 
-            $grid->column('created_at');
             $grid->column('updated_at')->sortable();
 
             $grid->filter(function (Grid\Filter $filter) {
@@ -53,7 +51,7 @@ class PlatformController extends AdminController
             $show->field('name');
             $show->field('app_id');
             $show->field('app_secret');
-            $show->status()->using([0 => '关闭', 1 => '正常']);
+            $show->status()->using($this->status);
             $show->field('created_at');
             $show->field('updated_at');
         });
@@ -69,12 +67,21 @@ class PlatformController extends AdminController
         return Form::make(new Platform(), function (Form $form) {
             $form->display('id');
             $form->text('name');
-            $form->text('app_id')->required()->placeholder('请输入唯一值');
+            $form->text('app_id')
+                ->help('用于区分来源平台，系统唯一值')
+                ->required();
             $form->text('app_secret');
-            $form->switch('status');
+            $form->radio('status')
+                ->options($this->status)
+                ->default(1)
+                ->required();
 
             $form->display('created_at');
             $form->display('updated_at');
+
+            $form->disableCreatingCheck();
+            $form->disableEditingCheck();
+            $form->disableViewCheck();
         });
     }
 }

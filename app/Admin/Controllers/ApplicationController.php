@@ -12,6 +12,9 @@ use Dcat\Admin\Http\Controllers\AdminController;
 
 class ApplicationController extends AdminController
 {
+    protected $status = [0 => '下线', 1 => '上线', 2 => '维护', 3 => '测试'];
+    protected $status_label = [0 => 'danger', 1 => 'success', 2 => 'dark', 3 => 'warning'];
+
     /**
      * Make a grid builder.
      *
@@ -21,6 +24,7 @@ class ApplicationController extends AdminController
     {
         return Grid::make(new Application(), function (Grid $grid) {
             $grid->column('id')->sortable();
+            $grid->column('auth')->using(DictModel::getValueByKey('auth_level'))->label();
             $grid->column('category_ids', trans('application.category.title'))
                 ->display(function ($category_ids) {
                     return CategoryModels::whereIn('id', explode(',', $category_ids))
@@ -31,8 +35,7 @@ class ApplicationController extends AdminController
             $grid->type()->using(DictModel::getValueByKey('link_type'))->label();
             $grid->column('url')->link();
             $grid->column('order')->sortable();;
-            $grid->column('auth')->using(DictModel::getValueByKey('auth_level'))->label();
-            $grid->status()->using([0 => '关闭', 1 => '正常'])->label([ 0 => 'danger', 1 => 'primary']);
+            $grid->status()->using($this->status)->dot($this->status_label);
 
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
@@ -42,7 +45,7 @@ class ApplicationController extends AdminController
                 );
                 $filter->equal('type')->select(DictModel::getValueByKey('link_type'));
                 $filter->like('url');
-                $filter->equal('status')->select([0 => '关闭', 1 => '正常']);
+                $filter->equal('status')->select($this->status);
             });
         });
     }
@@ -67,7 +70,8 @@ class ApplicationController extends AdminController
             $show->field('url');
             $show->field('order');
             $show->auth()->using(DictModel::getValueByKey('auth_level'));
-            $show->status()->using([0 => '关闭', 1 => '正常']);
+            $show->status()->using($this->status);
+            $show->field('remark');
             $show->field('created_at');
             $show->field('updated_at');
         });
@@ -92,7 +96,16 @@ class ApplicationController extends AdminController
             $form->url('url')->required();;
             $form->text('order')->default(0);
             $form->select('auth')->options(DictModel::getValueByKey('auth_level'))->default(0);
-            $form->radio('status')->options([0 => '关闭', 1 => '正常'])->default(1);
+            $form->radio('status')
+                ->when(2, function (Form $form){
+                    $form->text('remark');
+                })
+                ->options($this->status)
+                ->default(1);
+
+            $form->disableCreatingCheck();
+            $form->disableEditingCheck();
+            $form->disableViewCheck();
         });
     }
 }
