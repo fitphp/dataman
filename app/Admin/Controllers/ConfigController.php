@@ -68,6 +68,10 @@ class ConfigController extends AdminController
             $form->text('value');
             $form->radio('type')->options([0=>'否', 1=>'是'])->default(0);
             $form->text('remark');
+
+            $form->disableViewCheck();
+            $form->disableEditingCheck();
+            $form->disableCreatingCheck();
         });
     }
 }

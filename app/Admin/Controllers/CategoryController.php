@@ -15,25 +15,31 @@ use Dcat\Admin\Http\Controllers\AdminController;
 
 class CategoryController extends AdminController
 {
-    public function index(Content $content)
-    {
-        return $content->title(trans('category.title'))
-            ->description(trans('admin.list'))
-            ->body(function (Row $row) {
-                $tree = new Tree(new Category());
-                $tree->disableCreateButton();
-                $tree->disableQuickCreateButton();
-                $tree->branch(function ($branch) {
-                    if (empty($branch['name'])) {
-                        return "{$branch['id']} - {$branch['title']}";
-                    } else {
-                        return "{$branch['id']} - {$branch['title']}【{$branch['name']}】";
-                    }
-                });
-                $row->column(6, $tree);
-                $row->column(6, $this->form());
-            });
-    }
+//    public function index(Content $content)
+//    {
+//        return $content->title(trans('category.title'))
+//            ->description(trans('admin.list'))
+//            ->body(function (Row $row) {
+//                $row->column(6, $this->treeView()->render());
+//                $row->column(6, $this->form());
+//            });
+//    }
+//
+//    protected function treeView()
+//    {
+//        $tree = new Tree(new Category());
+//        $tree->disableCreateButton();
+//        $tree->disableQuickCreateButton();
+//        $tree->branch(function ($branch) {
+//            if (empty($branch['name'])) {
+//                return "{$branch['id']} - {$branch['title']}";
+//            } else {
+//                return "{$branch['id']} - {$branch['title']}【{$branch['name']}】";
+//            }
+//        });
+//
+//        return $tree;
+//    }
 
     /**
      * Make a grid builder.
@@ -43,17 +49,18 @@ class CategoryController extends AdminController
     protected function grid()
     {
         return Grid::make(new Category(), function (Grid $grid) {
-            $grid->column('parent_id', trans('category.fields.pid'))->sortable();
-            $grid->column('image', trans('category.fields.image'));
-            $grid->column('title', trans('category.fields.title'));
-            $grid->column('name', trans('category.fields.name'));
-            $grid->column('order', trans('category.fields.order'));
-            $grid->column('updated_at', admin_trans('category.fields.updated_at'));
+            $grid->column('id')->sortable();
+            $grid->column('parent_id');
+            $grid->column('image');
+            $grid->column('title');
+            $grid->column('name');
+            $grid->column('order');
+            $grid->column('updated_at')->sortable();
 
             $grid->filter(function (Grid\Filter $filter) {
-                $filter->equal('parent_id', trans('category.fields.parent_id'));
-                $filter->like('title', trans('category.fields.title'));
-                $filter->like('name', trans('category.fields.name'));
+                $filter->equal('parent_id');
+                $filter->like('title');
+                $filter->like('name');
             });
         });
     }
@@ -69,13 +76,13 @@ class CategoryController extends AdminController
     {
         return Show::make($id, new Category(), function (Show $show) {
             $show->field('id', 'ID');
-            $show->field('parent_id', trans('category.fields.parent_id'));
-            $show->field('image', trans('category.fields.image'));
-            $show->field('title', trans('category.fields.title'));
-            $show->field('name', trans('category.fields.name'));
-            $show->field('order', trans('category.fields.order'));
-            $show->field('created_at', admin_trans('category.fields.created_at'));
-            $show->field('updated_at', admin_trans('category.fields.updated_at'));
+            $show->field('parent_id');
+            $show->field('image');
+            $show->field('title');
+            $show->field('name');
+            $show->field('order');
+            $show->field('created_at');
+            $show->field('updated_at');
         });
     }
 
@@ -87,18 +94,20 @@ class CategoryController extends AdminController
     protected function form()
     {
         return Form::make(new Category(), function (Form $form) {
-            $form->action(admin_url('category'));
+            //$form->action(admin_base_path('category'));
 
             $form->display('id', 'ID');
-            $form->select('parent_id', trans('category.fields.parent_id'))
-                ->options(Models::selectOptions())->default(0)->required();;
-            $form->image('image', trans('category.fields.image'));
-            $form->text('title', trans('category.fields.title'))->required();
-            $form->text('name', trans('category.fields.name'))->required();
-            $form->text('order', trans('category.fields.order'))
-                ->default(0)->required();
+            $form->select('parent_id')
+                ->options(Models::selectOptions())
+                ->default(0)
+                ->required();;
+            $form->image('image');
+            $form->text('title')->required();
+            $form->text('name')->required();
+            $form->text('order')
+                ->default(0)
+                ->required();
 
-            $form->disableListButton();
             $form->disableViewCheck();
             $form->disableEditingCheck();
             $form->disableCreatingCheck();

@@ -12,6 +12,9 @@ use Dcat\Admin\Http\Controllers\AdminController;
 
 class AdvertDataController extends AdminController
 {
+    protected $status = [0 => '关闭', 1 => '正常'];
+    protected $status_label = [0 => 'danger', 1 => 'success'];
+
     /**
      * Make a grid builder.
      *
@@ -26,10 +29,10 @@ class AdvertDataController extends AdminController
             $grid->column('title');
             $grid->type()->using(DictModel::getValueByKey('link_type'))->label();
             $grid->column('url')->link();
-            $grid->status()->using([0 => '关闭', 1 => '正常'])->label([ 0 => 'danger', 1 => 'primary']);
             $grid->column('order')->sortable();
             $grid->column('start_at');
             $grid->column('end_at');
+            $grid->status()->using($this->status)->dot($this->status_label);
 
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
@@ -87,11 +90,15 @@ class AdvertDataController extends AdminController
                 $form->radio('type')->options(DictModel::getValueByKey('link_type'))->default('h5');
                 $form->text('appid');
                 $form->url('url');
-                $form->radio('status')->options([0 => '停用', 1 => '正常'])->default(1);
+                $form->radio('status')->options($this->status)->default(1);
                 $form->text('order')->default(0);
                 $form->datetime('start_at');
                 $form->datetime('end_at');
             });
+
+            $form->disableViewCheck();
+            $form->disableEditingCheck();
+            $form->disableCreatingCheck();
         });
     }
 }

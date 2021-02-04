@@ -15,32 +15,37 @@ use Dcat\Admin\Tree;
 
 class ChannelController extends AdminController
 {
-    public function index(Content $content)
-    {
-        return $content->title(trans('channel.title'))
-            ->description(trans('admin.list'))
-            ->body(function (Row $row) {
-                $tree = new Tree(new Channel(['platform']));
-                $tree->disableCreateButton();
-                $tree->disableQuickCreateButton();
-                $tree->branch(function ($branch) {
-                    $image = null;
-                    if (!empty($branch['image'])) {
-                        $src = config('admin.upload.host') . '/' . $branch['image'] ;
-                        $image = "<img src='$src' style='max-width:30px;max-height:30px' class='img'/>";
-                    }
-
-                    if (empty($branch['title'])) {
-                        return "{$branch['id']}  - {$branch['platform']['name']} - {$image} {$branch['title']}";
-                    } else {
-                        return "{$branch['id']}  - {$branch['platform']['name']} - {$image} {$branch['title']}【{$branch['name']}】";
-                    }
-                });
-
-                $row->column(6, $tree);
-                $row->column(6, $this->form());
-            });
-    }
+//    public function index(Content $content)
+//    {
+//        return $content->title(trans('channel.title'))
+//            ->description(trans('admin.list'))
+//            ->body(function (Row $row) {
+//                $row->column(6, $this->treeView()->render());
+//                $row->column(6, $this->form());
+//            });
+//    }
+//
+//    protected function treeView()
+//    {
+//        $tree = new Tree(new Channel(['platform']));
+//        $tree->disableCreateButton();
+//        $tree->disableQuickCreateButton();
+//        $tree->branch(function ($branch) {
+//            $image = null;
+//            if (!empty($branch['image'])) {
+//                $src = config('admin.upload.host') . '/' . $branch['image'] ;
+//                $image = "<img src='$src' style='max-width:30px;max-height:30px' class='img'/>";
+//            }
+//
+//            if (empty($branch['title'])) {
+//                return "{$branch['id']}  - {$branch['platform']['name']} - {$image} {$branch['title']}";
+//            } else {
+//                return "{$branch['id']}  - {$branch['platform']['name']} - {$image} {$branch['title']}【{$branch['name']}】";
+//            }
+//        });
+//
+//        return $tree;
+//    }
 
     /**
      * Make a grid builder.
@@ -52,7 +57,7 @@ class ChannelController extends AdminController
         return Grid::make(new Channel(['platform']), function (Grid $grid) {
             $grid->column('id')->sortable();
             $grid->column('parent_id');
-            $grid->column('platform.name');
+            $grid->column('platform.name', trans('channel.fields.platform_name'));
             $grid->column('name');
             $grid->column('title');
             $grid->column('image');

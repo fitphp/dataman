@@ -71,6 +71,10 @@ class AdvertPinController extends AdminController
             $form->text('flag')->required();
             $form->text('desc');
             $form->text('order')->default(0);
+
+            $form->disableViewCheck();
+            $form->disableEditingCheck();
+            $form->disableCreatingCheck();
         });
     }
 }

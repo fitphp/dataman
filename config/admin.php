@@ -11,7 +11,7 @@ return [
     | login page.
     |
     */
-    'name' => env('APP_NAME', 'laveman'),
+    'name' => env('APP_NAME', 'dataman'),
 
     /*
     |--------------------------------------------------------------------------
@@ -22,7 +22,7 @@ return [
     | `img` tag, eg '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo' => env('APP_NAME', 'laveman'),
+    'logo' => env('APP_NAME', 'dataman'),
 
     /*
     |--------------------------------------------------------------------------
@@ -278,7 +278,7 @@ return [
     */
     'layout' => [
         // default, blue, blue-light, green
-        'color' => 'default',
+        'color' => 'blue',
 
         'body_class' => '',
 

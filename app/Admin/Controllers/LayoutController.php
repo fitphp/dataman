@@ -15,6 +15,9 @@ use Dcat\Admin\Http\Controllers\AdminController;
 
 class LayoutController extends AdminController
 {
+    protected $status = [0 => '关闭', 1 => '正常'];
+    protected $status_label = [0 => 'danger', 1 => 'success'];
+
     /**
      * Make a grid builder.
      *
@@ -30,7 +33,7 @@ class LayoutController extends AdminController
             $grid->column('name');
             $grid->column('title');
             $grid->column('subtitle');
-            $grid->status()->using([0 => '关闭', 1 => '正常'])
+            $grid->status()->using($this->status)
                 ->dot([ 0 => 'danger', 1 => 'success']);
             $grid->column('updated_at')->sortable();
 

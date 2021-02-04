@@ -16,8 +16,8 @@ return [
     'setting_title' => '分类管理',
 
     'labels' => [
-        'CategoryManager' => '分类管理',
-        'category-manager' => '分类管理',
+        'Category' => '分类管理',
+        'category' => '分类管理',
     ],
     'fields' => [
         'parent_id' => '父ID',

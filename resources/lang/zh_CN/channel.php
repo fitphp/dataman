@@ -8,6 +8,7 @@ return [
     'fields' => [
         'parent_id' => '父ID',
         'platform_id' => '平台ID',
+        'platform_name' => '平台名称',
         'name' => '名称',
         'title' => '标题',
         'image' => '图标',
