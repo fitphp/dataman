@@ -29,13 +29,7 @@ class Clear extends Action
             ->id('clear') // 导航栏显示弹窗，必须固定ID，随机ID会在刷新后失败
             ->title($this->title())
             ->body(Forms\Clear::make())
-            ->button(
-                <<<HTML
-<ul class="nav navbar-nav" style="margin-right: 2rem">
-    <li><i class="ficon feather icon-trash-2"></i>{$this->title}</li>
-</ul>
-HTML
-            );
+            ->button(view('clear.navbar'));
 
         return $modal->render();
     }

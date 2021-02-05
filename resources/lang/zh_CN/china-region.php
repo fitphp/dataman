@@ -5,7 +5,7 @@ return [
 
     'labels' => [
         'ChinaRegion' => '中国地区',
-        'china-region' => '中国地区',
+        'china' => '中国地区',
     ],
     'fields' => [
         'level' => '等级',

@@ -12,13 +12,12 @@ class MediaController extends AdminController
     {
         $request = new Request;
         $path = $request->get('path', '/');
-        $view =  $request->get('view', 'table');
         $manager = new MediaService($path);
 
         return $content
             ->title($this->title())
             ->description($this->description()['index'] ?? trans('admin.list'))
-            ->body(view("media.$view", [
+            ->body(view("media.index", [
                 'list'   => $manager->ls(),
                 'nav'    => $manager->navigation(),
                 'url'    => $manager->urls(),

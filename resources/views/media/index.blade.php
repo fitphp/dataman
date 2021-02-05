@@ -267,123 +267,96 @@
 
 </script>
 
-<div class="row">
-    <!-- /.col -->
-    <div class="col-md-12">
-        <div class="box box-primary">
-
-            <div class="box-body no-padding">
-
-                <div class="mailbox-controls with-border">
-                    <div class="btn-group">
-                        <a href="" type="button" class="btn btn-default btn media-reload" title="Refresh">
-                            <i class="fa fa-refresh"></i>
-                        </a>
-                        <a type="button" class="btn btn-default btn file-delete-multiple" title="Delete">
-                            <i class="fa fa-trash-o"></i>
-                        </a>
-                    </div>
-                    <!-- /.btn-group -->
-                    <label class="btn btn-default btn"{{-- data-toggle="modal" data-target="#uploadModal"--}}>
-                        <i class="fa fa-upload"></i>&nbsp;&nbsp;{{ trans('admin.upload') }}
-                        <form action="{{ $url['upload'] }}" method="post" class="file-upload-form" enctype="multipart/form-data" pjax-container>
-                            <input type="file" name="files[]" class="hidden file-upload" multiple>
-                            <input type="hidden" name="dir" value="{{ $url['path'] }}" />
-                            {{ csrf_field() }}
-                        </form>
-                    </label>
-
-                    <!-- /.btn-group -->
-                    <a class="btn btn-default btn" data-toggle="modal" data-target="#newFolderModal">
-                        <i class="fa fa-folder"></i>&nbsp;&nbsp;{{ trans('admin.new_folder') }}
+<div class="box box-primary">
+    <div class="box-header">
+            <div class="float-left">
+                <div class="btn-group">
+                    <a href="" type="button" class="btn btn-default btn media-reload" title="{{ trans('admin.refresh') }}">
+                        <i class="fa fa-refresh"></i>
                     </a>
-
-                    <div class="btn-group">
-                        <a href="{{ route('dcat.admin.media.index', ['path' => $url['path'], 'view' => 'table']) }}" class="btn btn-default active"><i class="fa fa-list"></i></a>
-                        <a href="{{ route('dcat.admin.media.index', ['path' => $url['path'], 'view' => 'list']) }}" class="btn btn-default"><i class="fa fa-th"></i></a>
-                    </div>
-
-                    {{--<form action="{{ $url['index'] }}" method="get" pjax-container>--}}
-                    <div class="input-group input-group-sm pull-right goto-url" style="width: 250px;">
-                        <input type="text" name="path" class="form-control pull-right" value="{{ '/'.trim($url['path'], '/') }}">
-
-                        <div class="input-group-btn">
-                            <button type="submit" class="btn btn-default"><i class="fa fa-arrow-right"></i></button>
-                        </div>
-                    </div>
-                    {{--</form>--}}
-
+                    <a type="button" class="btn btn-default btn file-delete-multiple" title="{{ trans('admin.delete') }}">
+                        <i class="fa fa-trash-o"></i>
+                    </a>
                 </div>
+                <!-- /.btn-group -->
+                <label class="btn btn-default btn"{{-- data-toggle="modal" data-target="#uploadModal"--}}>
+                    <i class="fa fa-upload"></i>&nbsp;&nbsp;{{ trans('admin.upload') }}
+                    <form action="{{ $url['upload'] }}" method="post" class="file-upload-form" enctype="multipart/form-data" pjax-container>
+                        <input type="file" name="files[]" class="hidden file-upload" multiple>
+                        <input type="hidden" name="dir" value="{{ $url['path'] }}" />
+                        {{ csrf_field() }}
+                    </form>
+                </label>
 
-                <!-- /.mailbox-read-message -->
+                <!-- /.btn-group -->
+                <a class="btn btn-default btn" data-toggle="modal" data-target="#newFolderModal">
+                    <i class="fa fa-folder"></i>&nbsp;&nbsp;{{ trans('admin.new_folder') }}
+                </a>
             </div>
-            <!-- /.box-body -->
-            <div class="box-footer">
-                <ol class="breadcrumb" style="margin-bottom: 10px;">
+            {{--<form action="{{ $url['index'] }}" method="get" pjax-container>--}}
+            <div class="float-right">
+                <div class="input-group input-group-sm pull-right goto-url" style="width: 250px;">
+                    <input type="text" name="path" class="form-control pull-right" value="{{ '/'.trim($url['path'], '/') }}">
 
-                    <li><a href="{{ route('dcat.admin.media.index') }}"><i class="fa fa-th-large"></i> </a></li>
-
-                    @foreach($nav as $item)
-                        <li><a href="{{ $item['url'] }}"> {{ $item['name'] }}</a></li>
-                    @endforeach
-                </ol>
-
-                @if (!empty($list))
-                    <table class="table table-hover">
-                        <tbody>
-                        <tr>
-                            <th width="40px;">
-                            <span class="file-select-all">
-                            <input type="checkbox" value=""/>
-                            </span>
-                            </th>
-                            <th>{{ trans('admin.name') }}</th>
-                            <th></th>
-                            <th width="200px;">{{ trans('admin.time') }}</th>
-                            <th width="100px;">{{ trans('admin.size') }}</th>
-                        </tr>
-                        @foreach($list as $item)
-                            <tr>
-                                <td style="padding-top: 15px;">
-                            <span class="file-select">
-                            <input type="checkbox" value="{{ $item['name'] }}"/>
-                            </span>
-                                </td>
-                                <td>
-                                    {!! $item['preview'] !!}
-
-                                    <a @if(!$item['isDir'])target="_blank"@endif href="{{ $item['link'] }}" class="file-name" title="{{ $item['name'] }}">
-                                        {{ $item['icon'] }} {{ basename($item['name']) }}
-                                    </a>
-                                </td>
-
-                                <td class="action-row">
-                                    <div class="btn-group btn-group-xs hide">
-                                        <a class="btn btn-default file-rename" data-toggle="modal" data-target="#moveModal" data-name="{{ $item['name'] }}"><i class="fa fa-edit"></i></a>
-                                        <a class="btn btn-default file-delete" data-path="{{ $item['name'] }}"><i class="fa fa-trash"></i></a>
-                                        @unless($item['isDir'])
-                                            <a target="_blank" href="{{ $item['download'] }}" class="btn btn-default"><i class="fa fa-download"></i></a>
-                                        @endunless
-                                        <a class="btn btn-default" data-toggle="modal" data-target="#urlModal" data-url="{{ $item['url'] }}"><i class="fa fa-internet-explorer"></i></a>
-                                    </div>
-
-                                </td>
-                                <td>{{ $item['time'] }}&nbsp;</td>
-                                <td>{{ $item['size'] }}&nbsp;</td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                @endif
-
+                    <div class="input-group-btn">
+                        <button type="submit" class="btn btn-default">
+                            <i class="fa fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
-            <!-- /.box-footer -->
-            <!-- /.box-footer -->
-        </div>
-        <!-- /. box -->
+            {{--</form>--}}
     </div>
-    <!-- /.col -->
+    <div class="box-body no-padding">
+        <table class="table table-hover">
+            <tbody>
+            <tr>
+                <th width="40px;">
+                        <span class="file-select-all">
+                            <input type="checkbox" value=""/>
+                        </span>
+                </th>
+                <th>{{ trans('admin.name') }}</th>
+                <th width="200px;">{{ trans('admin.time') }}</th>
+                <th width="100px;">{{ trans('admin.size') }}</th>
+                <th width="100px;">{{ trans('admin.action') }}</th>
+            </tr>
+            @foreach($list as $item)
+                <tr>
+                    <td style="padding-top: 15px;">
+                    <span class="file-select">
+                    <input type="checkbox" value="{{ $item['name'] }}"/>
+                    </span>
+                    </td>
+                    <td>
+                        {!! $item['preview'] !!}
+
+                        <a @if(!$item['isDir'])target="_blank"@endif href="{{ $item['link'] }}" class="file-name" title="{{ $item['name'] }}">
+                            {{ $item['icon'] }} {{ basename($item['name']) }}
+                        </a>
+                    </td>
+                    <td>{{ $item['time'] }}&nbsp;</td>
+                    <td>{{ $item['size'] }}&nbsp;</td>
+                    <td class="action-row">
+                        <div class="btn-group btn-group-xs hide">
+                            <a class="btn btn-default file-rename" data-toggle="modal" data-target="#moveModal" data-name="{{ $item['name'] }}"><i class="fa fa-edit"></i></a>
+                            <a class="btn btn-default file-delete" data-path="{{ $item['name'] }}"><i class="fa fa-trash"></i></a>
+                            @unless($item['isDir'])
+                                <a target="_blank" href="{{ $item['download'] }}" class="btn btn-default"><i class="fa fa-download"></i></a>
+                            @endunless
+                            <a class="btn btn-default" data-toggle="modal" data-target="#urlModal" data-url="{{ $item['url'] }}"><i class="fa fa-internet-explorer"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+        <!-- /.mailbox-read-message -->
+    </div>
+    <!-- /.box-body -->
 </div>
+<!-- /. box -->
+
 
 <div class="modal fade" id="moveModal" tabindex="-1" role="dialog" aria-labelledby="moveModalLabel">
     <div class="modal-dialog" role="document">
@@ -413,8 +386,10 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="urlModalLabel">{{ trans('media.fields.url') }}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <div class="form-group">
@@ -432,8 +407,10 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="newFolderModalLabel">{{ trans('media.fields.new-folder') }}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <form id="new-folder">
                 <div class="modal-body">
