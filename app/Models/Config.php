@@ -12,7 +12,6 @@ class Config extends Model
     protected $table = 'system_config';
 
     public function setValueAttribute($value) {
-        var_dump($value, $this->attributes);die();
         if ('dict' == $this->attributes['group']) {
             $this->attributes['value'] = json_encode($value);
         } else {
