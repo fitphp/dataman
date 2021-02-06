@@ -70,10 +70,17 @@ composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 - `ext-bcmath` 扩展，注意和 PHP 版本相同。
 
 ## 部署
-推荐Docker镜像 [bincent/php](https://hub.docker.com/r/bincent/php)
+### PHP镜像版本
+推荐Docker PHP镜像 [bincent/php](https://hub.docker.com/r/bincent/php)
 已安装所需扩展与Composer
 ```bash
 docker pull bincent/php:8.0-alpine
+```
+
+### 推荐环境
+docker-compose运行环境 [Nginx + PHP Docker环境](https://gitee.com/fitphp/docker-nginx-php)
+```bash
+docker-compose -f nginx-php.yml up -d
 ```
 
 生产环境下为遵守安全策略，非常建议在服务器本地进行部署，暂时不提供相关线上初始化安装的功能。因此，虽然前期部署的步骤较多，但已经为大家自动化处理了很大部分的流程，只需要跟着下面的命令一步步执行，一般是不会有部署问题的。
@@ -135,6 +142,19 @@ server {
 
 接着，执行 `php artisan dataman:update` 来进行升级。
 
+## 控制台命令
+### 创建管理员
+```bash
+php artisan admin:create-user
+```
+这个命令用来创建一个admin用户，用交互式的方式填写用户名和密码、并且选择角色之后，会创建一个可登录的用户
+
+### 重置管理员密码
+```bash
+php artisan admin:reset-password
+```
+这个命令用来给指定用户重置密码，根据命令的提示来操作
+
 ## 版权信息
 
 数据管理平台（DataMan）基于遵循 [MIT](https://opensource.org/licenses/MIT) 开源协议的 Dcat-Admin 框架二次开发。
@@ -143,3 +163,6 @@ server {
 [Laravel](https://laravel.com/) ，优雅的 PHP Web 框架。
 
 [Dcat Admin](https://dcatadmin.com) ，高颜值、高效率的后台开发框架。
+
+### 参与开源
+欢迎提交 [issue](https://gitee.com/fitphp/dataman/issues)

@@ -32,7 +32,7 @@ class CreateChinaRegionTable extends Migration
                 $table->string('pinyin',255);
                 $table->unsignedDouble('lng');
                 $table->unsignedDouble('lat');
-                $table->index(['level','parent_code', 'area_code', 'zip_code','city_code']);
+                $table->index(['level','parent_code', 'area_code', 'zip_code','city_code'], 'SearchIndex');
             });
         }
     }

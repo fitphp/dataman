@@ -368,8 +368,8 @@ CREATE TABLE `channel` (
   `title` varchar(50) CHARACTER SET utf8mb4 NOT NULL COMMENT '标题',
   `image` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '图标',
   `order` tinyint(3) unsigned NOT NULL DEFAULT 0 COMMENT '排序',
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT '创建时间',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '更新时间',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() COMMENT '创建时间',
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

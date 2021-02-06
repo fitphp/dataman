@@ -53,6 +53,7 @@ class Update extends Command
         $this->call('migrate');
         $this->info('数据库迁移完成！');
         $this->info('升级完成！');
+
         return 0;
     }
 }
