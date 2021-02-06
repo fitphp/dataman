@@ -54,12 +54,6 @@
 ## 环境要求
 `git`，用于管理版本，部署和升级必要工具。
 
-如果安装过程中出现 composer 下载过慢或安装失败的情况， 请运行命令 
-```bash
-composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
-```
-把 composer 镜像更换为阿里云镜像。
-
 `MariaDB 10.2 +`，数据库引擎，理论上 `MySQL 5.6+` 兼容支持。
 
 `PHP 7.3 +` ，已经支持 PHP 8 。
@@ -69,19 +63,25 @@ composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 - `ext-ldap` 扩展，注意和 PHP 版本相同。
 - `ext-bcmath` 扩展，注意和 PHP 版本相同。
 
-## 部署
-### PHP镜像版本
-推荐Docker PHP镜像 [bincent/php](https://hub.docker.com/r/bincent/php)
-已安装所需扩展与Composer
-```bash
-docker pull bincent/php:8.0-alpine
-```
+更多 PHP版本 镜像 [bincent/php](https://hub.docker.com/r/bincent/php)；
+所需扩展均已安装，Composer 镜像为阿里云镜像
 
-### 推荐环境
-docker-compose运行环境 [Nginx + PHP Docker环境](https://gitee.com/fitphp/docker-nginx-php)
+## 安装部署
+
+### Docker 环境（推荐）
+docker-compose 运行环境 立即获得：[Nginx + PHP Docker](https://gitee.com/fitphp/docker-nginx-php) 部署环境
+
+在 docker-nginx-php 目录中根据项目路径路径修改`WEBSITE_PATH`
+
+启动docker
 ```bash
 docker-compose -f nginx-php.yml up -d
 ```
+
+### 自有环境
+自建可以自行百度，宝塔等一键部署环境
+
+## 安装步骤
 
 生产环境下为遵守安全策略，非常建议在服务器本地进行部署，暂时不提供相关线上初始化安装的功能。因此，虽然前期部署的步骤较多，但已经为大家自动化处理了很大部分的流程，只需要跟着下面的命令一步步执行，一般是不会有部署问题的。
 
