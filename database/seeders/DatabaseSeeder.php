@@ -13,6 +13,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        DB::unprepared(file_get_contents(base_path('/database/install.sql')));
     }
 }

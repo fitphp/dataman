@@ -61,10 +61,10 @@ class Install extends Command
         $this->info('正在处理数据库迁移！');
         $this->call('migrate');
         $this->info('正在初始化基础数据！');
-        // 填充菜单
-        $this->call('db:seed', ['--class' => 'AdminMenuTableSeeder']);
-        // 中国区域
-        $this->call('db:seed', ['--class' => 'ChinaRegionTableSeeder']);
+        /**
+         * 数据填充
+         */
+        //$this->call('db:seed', ['--class' => 'DatabaseSeeder']);
         $this->call('dataman:reset');
         $this->info('安装完成！');
         $this->warn('用户名密码都为：admin');

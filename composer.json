@@ -14,11 +14,13 @@
         }
     ],
     "license": "MIT",
-    "repositories":[
-        { "type": "git","url": "git@gitee.com:fitphp/laravel-admin.git"}
-    ],
     "require": {
         "php": "^7.3|^8.0",
+        "ext-bcmath": "*",
+        "ext-json": "*",
+        "ext-ldap": "*",
+        "ext-mysqli": "*",
+        "ext-zip": "*",
         "fitphp/laravel-admin": "2.*",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
