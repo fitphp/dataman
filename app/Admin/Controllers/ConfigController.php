@@ -10,6 +10,11 @@ use Dcat\Admin\Http\Controllers\AdminController;
 
 class ConfigController extends AdminController
 {
+    protected $group = ['basic' => '基础', 'dict' => '字典'];
+    protected $group_label = [0 => 'dark', 1 => 'info'];
+    protected $status = [0 => '关闭', 1 => '正常'];
+    protected $status_label = [0 => 'danger', 1 => 'success'];
+
     /**
      * Make a grid builder.
      *
@@ -19,16 +24,19 @@ class ConfigController extends AdminController
     {
         return Grid::make(new Config(), function (Grid $grid) {
             $grid->column('id')->sortable();
+            $grid->column('group')->using($this->group)->label($this->group_label);
             $grid->column('name');
-            $grid->column('key');
-            $grid->column('value');
-            $grid->type()->using([0 => '否', 1 => '是']);
+            $grid->column('key')->link(function () {
+                return admin_url('dict/'.$this->id);
+            }, '_self');
+            $grid->column('remark');
+            $grid->status()->using($this->status)->dot($this->status_label);
             $grid->column('updated_at')->sortable();
 
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
-                $filter->like('name', trans('system-config.fields.name'));
-                $filter->like('key', trans('system-config.fields.key'));
+                $filter->like('name', trans('config.fields.name'));
+                $filter->like('key', trans('config.fields.key'));
             });
         });
     }
@@ -46,8 +54,13 @@ class ConfigController extends AdminController
             $show->field('id');
             $show->field('name');
             $show->field('key');
-            $show->field('value');
-            $show->type()->using([0 => '否', 1 => '是']);
+            $show->field('group')->using($this->group);
+            if ('basic' == $show->model()->group) {
+                $show->field('value');
+            } else {
+                $show->field('value')->view('config.kv');
+            }
+            $show->status()->using($this->status);
             $show->field('remark');
             $show->field('created_at');
             $show->field('updated_at');
@@ -62,16 +75,31 @@ class ConfigController extends AdminController
     protected function form()
     {
         return Form::make(new Config(), function (Form $form) {
-
+            $form->display('id');
             $form->text('name')->required();
-            $form->text('key')->required()->placeholder('请输入唯一键值');
-            $form->text('value');
-            $form->radio('type')->options([0=>'否', 1=>'是'])->default(0);
+            $form->text('key')->required();
+            $form->radio('group')
+                ->when('basic', function (Form $form){
+                    $form->text('value');
+                })
+                ->when('dict', function (Form $form) {
+                    $form->keyValue('value', '字典表');
+                })
+                ->options($this->group)
+                ->default(1)
+                ->required();
+            $form->radio('status')
+                ->options($this->status)
+                ->default(1)
+                ->required();
             $form->text('remark');
 
-            $form->disableViewCheck();
-            $form->disableEditingCheck();
+            $form->display('created_at');
+            $form->display('updated_at');
+
             $form->disableCreatingCheck();
+            $form->disableEditingCheck();
+            $form->disableViewCheck();
         });
     }
 }

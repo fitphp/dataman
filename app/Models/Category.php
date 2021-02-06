@@ -22,5 +22,5 @@ class Category extends Model
 {
     use ModelTree;
     use HasDateTimeFormatter;
-    protected $table = 'categories';
+    protected $table = 'category';
 }

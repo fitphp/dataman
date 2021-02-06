@@ -5,11 +5,13 @@ return [
         'config' => '配置管理',
     ],
     'fields' => [
-        'name' => '名称',
         'key' => '键名',
+        'group' => '分组',
+        'name' => '名称',
         'value' => '键值',
-        'type' => '系统内置',
+        'status' => '状态',
         'remark' => '备注',
+        'desc' => '描述',
     ],
     'options' => [
     ],
