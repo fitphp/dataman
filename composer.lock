@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5f7e4c2a6ad26920ea3c830cd6fe9488",
+    "content-hash": "8de462cd6230c8bba37a0226bef8a073",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -570,7 +570,7 @@
             "version": "2.0.17-beta",
             "source": {
                 "type": "git",
-                "url": "https://gitee.com/fitphp/laravel-admin.git",
+                "url": "git@gitee.com:fitphp/laravel-admin.git",
                 "reference": "625e6f253d0e6a41d08cacd30763427f9396fbb5"
             },
             "require": {
@@ -602,7 +602,19 @@
                     "src/Support/helpers.php"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Dcat\\Admin\\Tests\\": "tests/"
+                }
+            },
+            "scripts": {
+                "phpstan": [
+                    "vendor/bin/phpstan analyse"
+                ],
+                "test": [
+                    "vendor/bin/phpunit"
+                ]
+            },
             "license": [
                 "MIT"
             ],

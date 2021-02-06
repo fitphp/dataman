@@ -1,12 +1,22 @@
 {
-    "name": "laravel/laravel",
+    "name": "fitphp/dataman",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": [
-        "framework",
-        "laravel"
+    "description": "一个轻量的、现代设计风格的移动端数据管理系统",
+    "homepage": "https://gitee.com/fitphp/dataman",
+    "keywords": ["dataman", "framework", "laravel", "dcat-admin"],
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "Boolean",
+            "email": "hongbin.hsu@qq.com",
+            "homepage": "http://www.fitphp.com",
+            "role": "Developer"
+        }
     ],
     "license": "MIT",
+    "repositories":[
+        { "type": "git","url": "git@gitee.com:fitphp/laravel-admin.git"}
+    ],
     "require": {
         "php": "^7.3|^8.0",
         "fitphp/laravel-admin": "2.*",

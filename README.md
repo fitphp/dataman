@@ -54,6 +54,12 @@
 ## 环境要求
 `git`，用于管理版本，部署和升级必要工具。
 
+如果安装过程中出现 composer 下载过慢或安装失败的情况， 请运行命令 
+```bash
+composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
+```
+把 composer 镜像更换为阿里云镜像。
+
 `MariaDB 10.2 +`，数据库引擎，理论上 `MySQL 5.6+` 兼容支持。
 
 `PHP 7.3 +` ，已经支持 PHP 8 。
@@ -80,12 +86,14 @@ docker pull bincent/php:8.0-alpine
 
 4：在 `.env` 中配置数据库信息。
 
-5：进入项目根目录，执行 `php artisan dataman:install` 进行安装。
+5：进入项目根目录，执行 `composer install` 进行安装。
 
-6：你可能使用的web服务器为 `nginx` 以及 `apache`，无论怎样，应用的起始路径在 `/public` 目录，请确保指向正确，同时程序的根目录权限应该调整为：拥有者和你的 Web
+6：进入项目根目录，执行 `php artisan dataman:install` 进行安装。
+
+7：你可能使用的web服务器为 `nginx` 以及 `apache`，无论怎样，应用的起始路径在 `/public` 目录，请确保指向正确，同时程序的根目录权限应该调整为：拥有者和你的 Web
 服务器运行用户一致，且根目录权限为 `755`。
 
-7：web服务器配置参考
+8：web服务器配置参考
 ```ssh
 server {
     listen 80;
@@ -119,7 +127,7 @@ server {
 }
 ```
 
-8：此时可以通过访问 `http://your_domain` 来使用 咖啡壶。管理员账号密码为：`admin / admin`。
+9：此时可以通过访问 `http://your_domain` 来使用 咖啡壶。管理员账号密码为：`admin / admin`。
 
 ## 更新（通过Git Pull方式）
 
