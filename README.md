@@ -78,6 +78,11 @@ docker-compose 运行环境 立即获得：[Nginx + PHP Docker](https://gitee.co
 docker-compose -f nginx-php.yml up -d
 ```
 
+注意，使用容器运行方式并且开启filesystem时，需要在public目录中创建 `storage` 软链指向 `storage/app/public`
+```bash
+ ln -s ../storage/app/public storage
+```
+
 ### 自有环境
 自建可以自行百度，宝塔等一键部署环境
 
