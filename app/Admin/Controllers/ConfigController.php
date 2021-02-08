@@ -27,7 +27,7 @@ class ConfigController extends AdminController
             $grid->column('group')->using($this->group)->label($this->group_label);
             $grid->column('name');
             $grid->column('key')->link(function () {
-                return admin_url('dict/'.$this->id);
+                return admin_url('config/'.$this->id);
             }, '_self');
             $grid->column('remark');
             $grid->status()->using($this->status)->dot($this->status_label);
@@ -86,7 +86,7 @@ class ConfigController extends AdminController
                     $form->keyValue('value', '字典表');
                 })
                 ->options($this->group)
-                ->default(1)
+                ->default('basic')
                 ->required();
             $form->radio('status')
                 ->options($this->status)
