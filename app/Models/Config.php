@@ -12,18 +12,18 @@ class Config extends Model
     protected $table = 'system_config';
 
     public function setValueAttribute($value) {
-        if ('dict' == $this->attributes['group']) {
-            $this->attributes['value'] = json_encode($value);
-        } else {
+        if ('basic' == $this->attributes['group']) {
             $this->attributes['value'] = $value;
+        } else {
+            $this->attributes['value'] = json_encode($value);
         }
     }
 
     public function getValueAttribute($value) {
-        if ('dict' == $this->attributes['group']) {
-            return json_decode($value, true);
-        } else {
+        if ('basic' == $this->attributes['group']) {
             return $value;
+        } else {
+            return json_decode($value, true);
         }
     }
 
