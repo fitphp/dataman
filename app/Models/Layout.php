@@ -11,9 +11,9 @@ class Layout extends Model
 	use HasDateTimeFormatter;
     protected $table = 'layout';
 
-//    public function setTargetAttribute($value) {
-//        $this->attributes['value'] = json_encode($value);
-//    }
+    public function setTargetIdsAttribute($value) {
+        $this->attributes['target_ids'] = json_encode($value);
+    }
 
     public function channel()
     {
