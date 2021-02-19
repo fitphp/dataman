@@ -8,7 +8,8 @@ Admin::navbar(function (Navbar $navbar) {
     $navbar->right(Actions\Clear::make()->render());
 });
 
-Admin::disablePjax();
+// 关闭Pjax
+//Admin::disablePjax();
 
 Field\Editor::resolving(function (Field\Editor $editor) {
     // 设置默认配置

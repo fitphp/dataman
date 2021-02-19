@@ -3,7 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Admin\Repositories\Content;
-use App\Models\Dict as DictModel;
+use App\Models\Config as ConfigModel;
 use App\Models\Category as CategoryModels;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
@@ -27,7 +27,7 @@ class ContentController extends AdminController
             $grid->column('category.title', trans('content.category.title'))->label();
             $grid->column('image')->width(40);
             $grid->column('title');
-            $grid->type()->using(DictModel::getValueByKey('link_type'))->label();
+            $grid->type()->using(ConfigModel::getValueByKey('link_type'))->label();
             $grid->column('url')->link();
             $grid->column('order')->sortable();
             $grid->status()->using($this->status)->dot($this->status_label);
@@ -38,7 +38,7 @@ class ContentController extends AdminController
                 $filter->equal('category_id', trans('content.category.title'))->select(
                     CategoryModels::selectOptions()
                 );
-                $filter->equal('type')->select(DictModel::getValueByKey('link_type'));
+                $filter->equal('type')->select(ConfigModel::getValueByKey('link_type'));
                 $filter->like('url');
                 $filter->equal('status')->select($this->status);
             });
@@ -61,7 +61,7 @@ class ContentController extends AdminController
             $show->field('category_id');
             $show->field('image');
             $show->field('content');
-            $show->field('type')->using(DictModel::getValueByKey('link_type'));
+            $show->field('type')->using(ConfigModel::getValueByKey('link_type'));
             $show->field('appid');
             $show->field('url');
             $show->field('order');
@@ -86,7 +86,7 @@ class ContentController extends AdminController
             $form->text('subtitle');
             $form->image('image');
             $form->radio('type')
-                ->options(DictModel::getValueByKey('link_type'))
+                ->options(ConfigModel::getValueByKey('link_type'))
                 ->default('h5')
                 ->required();
             $form->text('appid');

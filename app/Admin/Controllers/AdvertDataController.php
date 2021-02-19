@@ -4,7 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Admin\Repositories\AdvertData;
 use App\Models\AdvertPin as AdvertPinModels;
-use App\Models\Dict as DictModel;
+use App\Models\Config as ConfigModel;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
@@ -27,7 +27,7 @@ class AdvertDataController extends AdminController
             $grid->column('pin.name', trans('advert-data.type.name'));
             $grid->column('image');
             $grid->column('title');
-            $grid->type()->using(DictModel::getValueByKey('link_type'))->label();
+            $grid->type()->using(ConfigModel::getValueByKey('link_type'))->label();
             $grid->column('url')->link();
             $grid->column('order')->sortable();
             $grid->column('start_at');
@@ -56,7 +56,7 @@ class AdvertDataController extends AdminController
             $show->field('image');
             $show->field('pin_id');
             $show->field('desc');
-            $show->field('type')->using(DictModel::getValueByKey('link_type'));
+            $show->field('type')->using(ConfigModel::getValueByKey('link_type'));
             $show->field('appid');
             $show->field('url');
             $show->field('status');
@@ -87,7 +87,7 @@ class AdvertDataController extends AdminController
             });
 
             $form->column(6, function (Form $form) {
-                $form->radio('type')->options(DictModel::getValueByKey('link_type'))->default('h5');
+                $form->radio('type')->options(ConfigModel::getValueByKey('link_type'))->default('h5');
                 $form->text('appid');
                 $form->url('url');
                 $form->radio('status')->options($this->status)->default(1);

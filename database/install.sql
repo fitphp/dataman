@@ -80,7 +80,7 @@ INSERT INTO `admin_menu` VALUES (7, 2, 7, '扩展', NULL, 'auth/extensions', '',
 INSERT INTO `admin_menu` VALUES (8, 2, 8, '日志', NULL, 'auth/operation-logs', '', 1, '2021-01-24 19:05:30', '2021-01-27 23:28:48');
 INSERT INTO `admin_menu` VALUES (9, 0, 9, '数据中心', 'fa-align-justify', NULL, '', 1, '2021-01-27 23:21:33', '2021-01-27 23:33:49');
 INSERT INTO `admin_menu` VALUES (10, 9, 10, '配置管理', 'fa-cog', 'config', '', 1, '2021-01-27 23:36:56', '2021-01-27 23:36:56');
-INSERT INTO `admin_menu` VALUES (11, 9, 11, '附件管理', 'fa-file-picture-o', 'attachment', '', 1, '2021-01-27 23:42:57', '2021-01-27 23:42:57');
+INSERT INTO `admin_menu` VALUES (11, 9, 11, '附件管理', 'fa-file-picture-o', 'media', '', 1, '2021-01-27 23:42:57', '2021-01-27 23:42:57');
 INSERT INTO `admin_menu` VALUES (12, 9, 12, '中国区域', 'fa-globe', 'region/china', '', 1, '2021-01-24 19:05:30', '2021-01-27 23:28:48');
 INSERT INTO `admin_menu` VALUES (13, 0, 13, '应用中心', 'fa-paper-plane', NULL, '', 1, '2021-01-27 23:28:20', '2021-01-27 23:28:47');
 INSERT INTO `admin_menu` VALUES (14, 13, 14, '应用管理', 'fa-paper-plane-o', 'application', '', 1, '2021-01-27 23:44:58', '2021-01-27 23:44:58');
