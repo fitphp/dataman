@@ -60,7 +60,11 @@ class LayoutController extends AdminController
             $show->field('title');
             $show->field('subtitle');
             $show->type()->using([0 => '应用', 1 => '内容', '2' => '通知']);
-            $show->field('target_ids');
+
+//            $show->field('target_ids')->as(function ($target_ids){
+//                return var_dump($target_ids);
+//            });
+
             $show->status()->using([0 => '关闭', 1 => '正常']);
             $show->field('remark');
             $show->field('created_at');

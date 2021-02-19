@@ -25,11 +25,13 @@ class ApplicationController extends AdminController
         return Grid::make(new Application(), function (Grid $grid) {
             $grid->column('id')->sortable();
             $grid->column('auth')->using(ConfigModel::getValueByKey('auth_level'))->label();
+
             $grid->column('category_ids', trans('application.category.title'))
                 ->display(function ($category_ids) {
-                    return CategoryModels::whereIn('id', explode(',', $category_ids))
+                    return CategoryModels::whereIn('id', $category_ids)
                         ->get(['title'])->toArray();
                 })->pluck('title')->map('ucwords')->label();
+
             $grid->column('image')->width(40);
             $grid->column('title');
             $grid->type()->using(ConfigModel::getValueByKey('link_type'))->label();
@@ -64,7 +66,14 @@ class ApplicationController extends AdminController
             $show->field('title');
             $show->field('subtitle');
             $show->field('image');
-            $show->field('category_ids');
+            $show->field('category_ids')->as(function ($category_ids) use ($show) {
+                $fields = [];
+                foreach (CategoryModels::whereIn('id', $category_ids)
+                             ->get(['title']) as $val) {
+                    $fields[] = $val->title;
+                }
+                return implode('、', $fields);
+            });
             $show->field('type')->using(ConfigModel::getValueByKey('link_type'));
             $show->field('appid');
             $show->field('url');

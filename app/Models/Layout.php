@@ -12,7 +12,11 @@ class Layout extends Model
     protected $table = 'layout';
 
     public function setTargetIdsAttribute($value) {
-        $this->attributes['target_ids'] = json_encode($value);
+        $this->attributes['target_ids'] = trim(implode(',', $value), ',');
+    }
+
+    public function getTargetIdsAttribute($value) {
+        return explode(',', $value);
     }
 
     public function channel()

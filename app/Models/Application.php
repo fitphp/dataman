@@ -11,9 +11,14 @@ class Application extends Model
 	use HasDateTimeFormatter;
     protected $table = 'application';
 
-    public function setCategoryIdsAttribute($category_ids)
+    public function setCategoryIdsAttribute($value)
     {
-        $this->attributes['category_ids'] = trim(implode(',', $category_ids), ',');
+        $this->attributes['category_ids'] = trim(implode(',', $value), ',');
+    }
+
+    public function getCategoryIdsAttribute($value)
+    {
+        return explode(',', $value);
     }
 
     public function Category()
