@@ -19,17 +19,18 @@ use Dcat\Admin\Actions\Action;
 use Dcat\Admin\Widgets\Modal;
 use App\Admin\Forms;
 
-class Clear extends Action
+class ClearCacheAction extends Action
 {
-    protected $title = '清理缓存';
-
     public function render()
     {
         $modal = Modal::make()
-            ->id('clear') // 导航栏显示弹窗，必须固定ID，随机ID会在刷新后失败
-            ->title($this->title())
-            ->body(Forms\Clear::make())
-            ->button(view('clear.navbar'));
+            ->id('clearCache') // 导航栏显示弹窗，必须固定ID，随机ID会在刷新后失败
+            ->title('清理缓存')
+            ->body(
+                Forms\ClearCacheForm::make()
+                    ->render()
+            )
+            ->button(view('navbar.clear'));
 
         return $modal->render();
     }
