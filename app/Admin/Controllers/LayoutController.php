@@ -15,6 +15,8 @@ use Dcat\Admin\Http\Controllers\AdminController;
 
 class LayoutController extends AdminController
 {
+    protected $type = [1 => '应用', 2 => '内容', 3 => '通知'];
+    protected $type_label = [ 1 => 'success', 2 => 'info', 3 => 'primary'];
     protected $status = [0 => '关闭', 1 => '正常'];
     protected $status_label = [0 => 'danger', 1 => 'success'];
 
@@ -28,8 +30,8 @@ class LayoutController extends AdminController
         return Grid::make(new Layout(['channel']), function (Grid $grid) {
             $grid->column('id')->sortable();
             $grid->column('channel.title', trans('advert-pin.fields.channel'));
-            $grid->type()->using([0 => '应用', 1 => '内容', '2' => '通知'])
-                ->label([ 0 => 'success', 1 => 'info', 2 => 'primary']);
+            $grid->type()->using($this->type)
+                ->label($this->type_label);
             $grid->column('name');
             $grid->column('title');
             $grid->column('subtitle');
@@ -59,13 +61,13 @@ class LayoutController extends AdminController
             $show->field('name');
             $show->field('title');
             $show->field('subtitle');
-            $show->type()->using([0 => '应用', 1 => '内容', '2' => '通知']);
+            $show->type()->using($this->type);
 
 //            $show->field('target_ids')->as(function ($target_ids){
 //                return var_dump($target_ids);
 //            });
 
-            $show->status()->using([0 => '关闭', 1 => '正常']);
+            $show->status()->using($this->status);
             $show->field('remark');
             $show->field('created_at');
             $show->field('updated_at');
@@ -90,26 +92,26 @@ class LayoutController extends AdminController
             $form->text('title');
             $form->text('subtitle');
             $form->radio('type')
-                ->when(0, function (Form $form) {
+                ->when(1, function (Form $form) {
                     $form->multipleSelect('target_ids', '应用')->options(
                         ApplicationModels::all()->pluck('title', 'id')
                     )->default(0);
                 })
-                ->when(1, function (Form $form) {
+                ->when(2, function (Form $form) {
                     $form->multipleSelect('target_ids', '内容')->options(
                         ContentModels::all()->pluck('title', 'id')
                     )->default(0);
                 })
-                ->when(2, function (Form $form) {
+                ->when(3, function (Form $form) {
                     $form->multipleSelect('target_ids', '通知')->options(
                         NoticeModels::all()->pluck('title', 'id')
                     )->default(0);
                 })
-                ->options([0 => '应用', 1 => '内容', 2 => '通知'])
+                ->options($this->type)
                 ->default(0);
 
             $form->radio('status')
-                ->options([0 => '停用', 1 => '正常'])
+                ->options($this->status)
                 ->default(1);
             $form->text('remark');
 
