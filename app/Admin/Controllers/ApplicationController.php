@@ -4,7 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Admin\Repositories\Application;
 use App\Models\Category as CategoryModels;
-use App\Models\Config as ConfigModel;
+use App\Models\Dictionary as DictionaryModel;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
@@ -24,7 +24,9 @@ class ApplicationController extends AdminController
     {
         return Grid::make(new Application(), function (Grid $grid) {
             $grid->column('id')->sortable();
-            $grid->column('auth')->using(ConfigModel::getValueByKey('auth_level'))->label();
+            $grid->column('auth')->using(
+                DictionaryModel::getValueByKey('auth_level')
+            )->label();
 
             $grid->column('category_ids', trans('application.category.title'))
                 ->display(function ($category_ids) {
@@ -34,7 +36,9 @@ class ApplicationController extends AdminController
 
             $grid->column('image')->width(40);
             $grid->column('title');
-            $grid->type()->using(ConfigModel::getValueByKey('link_type'))->label();
+            $grid->type()->using(
+                DictionaryModel::getValueByKey('link_type')
+            )->label();
             $grid->column('url')->link();
             $grid->column('order')->sortable();;
             $grid->status()->using($this->status)->dot($this->status_label);
@@ -45,7 +49,9 @@ class ApplicationController extends AdminController
                 $filter->equal('category_id', trans('content.category.title'))->select(
                     CategoryModels::selectOptions()
                 );
-                $filter->equal('type')->select(ConfigModel::getValueByKey('link_type'));
+                $filter->equal('type')->select(
+                    DictionaryModel::getValueByKey('link_type')
+                );
                 $filter->like('url');
                 $filter->equal('status')->select($this->status);
             });
@@ -74,15 +80,13 @@ class ApplicationController extends AdminController
                 }
                 return implode('、', $fields);
             });
-            $show->field('type')->using(ConfigModel::getValueByKey('link_type'));
+            $show->field('type')->using(DictionaryModel::getValueByKey('link_type'));
             $show->field('appid');
             $show->field('url');
             $show->field('order');
-            $show->auth()->using(ConfigModel::getValueByKey('auth_level'));
+            $show->auth()->using(DictionaryModel::getValueByKey('auth_level'));
             $show->status()->using($this->status);
             $show->field('remark');
-            $show->field('created_at');
-            $show->field('updated_at');
         });
     }
 
@@ -100,11 +104,15 @@ class ApplicationController extends AdminController
             $form->multipleSelect('category_ids')->options(
                 CategoryModels::selectOptions()
             )->required();
-            $form->radio('type')->options(ConfigModel::getValueByKey('link_type'))->default('h5');
+            $form->radio('type')->options(
+                DictionaryModel::getValueByKey('link_type')
+            )->default('h5');
             $form->text('appid');
             $form->url('url')->required();;
             $form->text('order')->default(0);
-            $form->select('auth')->options(ConfigModel::getValueByKey('auth_level'))->default(0);
+            $form->select('auth')->options(
+                DictionaryModel::getValueByKey('auth_level')
+            )->default(0);
             $form->radio('status')
                 ->when(2, function (Form $form){
                     $form->text('remark');

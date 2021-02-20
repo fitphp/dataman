@@ -79,7 +79,7 @@ INSERT INTO `admin_menu` VALUES (6, 2, 6, '菜单', NULL, 'auth/menu', '', 1, '2
 INSERT INTO `admin_menu` VALUES (7, 2, 7, '扩展', NULL, 'auth/extensions', '', 1, '2020-12-21 14:40:07', '2021-01-08 14:41:25');
 INSERT INTO `admin_menu` VALUES (8, 2, 8, '日志', NULL, 'auth/operation-logs', '', 1, '2021-01-24 19:05:30', '2021-01-27 23:28:48');
 INSERT INTO `admin_menu` VALUES (9, 0, 9, '数据中心', 'fa-align-justify', NULL, '', 1, '2021-01-27 23:21:33', '2021-01-27 23:33:49');
-INSERT INTO `admin_menu` VALUES (10, 9, 10, '配置管理', 'fa-cog', 'config', '', 1, '2021-01-27 23:36:56', '2021-01-27 23:36:56');
+INSERT INTO `admin_menu` VALUES (10, 9, 10, '字典管理', 'fa-cog', 'dictionary', '', 1, '2021-01-27 23:36:56', '2021-01-27 23:36:56');
 INSERT INTO `admin_menu` VALUES (11, 9, 11, '附件管理', 'fa-file-picture-o', 'media', '', 1, '2021-01-27 23:42:57', '2021-01-27 23:42:57');
 INSERT INTO `admin_menu` VALUES (12, 9, 12, '中国区域', 'fa-globe', 'region/china', '', 1, '2021-01-24 19:05:30', '2021-01-27 23:28:48');
 INSERT INTO `admin_menu` VALUES (13, 0, 13, '应用中心', 'fa-paper-plane', NULL, '', 1, '2021-01-27 23:28:20', '2021-01-27 23:28:47');
@@ -4651,34 +4651,32 @@ CREATE TABLE `platform` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
--- Table structure for system_config
+-- Table structure for dictionary
 -- ----------------------------
-DROP TABLE IF EXISTS `system_config`;
-CREATE TABLE `system_config` (
+DROP TABLE IF EXISTS `dictionary`;
+CREATE TABLE `dictionary` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
-  `group` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT ' 分组',
   `key` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '键名',
   `value` text COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '键值',
   `status` tinyint(1) unsigned NOT NULL DEFAULT 1 COMMENT '状态 0停用 1正常',
   `remark` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '备注',
+  `is_system` tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '是否系统',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() COMMENT '创建时间',
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT '更新时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `system_dict_key_unique` (`key`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
--- Records of system_config
+-- Records of dictionary
 -- ----------------------------
 BEGIN;
-INSERT INTO `system_config` VALUES (1, '用户性别', 'dict', 'user_sex', '[\"\\u5973\",\"\\u7537\"]', 1, '用户性别', '2021-02-03 16:40:15', '2021-02-05 22:56:34');
-INSERT INTO `system_config` VALUES (2, '区域等级', 'dict', 'china_region_level', '[\"\\u7701\\u7ea7\",\"\\u5e02\\u7ea7\",\"\\u533a\\/\\u53bf\",\"\\u8857\\u9053\\/\\u9547\",\"\\u5c45\\u59d4\\/\\u6751\\u59d4\"]', 1, '区域等级', '2021-02-03 18:25:18', '2021-02-05 22:56:31');
-INSERT INTO `system_config` VALUES (3, '链接类型', 'dict', 'link_type', '{\"h5\":\"H5\",\"wechat\":\"\\u5fae\\u4fe1\\u5c0f\\u7a0b\\u5e8f\"}', 1, '链接类型', '2021-02-03 18:26:21', '2021-02-05 22:56:28');
-INSERT INTO `system_config` VALUES (4, '认证等级', 'dict', 'auth_level', '[\"\\u6e38\\u5ba2\",\"\\u5b9e\\u540d\",\"\\u5b9e\\u4eba\"]', 1, '认证等级', '2021-02-03 18:26:42', '2021-02-05 22:56:25');
-INSERT INTO `system_config` VALUES (5, '配置分组', 'dict', 'config_group', '{\"basic\":\"\\u57fa\\u7840\",\"dict\":\"\\u5b57\\u5178\"}', 1, '配置分组', '2021-02-05 22:55:45', '2021-02-05 22:59:28');
-INSERT INTO `system_config` VALUES (6, '站点名称', 'basic', 'site_name', '[\"\\u6570\\u636e\\u7ba1\\u7406\\u5e73\\u53f0\"]', 1, '站点名称', '2021-02-05 23:01:14', '2021-02-06 08:46:32');
-INSERT INTO `system_config` VALUES (7, '时区', 'basic', 'timezone', 'Asia/Shanghai', 1, '时区', '2021-02-05 23:02:12', '2021-02-05 23:02:12');
+INSERT INTO `dictionary` VALUES (1, '用户性别', 'user_sex', '[\"\\u5973\",\"\\u7537\"]', 1, '用户性别', 0, '2021-02-03 16:40:15', '2021-02-05 22:56:34');
+INSERT INTO `dictionary` VALUES (2, '区域等级', 'china_region_level', '[\"\\u7701\\u7ea7\",\"\\u5e02\\u7ea7\",\"\\u533a\\/\\u53bf\",\"\\u8857\\u9053\\/\\u9547\",\"\\u5c45\\u59d4\\/\\u6751\\u59d4\"]', 1, '区域等级', 0, '2021-02-03 18:25:18', '2021-02-05 22:56:31');
+INSERT INTO `dictionary` VALUES (3, '链接类型', 'link_type', '{\"h5\":\"H5\",\"wechat\":\"\\u5fae\\u4fe1\\u5c0f\\u7a0b\\u5e8f\"}', 1, '链接类型', 0, '2021-02-03 18:26:21', '2021-02-05 22:56:28');
+INSERT INTO `dictionary` VALUES (4, '认证等级', 'auth_level', '[\"\\u6e38\\u5ba2\",\"\\u5b9e\\u540d\",\"\\u5b9e\\u4eba\"]', 1, '认证等级', 0, '2021-02-03 18:26:42', '2021-02-05 22:56:25');
+INSERT INTO `dictionary` VALUES (5, '系统配置', 'system_config', '{\"site_name\":\"\\u6570\\u636e\\u7ba1\\u7406\\u5e73\\u53f0\",\"timezone\":\"Asia\\/Shanghai\"}', 1, '系统配置', 0, '2021-02-05 22:55:45', '2021-02-20 23:21:50');
 COMMIT;
 
 -- ----------------------------

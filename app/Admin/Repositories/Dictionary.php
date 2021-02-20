@@ -2,10 +2,10 @@
 
 namespace App\Admin\Repositories;
 
-use App\Models\Config as Model;
+use App\Models\Dictionary as Model;
 use Dcat\Admin\Repositories\EloquentRepository;
 
-class Config extends EloquentRepository
+class Dictionary extends EloquentRepository
 {
     /**
      * Model.
