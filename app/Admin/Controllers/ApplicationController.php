@@ -23,6 +23,9 @@ class ApplicationController extends AdminController
     protected function grid()
     {
         return Grid::make(new Application(), function (Grid $grid) {
+            // 启用导出功能
+            $grid->export()->xlsx();
+
             $grid->column('id')->sortable();
             $grid->column('auth')->using(
                 DictionaryModel::getValueByKey('auth_level')

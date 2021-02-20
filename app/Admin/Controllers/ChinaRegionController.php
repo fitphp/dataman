@@ -18,6 +18,9 @@ class ChinaRegionController extends AdminController
     protected function grid()
     {
         return Grid::make(new ChinaRegion(), function (Grid $grid) {
+            // 启用导出功能
+            $grid->export()->xlsx();
+
             $grid->level()->using(DictionaryModel::getValueByKey('china_region_level'))->sortable();
             $grid->column('parent_code', trans('china-region.fields.parent_code'));
             $grid->column('area_code', trans('china-region.fields.area_code'));

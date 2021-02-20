@@ -23,6 +23,9 @@ class ContentController extends AdminController
     protected function grid()
     {
         return Grid::make(new Content(['category']), function (Grid $grid) {
+            // 启用导出功能
+            $grid->export()->xlsx();
+
             $grid->column('id')->sortable();
             $grid->column('category.title', trans('content.category.title'))->label();
             $grid->column('image')->width(40);

@@ -15,32 +15,6 @@ use Dcat\Admin\Http\Controllers\AdminController;
 
 class CategoryController extends AdminController
 {
-//    public function index(Content $content)
-//    {
-//        return $content->title(trans('category.title'))
-//            ->description(trans('admin.list'))
-//            ->body(function (Row $row) {
-//                $row->column(6, $this->treeView()->render());
-//                $row->column(6, $this->form());
-//            });
-//    }
-//
-//    protected function treeView()
-//    {
-//        $tree = new Tree(new Category());
-//        $tree->disableCreateButton();
-//        $tree->disableQuickCreateButton();
-//        $tree->branch(function ($branch) {
-//            if (empty($branch['name'])) {
-//                return "{$branch['id']} - {$branch['title']}";
-//            } else {
-//                return "{$branch['id']} - {$branch['title']}【{$branch['name']}】";
-//            }
-//        });
-//
-//        return $tree;
-//    }
-
     /**
      * Make a grid builder.
      *
@@ -49,6 +23,9 @@ class CategoryController extends AdminController
     protected function grid()
     {
         return Grid::make(new Category(), function (Grid $grid) {
+            // 启用导出功能
+            $grid->export()->xlsx();
+
             $grid->column('id')->sortable();
             $grid->column('parent_id');
             $grid->column('image');
