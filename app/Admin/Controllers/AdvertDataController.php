@@ -3,7 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Admin\Repositories\AdvertData;
-use App\Models\AdvertPin as AdvertPinModels;
+use App\Models\AdvertPosition as AdvertPositionModels;
 use App\Models\Dictionary as DictionaryModel;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
@@ -22,7 +22,7 @@ class AdvertDataController extends AdminController
      */
     protected function grid()
     {
-        return Grid::make(new AdvertData(['pin']), function (Grid $grid) {
+        return Grid::make(new AdvertData(['position']), function (Grid $grid) {
             $grid->column('id')->sortable();
             $grid->column('pin.name', trans('advert-data.type.name'));
             $grid->column('image');
@@ -80,7 +80,7 @@ class AdvertDataController extends AdminController
             $form->column(6, function (Form $form) {
                 $form->text('title')->required();
                 $form->select('pin_id', trans('advert-data.type.name'))
-                    ->options(AdvertPinModels::all()->pluck('name', 'id'))
+                    ->options(AdvertPositionModels::all()->pluck('name', 'id'))
                     ->required();
                 $form->text('desc');
                 $form->image('image');

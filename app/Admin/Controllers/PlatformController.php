@@ -65,11 +65,16 @@ class PlatformController extends AdminController
     protected function form()
     {
         return Form::make(new Platform(), function (Form $form) {
+            $id = $form->getKey();
+            $connection = config('admin.database.connection');
+
             $form->display('id');
             $form->text('name');
             $form->text('app_id')
                 ->help('用于区分来源平台，系统唯一值')
-                ->required();
+                ->required()
+                ->creationRules(['required', "unique:{$connection}.platform"])
+                ->updateRules(['required', "unique:{$connection}.platform, app_id, $id"]);
             $form->text('app_secret');
             $form->radio('status')
                 ->options($this->status)

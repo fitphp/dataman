@@ -92,7 +92,7 @@ INSERT INTO `admin_menu` VALUES (19, 16, 19, '栏目管理', 'fa-font-awesome', 
 INSERT INTO `admin_menu` VALUES (20, 16, 20, '布局管理', 'fa-building', 'layout', '', 1, '2021-01-27 23:40:06', '2021-01-27 23:54:19');
 INSERT INTO `admin_menu` VALUES (21, 16, 21, '通知公告', 'fa-bell', 'notice', '', 1, '2021-01-24 19:05:30', '2021-01-27 23:28:48');
 INSERT INTO `admin_menu` VALUES (22, 16, 22, '广告管理', 'fa-audio-description', 'advert', '', 1, '2021-01-27 23:50:43', '2021-01-27 23:50:43');
-INSERT INTO `admin_menu` VALUES (23, 22, 23, '位置管理', 'fa-map-pin', 'advert/pin', '', 1, '2021-01-27 23:38:36', '2021-01-27 23:38:36');
+INSERT INTO `admin_menu` VALUES (23, 22, 23, '位置管理', 'fa-map-pin', 'advert/position', '', 1, '2021-01-27 23:38:36', '2021-01-27 23:38:36');
 INSERT INTO `admin_menu` VALUES (24, 22, 24, '广告管理', 'fa-list', 'advert/data', '', 1, '2021-01-27 23:38:36', '2021-01-27 23:38:36');
 COMMIT;
 
@@ -304,8 +304,8 @@ CREATE TABLE `advert_data` (
 -- ----------------------------
 -- Table structure for advert_pin
 -- ----------------------------
-DROP TABLE IF EXISTS `advert_pin`;
-CREATE TABLE `advert_pin` (
+DROP TABLE IF EXISTS `advert_position`;
+CREATE TABLE `advert_position` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
   `flag` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '标题',

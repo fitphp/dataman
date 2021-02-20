@@ -21,7 +21,7 @@ Route::group([
     $router->resource('/content', 'ContentController'); // 内容
     $router->resource('/dictionary', 'DictionaryController'); // 字典
     $router->resource('/region/china', 'ChinaRegionController'); // 中国区域
-    $router->resource('/advert/pin', 'AdvertPinController'); // 广告位置
+    $router->resource('/advert/position', 'AdvertPositionController'); // 广告位置
     $router->resource('/advert/data', 'AdvertDataController'); // 广告数据
     $router->resource('/application', 'ApplicationController'); // 应用
 

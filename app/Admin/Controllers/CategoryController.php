@@ -71,7 +71,8 @@ class CategoryController extends AdminController
     protected function form()
     {
         return Form::make(new Category(), function (Form $form) {
-            //$form->action(admin_base_path('category'));
+            $id = $form->getKey();
+            $connection = config('admin.database.connection');
 
             $form->display('id', 'ID');
             $form->select('parent_id')
@@ -80,7 +81,11 @@ class CategoryController extends AdminController
                 ->required();;
             $form->image('image');
             $form->text('title')->required();
-            $form->text('name')->required();
+            $form->text('name')
+                ->help('必须为唯一值，不可重复', 'fa-info-circle')
+                ->required()
+                ->creationRules(['required', "unique:{$connection}.category"])
+                ->updateRules(['required', "unique:{$connection}.category, name, $id"]);
             $form->text('order')
                 ->default(0)
                 ->required();

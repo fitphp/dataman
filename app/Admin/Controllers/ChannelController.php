@@ -67,6 +67,9 @@ class ChannelController extends AdminController
     protected function form()
     {
         return Form::make(new Channel(), function (Form $form) {
+            $id = $form->getKey();
+            $connection = config('admin.database.connection');
+
             $form->display('id');
             $form->select('platform_id', trans('channel.fields.platform_id'))
                 ->options(PlatformModels::all()->pluck('name','id'))
@@ -77,7 +80,9 @@ class ChannelController extends AdminController
             $form->text('title', trans('channel.fields.title'))->required();
             $form->text('name', trans('channel.fields.name'))
                 ->help('必须为唯一值，不可重复', 'fa-info-circle')
-                ->required();;
+                ->required()
+                ->creationRules(['required', "unique:{$connection}.channel"])
+                ->updateRules(['required', "unique:{$connection}.channel, name, $id"]);
             $form->text('order', trans('channel.fields.order'))
                 ->default(0)->required();
 

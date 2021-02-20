@@ -6,10 +6,10 @@ use Dcat\Admin\Traits\HasDateTimeFormatter;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AdvertPin extends Model
+class AdvertPosition extends Model
 {
 	use HasDateTimeFormatter;
-    protected $table = 'advert_pin';
+    protected $table = 'advert_position';
 
     public function channel()
     {

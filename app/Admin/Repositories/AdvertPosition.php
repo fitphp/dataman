@@ -2,10 +2,10 @@
 
 namespace App\Admin\Repositories;
 
-use App\Models\AdvertPin as Model;
+use App\Models\AdvertPosition as Model;
 use Dcat\Admin\Repositories\EloquentRepository;
 
-class AdvertPin extends EloquentRepository
+class AdvertPosition extends EloquentRepository
 {
     /**
      * Model.

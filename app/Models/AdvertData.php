@@ -11,8 +11,8 @@ class AdvertData extends Model
 	use HasDateTimeFormatter;
     protected $table = 'advert_data';
 
-    public function pin()
+    public function position()
     {
-        return $this->hasOne(AdvertPin::class, 'id', 'pin_id');
+        return $this->hasOne(AdvertPosition::class, 'id', 'pin_id');
     }
 }

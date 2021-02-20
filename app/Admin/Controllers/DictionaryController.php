@@ -70,9 +70,16 @@ class DictionaryController extends AdminController
     protected function form()
     {
         return Form::make(new Dictionary(), function (Form $form) {
+            $id = $form->getKey();
+            $connection = config('admin.database.connection');
+
             $form->display('id');
             $form->text('name')->required();
-            $form->text('key')->required();
+            $form->text('key')->help('用于区分字典键名，系统唯一值')
+                ->required()
+                ->creationRules(['required', "unique:{$connection}.dictionary"])
+                ->updateRules(['required', "unique:{$connection}.dictionary, key, $id"]);
+
             $form->keyValue('value');
             $form->radio('status')
                 ->options($this->status)

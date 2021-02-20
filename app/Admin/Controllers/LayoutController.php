@@ -82,13 +82,19 @@ class LayoutController extends AdminController
     protected function form()
     {
         return Form::make(new Layout(), function (Form $form) {
+            $id = $form->getKey();
+            $connection = config('admin.database.connection');
+
             $form->display('id');
             $form->select('channel_id')->options(
                 ChannelModels::selectOptions()
             )->default(0)->required();
             $form->text('name')
                 ->help('必须为唯一值，不可重复', 'fa-info-circle')
-                ->required();
+                ->required()
+                ->creationRules(['required', "unique:{$connection}.layout"])
+                ->updateRules(['required', "unique:{$connection}.layout, name, $id"]);
+
             $form->text('title');
             $form->text('subtitle');
             $form->radio('type')

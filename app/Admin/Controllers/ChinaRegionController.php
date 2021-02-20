@@ -79,6 +79,9 @@ class ChinaRegionController extends AdminController
     protected function form()
     {
         return Form::make(new ChinaRegion(), function (Form $form) {
+            $id = $form->getKey();
+            $connection = config('admin.database.connection');
+
             $form->display('id', 'ID');
             $form->select('level', trans('china-region.fields.level'))
                 ->options(DictionaryModel::getValueByKey('china_region_level'))
@@ -89,7 +92,10 @@ class ChinaRegionController extends AdminController
                 ->required();
             $form->text('area_code', trans('china-region.fields.area_code'))
                 ->help('使用国家统计局制定的统计用区划代码')
-                ->required();
+                ->required()
+                ->creationRules(['required', "unique:{$connection}.china_region"])
+                ->updateRules(['required', "unique:{$connection}.china_region, area_code, $id"]);
+
             $form->text('name', trans('china-region.fields.name'))->required();
             $form->text('short_name', trans('china-region.fields.short_name'))->required();
             $form->text('merger_name', trans('china-region.fields.merger_name'))

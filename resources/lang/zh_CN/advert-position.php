@@ -1,8 +1,8 @@
 <?php
 return [
     'labels' => [
-        'AdvertPin' => '位置管理',
-        'pin' => '位置管理',
+        'AdvertPosition' => '位置管理',
+        'position' => '位置管理',
     ],
     'fields' => [
         'name' => '名称',
