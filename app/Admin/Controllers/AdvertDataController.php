@@ -93,7 +93,7 @@ class AdvertDataController extends AdminController
                 $form->text('appid');
                 $form->url('url');
                 $form->radio('status')->options($this->status)->default(1);
-                $form->text('order')->default(0);
+                $form->number('order')->default(0);
                 $form->datetime('start_at');
                 $form->datetime('end_at');
             });

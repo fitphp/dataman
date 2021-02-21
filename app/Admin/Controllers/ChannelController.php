@@ -89,7 +89,7 @@ class ChannelController extends AdminController
                     ['required', "unique:{$connection}.channel,name,{$id}"],
                     ['unique' => trans('admin.validation.unique')]
                 );
-            $form->text('order', trans('channel.fields.order'))
+            $form->number('order', trans('channel.fields.order'))
                 ->default(0)->required();
 
             $form->disableListButton();

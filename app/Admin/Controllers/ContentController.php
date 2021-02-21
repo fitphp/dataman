@@ -94,7 +94,7 @@ class ContentController extends AdminController
                 ->required();
             $form->text('appid');
             $form->url('url')->required();
-            $form->text('order')->default(0);
+            $form->number('order')->default(0);
             $form->radio('status')->options($this->status)->default(1);
             $form->editor('content');
 

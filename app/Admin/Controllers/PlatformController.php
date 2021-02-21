@@ -87,9 +87,6 @@ class PlatformController extends AdminController
                 ->default(1)
                 ->required();
 
-            $form->display('created_at');
-            $form->display('updated_at');
-
             $form->disableCreatingCheck();
             $form->disableEditingCheck();
             $form->disableViewCheck();

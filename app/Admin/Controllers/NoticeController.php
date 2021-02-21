@@ -73,9 +73,16 @@ class NoticeController extends AdminController
                 $form->editor('content');
             });
             $form->row(function (Form\Row $form) {
-                $form->width(4)->radio('from')->options($this->form)->default(0);
-                $form->width(4)->switch('top')->default(0);
-                $form->width(4)->switch('status')->default(1);
+                $form->width(4)
+                    ->radio('from')
+                    ->options($this->form)
+                    ->default(0);
+                $form->width(4)
+                    ->switch('top')
+                    ->default(0);
+                $form->width(4)
+                    ->switch('status')
+                    ->default(1);
             });
 
             $form->disableViewCheck();

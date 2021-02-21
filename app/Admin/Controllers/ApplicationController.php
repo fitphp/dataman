@@ -112,7 +112,7 @@ class ApplicationController extends AdminController
             )->default('h5');
             $form->text('appid');
             $form->url('url')->required();;
-            $form->text('order')->default(0);
+            $form->number('order')->default(0);
             $form->select('auth')->options(
                 DictionaryModel::getValueByKey('auth_level')
             )->default(0);

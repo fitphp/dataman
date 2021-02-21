@@ -92,7 +92,7 @@ class CategoryController extends AdminController
                     ['required', "unique:{$connection}.category,name,{$id}"],
                     ['unique' => trans('admin.validation.unique')]
                 );
-            $form->text('order')
+            $form->number('order')
                 ->default(0)
                 ->required();
 
