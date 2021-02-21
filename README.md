@@ -69,19 +69,27 @@
 ## 安装部署
 
 ### Docker 环境（推荐）
-docker-compose 运行环境 立即获得：[Nginx + PHP Docker](https://gitee.com/fitphp/docker-nginx-php) 部署环境
+#### Nginx + PHP 8.0
+```
+$ cd ./docker
+$ docker-compose -f docker-compose.yml up -d
+```
 
-在 docker-nginx-php 目录中根据项目路径路径修改`WEBSITE_PATH`
+**使用Docker脚本，按照【安装步骤】3、4、5、6、9 即可**
 
-启动docker
 ```bash
-docker-compose -f nginx-php.yml up -d
+// 进入带有composer的PHP容器
+$ docker exec -it PHP容器ID /bin/sh
 ```
 
 注意，使用容器运行方式并且开启filesystem时，需要在public目录中创建 `storage` 软链指向 `storage/app/public`
-```bash
- ln -s ../storage/app/public storage
 ```
+// 创建软链
+$ cd /var/www/html/public
+$ ln -s ../storage/app/public storage
+```
+
+*更多版本部署环境 可参考：[Nginx + PHP Docker](https://gitee.com/fitphp/docker-nginx-php) *
 
 ### 自有环境
 自建可以自行百度，宝塔等一键部署环境
@@ -139,7 +147,7 @@ server {
 }
 ```
 
-9：此时可以通过访问 `http://your_domain` 来使用 咖啡壶。管理员账号密码为：`admin / admin`。
+9：此时可以通过访问 `http://your_domain` 来使用。管理员账号密码为：`admin / admin`。
 
 ## 更新（通过Git Pull方式）
 
