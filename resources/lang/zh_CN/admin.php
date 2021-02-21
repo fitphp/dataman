@@ -224,6 +224,6 @@ return [
         'match'     => '与 :attribute 不匹配。',
         'minlength' => ':attribute 字符长度不能少于 :min。',
         'maxlength' => ':attribute 字符长度不能超出 :max。',
-        'unique'    => ':attribute 已经存在。',
+        'unique'    => '已有相同 :attribute 存在，系统内须唯一。',
     ],
 ];

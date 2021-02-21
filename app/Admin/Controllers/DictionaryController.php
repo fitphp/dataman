@@ -77,8 +77,14 @@ class DictionaryController extends AdminController
             $form->text('name')->required();
             $form->text('key')->help('用于区分字典键名，系统唯一值')
                 ->required()
-                ->creationRules(['required', "unique:{$connection}.dictionary"])
-                ->updateRules(['required', "unique:{$connection}.dictionary, key, $id"]);
+                ->creationRules(
+                    ['required', "unique:{$connection}.dictionary"],
+                    ['unique' => trans('admin.validation.unique')]
+                )
+                ->updateRules(
+                    ['required', "unique:{$connection}.dictionary,key,{$id}"],
+                    ['unique' => trans('admin.validation.unique')]
+                );
 
             $form->keyValue('value');
             $form->radio('status')

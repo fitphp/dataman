@@ -81,8 +81,14 @@ class ChannelController extends AdminController
             $form->text('name', trans('channel.fields.name'))
                 ->help('必须为唯一值，不可重复', 'fa-info-circle')
                 ->required()
-                ->creationRules(['required', "unique:{$connection}.channel"])
-                ->updateRules(['required', "unique:{$connection}.channel, name, $id"]);
+                ->creationRules(
+                    ['required', "unique:{$connection}.channel"],
+                    ['unique' => trans('admin.validation.unique')]
+                )
+                ->updateRules(
+                    ['required', "unique:{$connection}.channel,name,{$id}"],
+                    ['unique' => trans('admin.validation.unique')]
+                );
             $form->text('order', trans('channel.fields.order'))
                 ->default(0)->required();
 

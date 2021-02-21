@@ -84,8 +84,14 @@ class CategoryController extends AdminController
             $form->text('name')
                 ->help('必须为唯一值，不可重复', 'fa-info-circle')
                 ->required()
-                ->creationRules(['required', "unique:{$connection}.category"])
-                ->updateRules(['required', "unique:{$connection}.category, name, $id"]);
+                ->creationRules(
+                    ['required', "unique:{$connection}.category"],
+                    ['unique' => trans('admin.validation.unique')]
+                )
+                ->updateRules(
+                    ['required', "unique:{$connection}.category,name,{$id}"],
+                    ['unique' => trans('admin.validation.unique')]
+                );
             $form->text('order')
                 ->default(0)
                 ->required();

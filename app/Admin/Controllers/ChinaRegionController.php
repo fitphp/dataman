@@ -93,8 +93,14 @@ class ChinaRegionController extends AdminController
             $form->text('area_code', trans('china-region.fields.area_code'))
                 ->help('使用国家统计局制定的统计用区划代码')
                 ->required()
-                ->creationRules(['required', "unique:{$connection}.china_region"])
-                ->updateRules(['required', "unique:{$connection}.china_region, area_code, $id"]);
+                ->creationRules(
+                    ['required', "unique:{$connection}.china_region"],
+                    ['unique' => trans('admin.validation.unique')]
+                )
+                ->updateRules(
+                    ['required', "unique:{$connection}.china_region,area_code,{$id}"],
+                    ['unique' => trans('admin.validation.unique')]
+                );
 
             $form->text('name', trans('china-region.fields.name'))->required();
             $form->text('short_name', trans('china-region.fields.short_name'))->required();

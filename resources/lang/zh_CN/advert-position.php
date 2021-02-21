@@ -14,4 +14,9 @@ return [
     ],
     'options' => [
     ],
+    'validation' => [
+        'unique' => [
+            'flag'    => '已有相同 :attribute 存在，相同栏目下须唯一。',
+        ],
+    ],
 ];

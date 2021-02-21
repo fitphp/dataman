@@ -73,8 +73,14 @@ class PlatformController extends AdminController
             $form->text('app_id')
                 ->help('用于区分来源平台，系统唯一值')
                 ->required()
-                ->creationRules(['required', "unique:{$connection}.platform"])
-                ->updateRules(['required', "unique:{$connection}.platform, app_id, $id"]);
+                ->creationRules(
+                    ['required', "unique:{$connection}.platform"],
+                    ['unique' => trans('admin.validation.unique')]
+                )
+                ->updateRules(
+                    ['required', "unique:{$connection}.platform,app_id,{$id}"],
+                    ['unique' => trans('admin.validation.unique')]
+                );
             $form->text('app_secret');
             $form->radio('status')
                 ->options($this->status)

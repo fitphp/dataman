@@ -92,8 +92,14 @@ class LayoutController extends AdminController
             $form->text('name')
                 ->help('必须为唯一值，不可重复', 'fa-info-circle')
                 ->required()
-                ->creationRules(['required', "unique:{$connection}.layout"])
-                ->updateRules(['required', "unique:{$connection}.layout, name, $id"]);
+                ->creationRules(
+                    ['required', "unique:{$connection}.layout"],
+                    ['unique' => trans('admin.validation.unique')]
+                )
+                ->updateRules(
+                    ['required', "unique:{$connection}.layout,name,{$id}"],
+                    ['unique' => trans('admin.validation.unique')]
+                );
 
             $form->text('title');
             $form->text('subtitle');
