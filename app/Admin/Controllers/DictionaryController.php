@@ -70,20 +70,27 @@ class DictionaryController extends AdminController
     protected function form()
     {
         return Form::make(new Dictionary(), function (Form $form) {
-            $id = $form->getKey();
-            $connection = config('admin.database.connection');
-
             $form->display('id');
             $form->text('name')->required();
-            $form->text('key')->help('用于区分字典键名，系统唯一值')
+            $form->text('key')->help('用于区分字典键名，系统唯一值，仅支持英文与下划线"_"组成')
                 ->required()
                 ->creationRules(
-                    ['required', "unique:{$connection}.dictionary"],
-                    ['unique' => trans('admin.validation.unique')]
+                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]$/', "unique:dictionary"],
+                    [
+                        'min' => trans('admin.validation.minlength'),
+                        'max' => trans('admin.validation.maxlength'),
+                        'regex' => trans('admin.validation.match'),
+                        'unique' => trans('admin.validation.unique')
+                    ]
                 )
                 ->updateRules(
-                    ['required', "unique:{$connection}.dictionary,key,{$id}"],
-                    ['unique' => trans('admin.validation.unique')]
+                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]$/', "unique:dictionary,key,{{id}},id"],
+                    [
+                        'min' => trans('admin.validation.minlength'),
+                        'max' => trans('admin.validation.maxlength'),
+                        'regex' => trans('admin.validation.match'),
+                        'unique' => trans('admin.validation.unique')
+                    ]
                 );
 
             $form->keyValue('value');

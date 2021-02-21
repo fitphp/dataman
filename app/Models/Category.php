@@ -23,4 +23,8 @@ class Category extends Model
     use ModelTree;
     use HasDateTimeFormatter;
     protected $table = 'category';
+
+    public function setNameAttribute($value) {
+        $this->attributes['name'] = strtolower($value);
+    }
 }

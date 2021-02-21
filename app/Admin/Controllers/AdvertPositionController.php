@@ -63,9 +63,7 @@ class AdvertPositionController extends AdminController
     protected function form()
     {
         return Form::make(new AdvertPosition(), function (Form $form) {
-            $id = $form->getKey();
             $channel_id = isset(request()->all()['channel_id']) ? request()->all()['channel_id'] : '';
-            $connection = config('admin.database.connection');
 
             $form->select('channel_id')->options(
                 ChannelModels::selectOptions()
@@ -73,15 +71,25 @@ class AdvertPositionController extends AdminController
             $form->text('name')->required();
 
             $form->text('flag')
-                ->help('栏目ID+标识，须唯一值')
+                ->help('栏目ID+标识，须唯一值，仅支持英文与下划组"_"组成')
                 ->required()
                 ->creationRules(
-                    ['required',"unique:{$connection}.advert_position,flag,null,id,channel_id,{$channel_id}"],
-                    ['unique' => trans('advert-position.validation.unique.flag')]
+                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]$/', "unique:advert_position,flag,null,null,channel_id,{$channel_id}"],
+                    [
+                        'min' => trans('admin.validation.minlength'),
+                        'max' => trans('admin.validation.maxlength'),
+                        'regex' => trans('admin.validation.match'),
+                        'unique' => trans('advert-position.validation.unique.flag')
+                    ]
                 )
                 ->updateRules(
-                    ['required',"unique:{$connection}.advert_position,flag,{$id},id,channel_id,{$channel_id}"],
-                    ['unique' => trans('advert-position.validation.unique.flag')]
+                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]$/', "unique:advert_position,flag,{{id}},id,channel_id,{$channel_id}"],
+                    [
+                        'min' => trans('admin.validation.minlength'),
+                        'max' => trans('admin.validation.maxlength'),
+                        'regex' => trans('admin.validation.match'),
+                        'unique' => trans('advert-position.validation.unique.flag')
+                    ]
                 );
 
             $form->text('desc');

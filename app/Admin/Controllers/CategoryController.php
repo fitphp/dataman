@@ -71,9 +71,6 @@ class CategoryController extends AdminController
     protected function form()
     {
         return Form::make(new Category(), function (Form $form) {
-            $id = $form->getKey();
-            $connection = config('admin.database.connection');
-
             $form->display('id', 'ID');
             $form->select('parent_id')
                 ->options(Models::selectOptions())
@@ -82,15 +79,25 @@ class CategoryController extends AdminController
             $form->image('image');
             $form->text('title')->required();
             $form->text('name')
-                ->help('必须为唯一值，不可重复', 'fa-info-circle')
+                ->help('必须为唯一值，仅支持英文与下划线"_"组成')
                 ->required()
                 ->creationRules(
-                    ['required', "unique:{$connection}.category"],
-                    ['unique' => trans('admin.validation.unique')]
+                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]$/', "unique:category"],
+                    [
+                        'min' => trans('admin.validation.minlength'),
+                        'max' => trans('admin.validation.maxlength'),
+                        'regex' => trans('admin.validation.match'),
+                        'unique' => trans('admin.validation.unique')
+                    ]
                 )
                 ->updateRules(
-                    ['required', "unique:{$connection}.category,name,{$id}"],
-                    ['unique' => trans('admin.validation.unique')]
+                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]$/', "unique:category,name,{{id}},id"],
+                    [
+                        'min' => trans('admin.validation.minlength'),
+                        'max' => trans('admin.validation.maxlength'),
+                        'regex' => trans('admin.validation.match'),
+                        'unique' => trans('admin.validation.unique')
+                    ]
                 );
             $form->number('order')
                 ->default(0)

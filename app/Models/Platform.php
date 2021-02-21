@@ -12,6 +12,10 @@ class Platform extends Model
 	use HasDateTimeFormatter;
     protected $table = 'platform';
 
+    public function setAppIdAttribute($value) {
+        $this->attributes['app_id'] = strtolower($value);
+    }
+
     public function channel()
     {
         return $this->hasOne(Channel::class);

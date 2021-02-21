@@ -79,27 +79,36 @@ class ChinaRegionController extends AdminController
     protected function form()
     {
         return Form::make(new ChinaRegion(), function (Form $form) {
-            $id = $form->getKey();
-            $connection = config('admin.database.connection');
-
             $form->display('id', 'ID');
             $form->select('level', trans('china-region.fields.level'))
                 ->options(DictionaryModel::getValueByKey('china_region_level'))
                 ->required();
             $form->text('parent_code', trans('china-region.fields.parent_code'))
-                ->help('使用国家统计局制定的统计用区划代码')
+                ->help('使用国家统计局制定的统计用区划代码，仅支持数字')
                 ->default(0)
-                ->required();
+                ->required()
+                ->rules(
+                    ['required', 'regex:/^\d+$/'],
+                    [
+                        'regex' => trans('admin.validation.match')
+                    ]
+                );
             $form->text('area_code', trans('china-region.fields.area_code'))
-                ->help('使用国家统计局制定的统计用区划代码')
+                ->help('使用国家统计局制定的统计用区划代码，仅支持数字')
                 ->required()
                 ->creationRules(
-                    ['required', "unique:{$connection}.china_region"],
-                    ['unique' => trans('admin.validation.unique')]
+                    ['required', 'regex:/^\d+$/', "unique:china_region"],
+                    [
+                        'regex' => trans('admin.validation.match'),
+                        'unique' => trans('admin.validation.unique')
+                    ]
                 )
                 ->updateRules(
-                    ['required', "unique:{$connection}.china_region,area_code,{$id}"],
-                    ['unique' => trans('admin.validation.unique')]
+                    ['required', 'regex:/^\d+$/', "unique:china_region,area_code,{{id}},id"],
+                    [
+                        'regex' => trans('admin.validation.match'),
+                        'unique' => trans('admin.validation.unique')
+                    ]
                 );
 
             $form->text('name', trans('china-region.fields.name'))->required();

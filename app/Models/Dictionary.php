@@ -11,6 +11,10 @@ class Dictionary extends Model
 	use HasDateTimeFormatter;
     protected $table = 'dictionary';
 
+    public function setKeyAttribute($value) {
+        $this->attributes['key'] = strtolower($value);
+    }
+
     public function setValueAttribute($value) {
         $value = array_filter($value);
         $this->attributes['value'] = json_encode($value);

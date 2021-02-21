@@ -82,23 +82,30 @@ class LayoutController extends AdminController
     protected function form()
     {
         return Form::make(new Layout(), function (Form $form) {
-            $id = $form->getKey();
-            $connection = config('admin.database.connection');
-
             $form->display('id');
             $form->select('channel_id')->options(
                 ChannelModels::selectOptions()
             )->default(0)->required();
             $form->text('name')
-                ->help('必须为唯一值，不可重复', 'fa-info-circle')
+                ->help('必须为唯一值，仅支持英文与下划线"_"组成')
                 ->required()
                 ->creationRules(
-                    ['required', "unique:{$connection}.layout"],
-                    ['unique' => trans('admin.validation.unique')]
+                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]$/', "unique:layout"],
+                    [
+                        'min' => trans('admin.validation.minlength'),
+                        'max' => trans('admin.validation.maxlength'),
+                        'regex' => trans('admin.validation.match'),
+                        'unique' => trans('admin.validation.unique')
+                    ]
                 )
                 ->updateRules(
-                    ['required', "unique:{$connection}.layout,name,{$id}"],
-                    ['unique' => trans('admin.validation.unique')]
+                    ['required', "unique:layout,name,{{id}},id"],
+                    [
+                        'min' => trans('admin.validation.minlength'),
+                        'max' => trans('admin.validation.maxlength'),
+                        'regex' => trans('admin.validation.match'),
+                        'unique' => trans('admin.validation.unique')
+                    ]
                 );
 
             $form->text('title');

@@ -12,6 +12,10 @@ class Channel extends Model
     use HasDateTimeFormatter;
     protected $table = 'channel';
 
+    public function setNameAttribute($value) {
+        $this->attributes['name'] = strtolower($value);
+    }
+
     public function platform()
     {
         return $this->belongsTo(Platform::class);

@@ -11,6 +11,10 @@ class Layout extends Model
 	use HasDateTimeFormatter;
     protected $table = 'layout';
 
+    public function setNameAttribute($value) {
+        $this->attributes['name'] = strtolower($value);
+    }
+
     public function setTargetIdsAttribute($value) {
         $this->attributes['target_ids'] = trim(implode(',', $value), ',');
     }

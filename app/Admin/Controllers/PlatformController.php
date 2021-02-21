@@ -65,21 +65,28 @@ class PlatformController extends AdminController
     protected function form()
     {
         return Form::make(new Platform(), function (Form $form) {
-            $id = $form->getKey();
-            $connection = config('admin.database.connection');
-
             $form->display('id');
             $form->text('name');
             $form->text('app_id')
-                ->help('用于区分来源平台，系统唯一值')
+                ->help('用于区分来源平台，系统唯一值，支持由英文、数字、"."、"-"、"_"组成')
                 ->required()
                 ->creationRules(
-                    ['required', "unique:{$connection}.platform"],
-                    ['unique' => trans('admin.validation.unique')]
+                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z0-9.-_]$/', "unique:platform"],
+                    [
+                        'min' => trans('admin.validation.minlength'),
+                        'max' => trans('admin.validation.maxlength'),
+                        'regex' => trans('admin.validation.match'),
+                        'unique' => trans('admin.validation.unique')
+                    ]
                 )
                 ->updateRules(
-                    ['required', "unique:{$connection}.platform,app_id,{$id}"],
-                    ['unique' => trans('admin.validation.unique')]
+                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z0-9.-_]$/', "unique:platform,app_id,{{id}},id"],
+                    [
+                        'min' => trans('admin.validation.minlength'),
+                        'max' => trans('admin.validation.maxlength'),
+                        'regex' => trans('admin.validation.match'),
+                        'unique' => trans('admin.validation.unique')
+                    ]
                 );
             $form->text('app_secret');
             $form->radio('status')
