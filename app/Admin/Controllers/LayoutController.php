@@ -29,7 +29,7 @@ class LayoutController extends AdminController
     {
         return Grid::make(new Layout(['channel']), function (Grid $grid) {
             $grid->column('id')->sortable();
-            $grid->column('channel.title', trans('advert-pin.fields.channel'));
+            $grid->column('channel.title', trans('advert-position.fields.channel'));
             $grid->type()->using($this->type)
                 ->label($this->type_label);
             $grid->column('name');
@@ -62,11 +62,22 @@ class LayoutController extends AdminController
             $show->field('title');
             $show->field('subtitle');
             $show->type()->using($this->type);
-
-//            $show->field('target_ids')->as(function ($target_ids){
-//                return var_dump($target_ids);
-//            });
-
+            $show->field('target_ids', trans('layout.fields.target'))->as(function () {
+                switch ($this->type) {
+                    case 1:
+                        $fields = ApplicationModels::whereIn('id', $this->target_ids)->get('title');
+                        return $fields->pluck('title');
+                        break;
+                    case 2:
+                        $fields = ContentModels::whereIn('id', $this->target_ids)->get('title');
+                        return $fields->pluck('title');
+                        break;
+                    case 3: default:
+                        $fields = NoticeModels::whereIn('id', $this->target_ids)->get('title');
+                        return $fields->pluck('title');
+                        break;
+                }
+            })->label();
             $show->status()->using($this->status);
             $show->field('remark');
             $show->field('created_at');
@@ -87,7 +98,7 @@ class LayoutController extends AdminController
                 ChannelModels::selectOptions()
             )->default(0)->required();
             $form->text('name')
-                ->help('必须为唯一值，仅支持英文与下划线"_"组成')
+                ->help(trans('layout.help.name'))
                 ->required()
                 ->creationRules(
                     ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]$/', "unique:layout"],
