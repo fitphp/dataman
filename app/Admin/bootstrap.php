@@ -5,8 +5,7 @@ use App\Admin\Actions;
 use Dcat\Admin\Layout\Navbar;
 
 Admin::navbar(function (Navbar $navbar) {
-    $navbar->right(Actions\ClearCacheAction::make()->render());
-
+    $navbar->right(Actions\ClearCache::make()->render());
 });
 
 // 关闭Pjax
