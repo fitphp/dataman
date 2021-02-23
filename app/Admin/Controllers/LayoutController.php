@@ -61,22 +61,21 @@ class LayoutController extends AdminController
             $show->field('name');
             $show->field('title');
             $show->field('subtitle');
-            $show->type()->using($this->type);
+            $show->field('type')->using($this->type);
             $show->field('target_ids', trans('layout.fields.target'))->as(function () {
                 switch ($this->type) {
                     case 1:
                         $fields = ApplicationModels::whereIn('id', $this->target_ids)->get('title');
-                        return $fields->pluck('title');
                         break;
                     case 2:
                         $fields = ContentModels::whereIn('id', $this->target_ids)->get('title');
-                        return $fields->pluck('title');
                         break;
                     case 3: default:
                         $fields = NoticeModels::whereIn('id', $this->target_ids)->get('title');
-                        return $fields->pluck('title');
                         break;
                 }
+
+                return $fields->pluck('title');
             })->label();
             $show->status()->using($this->status);
             $show->field('remark');
@@ -123,19 +122,25 @@ class LayoutController extends AdminController
             $form->text('subtitle');
             $form->radio('type')
                 ->when(1, function (Form $form) {
-                    $form->multipleSelect('target_ids', '应用')->options(
-                        ApplicationModels::all()->pluck('title', 'id')
-                    )->default(0);
+                    $form->listbox('target_ids', '应用')->options(
+                        ApplicationModels::all()
+                            ->pluck('title', 'id')
+                            ->toArray()
+                    );
                 })
                 ->when(2, function (Form $form) {
-                    $form->multipleSelect('target_ids', '内容')->options(
-                        ContentModels::all()->pluck('title', 'id')
-                    )->default(0);
+                    $form->listbox('target_ids', '内容')->options(
+                        ContentModels::all()
+                            ->pluck('title', 'id')
+                            ->toArray()
+                    );
                 })
                 ->when(3, function (Form $form) {
-                    $form->multipleSelect('target_ids', '通知')->options(
-                        NoticeModels::all()->pluck('title', 'id')
-                    )->default(0);
+                    $form->listbox('target_ids', '通知')->options(
+                        NoticeModels::all()
+                            ->pluck('title', 'id')
+                            ->toArray()
+                    );
                 })
                 ->options($this->type)
                 ->default(0);
