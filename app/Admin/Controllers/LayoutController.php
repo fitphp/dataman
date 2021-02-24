@@ -100,7 +100,7 @@ class LayoutController extends AdminController
                 ->help(trans('layout.help.name'))
                 ->required()
                 ->creationRules(
-                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]$/', "unique:layout"],
+                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]+$/', "unique:layout"],
                     [
                         'min' => trans('admin.validation.minlength'),
                         'max' => trans('admin.validation.maxlength'),

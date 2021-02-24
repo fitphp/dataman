@@ -79,7 +79,7 @@ class ChannelController extends AdminController
                 ->help('必须为唯一值，仅支持英文与下划线"_"组成')
                 ->required()
                 ->creationRules(
-                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]$/', "unique:channel"],
+                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]+$/', "unique:channel"],
                     [
                         'min' => trans('admin.validation.minlength'),
                         'max' => trans('admin.validation.maxlength'),
@@ -88,7 +88,7 @@ class ChannelController extends AdminController
                     ]
                 )
                 ->updateRules(
-                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]$/', "unique:channel,name,{{id}},id"],
+                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]+$/', "unique:channel,name,{{id}},id"],
                     [
                         'min' => trans('admin.validation.minlength'),
                         'max' => trans('admin.validation.maxlength'),

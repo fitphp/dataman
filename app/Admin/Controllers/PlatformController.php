@@ -71,7 +71,7 @@ class PlatformController extends AdminController
                 ->help('用于区分来源平台，系统唯一值，支持由英文、数字、"."、"-"、"_"组成')
                 ->required()
                 ->creationRules(
-                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z0-9.-_]$/', "unique:platform"],
+                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z0-9_-.]+$/', "unique:platform"],
                     [
                         'min' => trans('admin.validation.minlength'),
                         'max' => trans('admin.validation.maxlength'),
@@ -80,7 +80,7 @@ class PlatformController extends AdminController
                     ]
                 )
                 ->updateRules(
-                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z0-9.-_]$/', "unique:platform,app_id,{{id}},id"],
+                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z0-9_-.]+$/', "unique:platform,app_id,{{id}},id"],
                     [
                         'min' => trans('admin.validation.minlength'),
                         'max' => trans('admin.validation.maxlength'),

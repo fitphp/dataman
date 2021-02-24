@@ -75,7 +75,7 @@ class DictionaryController extends AdminController
             $form->text('key')->help('用于区分字典键名，系统唯一值，仅支持英文与下划线"_"组成')
                 ->required()
                 ->creationRules(
-                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]$/', "unique:dictionary"],
+                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]+$/', "unique:dictionary"],
                     [
                         'min' => trans('admin.validation.minlength'),
                         'max' => trans('admin.validation.maxlength'),
@@ -84,7 +84,7 @@ class DictionaryController extends AdminController
                     ]
                 )
                 ->updateRules(
-                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]$/', "unique:dictionary,key,{{id}},id"],
+                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]+$/', "unique:dictionary,key,{{id}},id"],
                     [
                         'min' => trans('admin.validation.minlength'),
                         'max' => trans('admin.validation.maxlength'),
