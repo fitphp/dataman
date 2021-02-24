@@ -3,7 +3,8 @@
 namespace App\Admin\Controllers;
 
 use App\Admin\Repositories\Category;
-use App\Models\Category as Models;
+use App\Models\Category as CategoryModels;
+use App\Models\Dictionary as DictionaryModel;
 use Dcat\Admin\Show;
 use Dcat\Admin\Tree;
 use Dcat\Admin\Form;
@@ -27,6 +28,9 @@ class CategoryController extends AdminController
             $grid->export()->xlsx();
 
             $grid->column('id')->sortable();
+            $grid->column('group')->using(
+                DictionaryModel::getValueByKey('category_group')
+            )->label();
             $grid->column('parent_id');
             $grid->column('image');
             $grid->column('title');
@@ -53,6 +57,9 @@ class CategoryController extends AdminController
     {
         return Show::make($id, new Category(), function (Show $show) {
             $show->field('id', 'ID');
+            $show->field('group')->using(
+                DictionaryModel::getValueByKey('category_group')
+            );
             $show->field('parent_id');
             $show->field('image');
             $show->field('title');
@@ -72,17 +79,32 @@ class CategoryController extends AdminController
     {
         return Form::make(new Category(), function (Form $form) {
             $form->display('id', 'ID');
-            $form->select('parent_id')
-                ->options(Models::selectOptions())
-                ->default(0)
-                ->required();;
+            $form->radio('group')
+                ->when('application', function (Form $form){
+                    $form->select('parent_id')
+                        ->options( array_merge([0 => '顶级'],
+                            CategoryModels::getByGroup('application')->all()
+                        ))
+                        ->default(0)
+                        ->required();
+                })->when('content', function (Form $form){
+                    $form->select('parent_id')
+                        ->options( array_merge([0 => '顶级'],
+                            CategoryModels::getByGroup('content')->all()
+                        ))
+                        ->default(0)
+                        ->required();
+                })
+                ->options(DictionaryModel::getValueByKey('category_group'))
+                ->required();
+
             $form->image('image');
             $form->text('title')->required();
             $form->text('name')
                 ->help('必须为唯一值，仅支持英文与下划线"_"组成')
                 ->required()
                 ->creationRules(
-                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]$/', "unique:category"],
+                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z0-9_-]{4,16}$/', "unique:category"],
                     [
                         'min' => trans('admin.validation.minlength'),
                         'max' => trans('admin.validation.maxlength'),
@@ -91,7 +113,7 @@ class CategoryController extends AdminController
                     ]
                 )
                 ->updateRules(
-                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]$/', "unique:category,name,{{id}},id"],
+                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z0-9_-]{4,16}$/', "unique:category,name,{{id}},id"],
                     [
                         'min' => trans('admin.validation.minlength'),
                         'max' => trans('admin.validation.maxlength'),

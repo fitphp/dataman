@@ -20,6 +20,7 @@ return [
         'category' => '分类管理',
     ],
     'fields' => [
+        'group' => '组别',
         'parent_id' => '父ID',
         'image' => '图标',
         'title' => '标题',

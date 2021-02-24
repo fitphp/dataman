@@ -30,7 +30,9 @@ class ContentController extends AdminController
             $grid->column('category.title', trans('content.category.title'))->label();
             $grid->column('image')->width(40);
             $grid->column('title');
-            $grid->type()->using(DictionaryModel::getValueByKey('link_type'))->label();
+            $grid->column('type')->using(
+                DictionaryModel::getValueByKey('link_type')
+            )->label();
             $grid->column('url')->link();
             $grid->column('order')->sortable();
             $grid->status()->using($this->status)->dot($this->status_label);
@@ -41,7 +43,9 @@ class ContentController extends AdminController
                 $filter->equal('category_id', trans('content.category.title'))->select(
                     CategoryModels::selectOptions()
                 );
-                $filter->equal('type')->select(DictionaryModel::getValueByKey('link_type'));
+                $filter->equal('type')->select(
+                    DictionaryModel::getValueByKey('link_type')
+                );
                 $filter->like('url');
                 $filter->equal('status')->select($this->status);
             });
@@ -64,7 +68,9 @@ class ContentController extends AdminController
             $show->field('category_id');
             $show->field('image');
             $show->field('content');
-            $show->field('type')->using(DictionaryModel::getValueByKey('link_type'));
+            $show->field('type')->using(
+                DictionaryModel::getValueByKey('link_type')
+            );
             $show->field('appid');
             $show->field('url');
             $show->field('order');

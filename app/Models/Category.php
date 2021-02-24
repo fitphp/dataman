@@ -27,4 +27,8 @@ class Category extends Model
     public function setNameAttribute($value) {
         $this->attributes['name'] = strtolower($value);
     }
+
+    public static function getByGroup($group = 'application') {
+        return self::where('group', $group)->pluck('title', 'id');
+    }
 }

@@ -69,7 +69,7 @@ class ChannelController extends AdminController
         return Form::make(new Channel(), function (Form $form) {
             $form->display('id');
             $form->select('platform_id', trans('channel.fields.platform_id'))
-                ->options(PlatformModels::all()->pluck('name','id'))
+                ->options(PlatformModels::pluck('name','id'))
                 ->default(0)->required();
             $form->select('parent_id', trans('channel.fields.parent_id'))
                 ->options(Models::selectOptions())->default(0)->required();

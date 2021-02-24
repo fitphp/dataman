@@ -80,7 +80,7 @@ class AdvertDataController extends AdminController
             $form->column(6, function (Form $form) {
                 $form->text('title')->required();
                 $form->select('pin_id', trans('advert-data.type.name'))
-                    ->options(AdvertPositionModels::all()->pluck('name', 'id'))
+                    ->options(AdvertPositionModels::pluck('name', 'id'))
                     ->required();
                 $form->text('desc');
                 $form->image('image');

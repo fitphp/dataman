@@ -33,13 +33,12 @@ class ApplicationController extends AdminController
 
             $grid->column('category_ids', trans('application.category.title'))
                 ->display(function ($category_ids) {
-                    return CategoryModels::whereIn('id', $category_ids)
-                        ->get(['title'])->toArray();
-                })->pluck('title')->map('ucwords')->label();
+                    return CategoryModels::whereIn('id', $category_ids)->pluck('title');
+                })->label();
 
             $grid->column('image')->width(40);
             $grid->column('title');
-            $grid->type()->using(
+            $grid->column('type')->using(
                 DictionaryModel::getValueByKey('link_type')
             )->label();
             $grid->column('url')->link();
@@ -76,14 +75,11 @@ class ApplicationController extends AdminController
             $show->field('subtitle');
             $show->field('image');
             $show->field('category_ids')->as(function ($category_ids) use ($show) {
-                $fields = [];
-                foreach (CategoryModels::whereIn('id', $category_ids)
-                             ->get(['title']) as $val) {
-                    $fields[] = $val->title;
-                }
-                return implode('、', $fields);
-            });
-            $show->field('type')->using(DictionaryModel::getValueByKey('link_type'));
+                return CategoryModels::whereIn('id', $category_ids)->pluck('title');
+            })->label();
+            $show->field('type')->using(
+                DictionaryModel::getValueByKey('link_type')
+            );
             $show->field('appid');
             $show->field('url');
             $show->field('order');
@@ -104,8 +100,8 @@ class ApplicationController extends AdminController
             $form->text('title')->required();
             $form->text('subtitle');
             $form->image('image');
-            $form->multipleSelect('category_ids')->options(
-                CategoryModels::selectOptions()
+            $form->listbox('category_ids')->options(
+                CategoryModels::getByGroup('application')
             )->required();
             $form->radio('type')->options(
                 DictionaryModel::getValueByKey('link_type')
