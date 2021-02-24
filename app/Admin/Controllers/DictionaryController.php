@@ -12,6 +12,8 @@ class DictionaryController extends AdminController
 {
     protected $status = [0 => '关闭', 1 => '正常'];
     protected $status_label = [0 => 'danger', 1 => 'success'];
+    protected $is_system = [0 => '否', 1 => '是'];
+    protected $is_system_label = [0 => 'success', 1 => 'dark'];
 
     /**
      * Make a grid builder.
@@ -29,15 +31,26 @@ class DictionaryController extends AdminController
             $grid->column('remark');
             $grid->column('status')->using($this->status)
                 ->dot($this->status_label);
+            $grid->column('is_system')->using($this->is_system)
+                ->dot($this->is_system_label);
             $grid->column('updated_at')->sortable();
 
+            // 搜索
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
                 $filter->like('name', trans('dictionary.fields.name'));
                 $filter->like('key', trans('dictionary.fields.key'));
             });
 
+            // 表单右上角
             $grid->disableBatchDelete();
+
+            // 操作按钮
+            $grid->actions(function (Grid\Displayers\Actions $actions) {
+                if ($actions->row->is_system) {
+                    $actions->disableDelete();
+                }
+            });
         });
     }
 
@@ -57,6 +70,7 @@ class DictionaryController extends AdminController
             $show->field('value')->view('field.kv');
             $show->field('status')->using($this->status);
             $show->field('remark');
+            $show->field('is_system')->using($this->is_system);
             $show->field('created_at');
             $show->field('updated_at');
         });
@@ -99,6 +113,10 @@ class DictionaryController extends AdminController
                 ->default(1)
                 ->required();
             $form->text('remark');
+            $form->radio('is_system')
+                ->help('删除系统字典可能会引起系统错误')
+                ->options($this->is_system)
+                ->default(0);
 
             $form->disableCreatingCheck();
             $form->disableEditingCheck();

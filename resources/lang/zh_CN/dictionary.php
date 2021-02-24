@@ -10,7 +10,7 @@ return [
         'value' => '键值',
         'status' => '状态',
         'remark' => '备注',
-        'is_system' => '是否系统',
+        'is_system' => '系统',
     ],
     'options' => [
     ],
