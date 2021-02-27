@@ -179,3 +179,8 @@ php artisan admin:reset-password
 
 ### 参与开源
 欢迎提交 [issue](https://gitee.com/fitphp/dataman/issues)
+
+
+### 版本计划
+- [x] 1.0 完成数据管理控制台
+- 1.1 完成Restful接口 
