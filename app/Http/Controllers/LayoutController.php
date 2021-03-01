@@ -44,6 +44,9 @@ class LayoutController extends Controller
         // 获取频道详情
         $channelService = new ChannelService();
         $data = $channelService->getByNameAndPlatformId($platform['id'], $channel_name);
+        if (empty($data)) {
+            return $this->failed(404, '无对应频道');
+        }
 
         // 获取广告列表
         $advertService= new AdvertService();
