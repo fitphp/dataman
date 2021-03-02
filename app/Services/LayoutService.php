@@ -15,9 +15,7 @@
 
 namespace App\Services;
 
-
 use App\Models\Application;
-use App\Models\Category;
 use App\Models\Content;
 use App\Models\Layout;
 use App\Models\Notice;
@@ -32,7 +30,7 @@ class LayoutService
             return json_decode(Cache::get($key), true);
         } else {
             $layouts = Layout::where(['channel_id' => $channel_id])->get();
-            $categoryService = new categoryService();
+            $categoryService = new CategoryService();
             foreach ($layouts as $layout) {
                 switch ($layout['type']) {
                     case 1:
