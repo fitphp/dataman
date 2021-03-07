@@ -78,52 +78,56 @@ class CategoryController extends AdminController
     protected function form()
     {
         return Form::make(new Category(), function (Form $form) {
-            $form->display('id', 'ID');
-            $form->radio('group')
-                ->when('application', function (Form $form){
-                    $form->select('parent_id')
-                        ->options( array_merge([0 => '顶级'],
-                            CategoryModels::getByGroup('application')->all()
-                        ))
-                        ->default(0)
-                        ->required();
-                })->when('content', function (Form $form){
-                    $form->select('parent_id')
-                        ->options( array_merge([0 => '顶级'],
-                            CategoryModels::getByGroup('content')->all()
-                        ))
-                        ->default(0)
-                        ->required();
-                })
-                ->options(DictionaryModel::getValueByKey('category_group'))
-                ->required();
+            $form->column(8, function (Form $form) {
+                $form->radio('group')
+                    ->when('application', function (Form $form){
+                        $form->select('parent_id')
+                            ->options( array_merge([0 => '顶级'],
+                                CategoryModels::getByGroup('application')->all()
+                            ))
+                            ->default(0)
+                            ->required();
+                    })->when('content', function (Form $form){
+                        $form->select('parent_id')
+                            ->options( array_merge([0 => '顶级'],
+                                CategoryModels::getByGroup('content')->all()
+                            ))
+                            ->default(0)
+                            ->required();
+                    })
+                    ->options(DictionaryModel::getValueByKey('category_group'))
+                    ->required();
 
-            $form->image('image');
-            $form->text('title')->required();
-            $form->text('name')
-                ->help('必须为唯一值，仅支持英文与下划线"_"组成')
-                ->required()
-                ->creationRules(
-                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]+$/', "unique:category"],
-                    [
-                        'min' => trans('admin.validation.minlength'),
-                        'max' => trans('admin.validation.maxlength'),
-                        'regex' => trans('admin.validation.match'),
-                        'unique' => trans('admin.validation.unique')
-                    ]
-                )
-                ->updateRules(
-                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]+$/', "unique:category,name,{{id}},id"],
-                    [
-                        'min' => trans('admin.validation.minlength'),
-                        'max' => trans('admin.validation.maxlength'),
-                        'regex' => trans('admin.validation.match'),
-                        'unique' => trans('admin.validation.unique')
-                    ]
-                );
-            $form->number('order')
-                ->default(0)
-                ->required();
+                $form->text('title')->required();
+                $form->text('name')
+                    ->help('必须为唯一值，仅支持英文与下划线"_"组成')
+                    ->required()
+                    ->creationRules(
+                        ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]+$/', "unique:category"],
+                        [
+                            'min' => trans('admin.validation.minlength'),
+                            'max' => trans('admin.validation.maxlength'),
+                            'regex' => trans('admin.validation.match'),
+                            'unique' => trans('admin.validation.unique')
+                        ]
+                    )
+                    ->updateRules(
+                        ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]+$/', "unique:category,name,{{id}},id"],
+                        [
+                            'min' => trans('admin.validation.minlength'),
+                            'max' => trans('admin.validation.maxlength'),
+                            'regex' => trans('admin.validation.match'),
+                            'unique' => trans('admin.validation.unique')
+                        ]
+                    );
+            });
+
+            $form->column(4, function (Form $form) {
+                $form->image('image');
+
+                $form->number('order')
+                    ->default(0);
+            });
 
             $form->disableViewCheck();
             $form->disableEditingCheck();

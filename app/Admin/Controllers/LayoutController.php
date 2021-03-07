@@ -92,54 +92,57 @@ class LayoutController extends AdminController
     protected function form()
     {
         return Form::make(new Layout(), function (Form $form) {
-            $form->display('id');
-            $form->select('channel_id')->options(
-                ChannelModels::selectOptions()
-            )->default(0)->required();
-            $form->text('name')
-                ->help(trans('layout.help.name'))
-                ->required()
-                ->creationRules(
-                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]+$/', "unique:layout"],
-                    [
-                        'min' => trans('admin.validation.minlength'),
-                        'max' => trans('admin.validation.maxlength'),
-                        'regex' => trans('admin.validation.match'),
-                        'unique' => trans('admin.validation.unique')
-                    ]
-                )
-                ->updateRules(
-                    ['required', "unique:layout,name,{{id}},id"],
-                    [
-                        'min' => trans('admin.validation.minlength'),
-                        'max' => trans('admin.validation.maxlength'),
-                        'regex' => trans('admin.validation.match'),
-                        'unique' => trans('admin.validation.unique')
-                    ]
-                );
+            $form->column(6, function (Form $form) {
+                $form->select('channel_id')->options(
+                    ChannelModels::selectOptions()
+                )->default(0)->required();
+                $form->text('name')
+                    ->help(trans('layout.help.name'))
+                    ->required()
+                    ->creationRules(
+                        ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]+$/', "unique:layout"],
+                        [
+                            'min' => trans('admin.validation.minlength'),
+                            'max' => trans('admin.validation.maxlength'),
+                            'regex' => trans('admin.validation.match'),
+                            'unique' => trans('admin.validation.unique')
+                        ]
+                    )
+                    ->updateRules(
+                        ['required', "unique:layout,name,{{id}},id"],
+                        [
+                            'min' => trans('admin.validation.minlength'),
+                            'max' => trans('admin.validation.maxlength'),
+                            'regex' => trans('admin.validation.match'),
+                            'unique' => trans('admin.validation.unique')
+                        ]
+                    );
 
-            $form->text('title');
-            $form->text('subtitle');
-            $form->radio('type')
-                ->when(1, function (Form $form) {
-                    $form->listbox('target_ids', '应用')
-                        ->options(ApplicationModels::pluck('title', 'id'));
-                })
-                ->when(2, function (Form $form) {
-                    $form->listbox('target_ids', '内容')
-                        ->options(ContentModels::pluck('title', 'id'));
-                })
-                ->when(3, function (Form $form) {
-                    $form->listbox('target_ids', '通知')
-                        ->options(NoticeModels::pluck('title', 'id'));
-                })
-                ->options($this->type)
-                ->default(0);
+                $form->text('title');
+                $form->text('subtitle');
+                $form->radio('status')
+                    ->options($this->status)
+                    ->default(1);
+                $form->text('remark');
+            });
 
-            $form->radio('status')
-                ->options($this->status)
-                ->default(1);
-            $form->text('remark');
+            $form->column(6, function (Form $form) {
+                $form->radio('type')
+                    ->when(1, function (Form $form) {
+                        $form->listbox('target_ids', '应用')
+                            ->options(ApplicationModels::pluck('title', 'id'));
+                    })
+                    ->when(2, function (Form $form) {
+                        $form->listbox('target_ids', '内容')
+                            ->options(ContentModels::pluck('title', 'id'));
+                    })
+                    ->when(3, function (Form $form) {
+                        $form->listbox('target_ids', '通知')
+                            ->options(NoticeModels::pluck('title', 'id'));
+                    })
+                    ->options($this->type)
+                    ->default(0);
+            });
 
             $form->disableCreatingCheck();
             $form->disableEditingCheck();

@@ -67,37 +67,42 @@ class ChannelController extends AdminController
     protected function form()
     {
         return Form::make(new Channel(), function (Form $form) {
-            $form->display('id');
-            $form->select('platform_id', trans('channel.fields.platform_id'))
-                ->options(PlatformModels::pluck('name','id'))
-                ->default(0)->required();
-            $form->select('parent_id', trans('channel.fields.parent_id'))
-                ->options(Models::selectOptions())->default(0)->required();
-            $form->image('image', trans('channel.fields.image'));
-            $form->text('title', trans('channel.fields.title'))->required();
-            $form->text('name', trans('channel.fields.name'))
-                ->help('必须为唯一值，仅支持英文与下划线"_"组成')
-                ->required()
-                ->creationRules(
-                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]+$/', "unique:channel"],
-                    [
-                        'min' => trans('admin.validation.minlength'),
-                        'max' => trans('admin.validation.maxlength'),
-                        'regex' => trans('admin.validation.match'),
-                        'unique' => trans('admin.validation.unique')
-                    ]
-                )
-                ->updateRules(
-                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]+$/', "unique:channel,name,{{id}},id"],
-                    [
-                        'min' => trans('admin.validation.minlength'),
-                        'max' => trans('admin.validation.maxlength'),
-                        'regex' => trans('admin.validation.match'),
-                        'unique' => trans('admin.validation.unique'),
-                    ]
-                );
-            $form->number('order', trans('channel.fields.order'))
-                ->default(0)->required();
+            $form->column(8, function (Form $form) {
+                $form->select('platform_id', trans('channel.fields.platform_id'))
+                    ->options(PlatformModels::pluck('name','id'))
+                    ->default(0)->required();
+                $form->select('parent_id', trans('channel.fields.parent_id'))
+                    ->options(Models::selectOptions())->default(0)->required();
+
+                $form->text('title', trans('channel.fields.title'))->required();
+                $form->text('name', trans('channel.fields.name'))
+                    ->help('必须为唯一值，仅支持英文与下划线"_"组成')
+                    ->required()
+                    ->creationRules(
+                        ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]+$/', "unique:channel"],
+                        [
+                            'min' => trans('admin.validation.minlength'),
+                            'max' => trans('admin.validation.maxlength'),
+                            'regex' => trans('admin.validation.match'),
+                            'unique' => trans('admin.validation.unique')
+                        ]
+                    )
+                    ->updateRules(
+                        ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]+$/', "unique:channel,name,{{id}},id"],
+                        [
+                            'min' => trans('admin.validation.minlength'),
+                            'max' => trans('admin.validation.maxlength'),
+                            'regex' => trans('admin.validation.match'),
+                            'unique' => trans('admin.validation.unique'),
+                        ]
+                    );
+                $form->number('order', trans('channel.fields.order'))
+                    ->default(0)->required();
+            });
+
+            $form->column(4, function (Form $form) {
+                $form->image('image', trans('channel.fields.image'));
+            });
 
             $form->disableListButton();
             $form->disableViewCheck();
