@@ -32,7 +32,7 @@ class PlatformController extends AdminController
                 $filter->equal('id');
                 $filter->like('name', trans('platform.fields.name'));
                 $filter->like('app_id', trans('platform.fields.app_id'));
-
+                $filter->equal('status')->select($this->status);
             });
         });
     }

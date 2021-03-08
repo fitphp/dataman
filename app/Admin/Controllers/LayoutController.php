@@ -42,7 +42,7 @@ class LayoutController extends AdminController
 
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
-
+                $filter->equal('type')->select($this->type);
             });
         });
     }

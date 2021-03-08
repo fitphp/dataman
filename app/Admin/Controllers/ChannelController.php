@@ -32,7 +32,8 @@ class ChannelController extends AdminController
 
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
-
+                $filter->equal('platform_id')
+                    ->select(PlatformModels::pluck('name','id'));
             });
         });
     }
