@@ -48,10 +48,6 @@ class LayoutController extends Controller
             return $this->failed(404, '无对应频道');
         }
 
-        // 获取广告列表
-        $advertService= new AdvertService();
-        $data['advert'] = $advertService->getByChannelId($data['id']);
-
         // 获取布局列表
         $layoutService = new LayoutService();
         $data['layout'] = $layoutService->getByChannelId($data['id']);

@@ -3,7 +3,6 @@
 namespace App\Admin\Controllers;
 
 use App\Admin\Repositories\AdvertPosition;
-use App\Models\Channel as ChannelModels;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
@@ -18,7 +17,7 @@ class AdvertPositionController extends AdminController
      */
     protected function grid()
     {
-        return Grid::make(new AdvertPosition(), function (Grid $grid) {
+        return Grid::make(new AdvertPosition(['data']), function (Grid $grid) {
             $grid->column('id')->sortable();
             $grid->column('name');
             $grid->column('flag');

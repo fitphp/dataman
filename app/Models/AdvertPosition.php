@@ -17,6 +17,6 @@ class AdvertPosition extends Model
 
     public function data()
     {
-        return $this->hasOne(Channel::class, 'id', 'pin_id');
+        return $this->belongsTo(AdvertData::class, 'id', 'pin_id');
     }
 }

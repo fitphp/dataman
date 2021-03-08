@@ -22,10 +22,10 @@ use Illuminate\Support\Facades\Cache;
 
 class AdvertService
 {
-    public function getByChannelId($channel_id)
+    public function getByChannelId($channel_id, $cache = true)
     {
         $key = "dmp:ad:chl:{$channel_id}";
-        if (Cache::has($key)) {
+        if (Cache::has($key) && $cache) {
             return json_decode(Cache::get($key), true);
         } else {
             $positions = AdvertPosition::where(['channel_id' => $channel_id])
@@ -40,9 +40,38 @@ class AdvertService
                 $advert[$position['flag']]['items'] = $items;
             }
 
-            Cache::put($key, json_encode($advert));
+            if ($cache) {
+                Cache::put($key, json_encode($advert));
+            }
+            return $advert;
+        }
+    }
+
+    public function getByPositionFlag($flag, $cache = true)
+    {
+        $key = "dmp:ad:flag:{$flag}";
+        if (Cache::has($key) && $cache) {
+            return json_decode(Cache::get($key), true);
+        } else {
+            $position = AdvertPosition::where(['flag' => $flag])
+                ->first(['id', 'flag'])->toArray();
+            $advert = AdvertData::where(['pin_id' => $position['id']])->get()->toArray();
+
+            if ($cache) {
+                Cache::put($key, json_encode($advert));
+            }
 
             return $advert;
         }
+    }
+
+    public function getByPositionFlags($flags, $cache = true)
+    {
+        $advert = [];
+        foreach ($flags as $flag) {
+            $advert[$flag] = $this->getByPositionFlag($flag, $cache);
+        }
+
+        return $advert;
     }
 }

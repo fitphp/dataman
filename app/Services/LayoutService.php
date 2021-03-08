@@ -15,6 +15,7 @@
 
 namespace App\Services;
 
+use App\Models\AdvertData;
 use App\Models\Application;
 use App\Models\Content;
 use App\Models\Layout;
@@ -33,7 +34,7 @@ class LayoutService
             $categoryService = new CategoryService();
             foreach ($layouts as $layout) {
                 switch ($layout['type']) {
-                    case 1:
+                    case 'app':
                         $targets = Application::whereIn('id', $layout['target_ids'])
                             ->where(['status' => 1])
                             ->orderBy('order')
@@ -43,7 +44,7 @@ class LayoutService
                             $target['categories'] = $categoryService->getByIds($target['category_ids']);
                         }
                         break;
-                    case 2:
+                    case 'content':
                         $targets = Content::with(['category'])
                             ->whereIn('id', $layout['target_ids'])
                             ->where(['status' => 1])
@@ -54,12 +55,16 @@ class LayoutService
                             $target['category'] = $categoryService->getById($target['category_id']);
                         }
                         break;
-                    case 3:
-                    default:
-                    $targets = Notice::whereIn('id', $layout['target_ids'])
+                    case 'notice':
+                        $targets = Notice::whereIn('id', $layout['target_ids'])
                             ->where(['status' => 1])
                             ->get(['id', 'title', 'from', 'top'])
                             ->toArray();
+                        break;
+                    case 'advert':
+                    default:
+                        $advertService = new AdvertService();
+                        $targets = $advertService->getByPositionFlags($layout['target_ids']);
                         break;
                 }
 

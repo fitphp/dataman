@@ -9,6 +9,7 @@ use App\Models\Content as ContentModels;
 use App\Models\Channel as ChannelModels;
 use App\Models\Application as ApplicationModels;
 
+use App\Services\AdvertService;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
@@ -65,18 +66,28 @@ class LayoutController extends AdminController
             $show->field('type')->using($this->type);
             $show->field('target_ids', trans('layout.fields.target'))->as(function () {
                 switch ($this->type) {
-                    case 1:
-                        $collection = ApplicationModels::whereIn('id', $this->target_ids);
+                    case 'app':
+                        $collection = ApplicationModels::whereIn('id', $this->target_ids)->pluck('title');
                         break;
-                    case 2:
-                        $collection = ContentModels::whereIn('id', $this->target_ids);
+                    case 'content':
+                        $collection = ContentModels::whereIn('id', $this->target_ids)->pluck('title');
                         break;
-                    case 3: default:
-                    $collection = NoticeModels::whereIn('id', $this->target_ids);
+                    case 'notice':
+                        $collection = NoticeModels::whereIn('id', $this->target_ids)->pluck('title');
                         break;
+                    case 'advert':
+                        $advertService = new AdvertService();
+
+                        $advert = [];
+                        array_map(function ($value) use (&$advert) {
+                            $advert = array_merge($advert, array_values($value));
+                        }, $advertService->getByPositionFlags($this->target_ids, false));
+
+                        $collection = collect($advert)->pluck('title');
+                    default:
                 }
 
-                return $collection->pluck('title');
+                return $collection;
             })->label();
             $show->status()->using($this->status);
             $show->field('remark');
@@ -142,7 +153,7 @@ class LayoutController extends AdminController
                             ->options(NoticeModels::pluck('title', 'id'));
                     })
                     ->when('advert', function (Form $form) {
-                        $form->select('target_ids', '广告位')
+                        $form->listbox('target_ids', '广告位')
                             ->options(AdvertPositionModels::pluck('name', 'flag'));
                     })
                     ->options($this->type)
