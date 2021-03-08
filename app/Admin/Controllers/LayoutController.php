@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Admin\Repositories\Layout;
+use App\Models\AdvertPosition as AdvertPositionModels;
 use App\Models\Notice as NoticeModels;
 use App\Models\Content as ContentModels;
 use App\Models\Channel as ChannelModels;
@@ -15,8 +16,8 @@ use Dcat\Admin\Http\Controllers\AdminController;
 
 class LayoutController extends AdminController
 {
-    protected $type = [1 => '应用', 2 => '内容', 3 => '通知'];
-    protected $type_label = [ 1 => 'success', 2 => 'info', 3 => 'primary'];
+    protected $type = ['app' => '应用', 'content' => '内容', 'notice' => '通知', 'advert' => '广告'];
+    protected $type_label = [ 'app' => 'success', 'content' => 'info', 'notice' => 'primary', 'advert' => 'default'];
     protected $status = [0 => '关闭', 1 => '正常'];
     protected $status_label = [0 => 'danger', 1 => 'success'];
 
@@ -36,7 +37,7 @@ class LayoutController extends AdminController
             $grid->column('title');
             $grid->column('subtitle');
             $grid->status()->using($this->status)
-                ->dot([ 0 => 'danger', 1 => 'success']);
+                ->dot($this->status_label);
             $grid->column('updated_at')->sortable();
 
             $grid->filter(function (Grid\Filter $filter) {
@@ -118,7 +119,7 @@ class LayoutController extends AdminController
                         ]
                     );
 
-                $form->text('title');
+                $form->text('title')->required();
                 $form->text('subtitle');
                 $form->radio('status')
                     ->options($this->status)
@@ -128,17 +129,21 @@ class LayoutController extends AdminController
 
             $form->column(6, function (Form $form) {
                 $form->radio('type')
-                    ->when(1, function (Form $form) {
+                    ->when('app', function (Form $form) {
                         $form->listbox('target_ids', '应用')
                             ->options(ApplicationModels::pluck('title', 'id'));
                     })
-                    ->when(2, function (Form $form) {
+                    ->when('content', function (Form $form) {
                         $form->listbox('target_ids', '内容')
                             ->options(ContentModels::pluck('title', 'id'));
                     })
-                    ->when(3, function (Form $form) {
+                    ->when('notice', function (Form $form) {
                         $form->listbox('target_ids', '通知')
                             ->options(NoticeModels::pluck('title', 'id'));
+                    })
+                    ->when('advert', function (Form $form) {
+                        $form->select('target_ids', '广告位')
+                            ->options(AdvertPositionModels::pluck('name', 'flag'));
                     })
                     ->options($this->type)
                     ->default(0);

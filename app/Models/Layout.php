@@ -16,7 +16,11 @@ class Layout extends Model
     }
 
     public function setTargetIdsAttribute($value) {
-        $this->attributes['target_ids'] = trim(implode(',', $value), ',');
+        if (is_array($value)) {
+            $this->attributes['target_ids'] = trim(implode(',', $value), ',');
+        } else {
+            $this->attributes['target_ids'] = $value;
+        }
     }
 
     public function getTargetIdsAttribute($value) {
