@@ -24,7 +24,7 @@ class AdvertDataController extends AdminController
     {
         return Grid::make(new AdvertData(['position']), function (Grid $grid) {
             $grid->column('id')->sortable();
-            $grid->column('pin.name', trans('advert-data.type.name'));
+            $grid->column('position.name', trans('advert-data.type.name'));
             $grid->column('image');
             $grid->column('title');
             $grid->type()->using(DictionaryModel::getValueByKey('link_type'))->label();
