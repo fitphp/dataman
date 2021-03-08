@@ -83,17 +83,18 @@ INSERT INTO `admin_menu` VALUES (10, 9, 10, '字典管理', 'fa-cog', 'dictionar
 INSERT INTO `admin_menu` VALUES (11, 9, 11, '附件管理', 'fa-file-picture-o', 'media', '', 1, '2021-01-27 23:42:57', '2021-01-27 23:42:57');
 INSERT INTO `admin_menu` VALUES (12, 9, 12, '中国区域', 'fa-globe', 'region/china', '', 1, '2021-01-24 19:05:30', '2021-01-27 23:28:48');
 INSERT INTO `admin_menu` VALUES (13, 9, 13, '分类管理', 'fa-list-ul', 'category', '', 1, '2021-01-24 19:11:15', '2021-01-27 23:28:47');
-INSERT INTO `admin_menu` VALUES (14, 0, 14, '应用中心', 'fa-paper-plane', NULL, '', 1, '2021-01-27 23:28:20', '2021-01-27 23:28:47');
-INSERT INTO `admin_menu` VALUES (15, 14, 15, '应用管理', 'fa-paper-plane-o', 'application', '', 1, '2021-01-27 23:44:58', '2021-01-27 23:44:58');
-INSERT INTO `admin_menu` VALUES (16, 14, 16, '内容管理', 'fa-copy', 'content', '', 1, '2021-01-27 23:46:49', '2021-01-27 23:46:49');
-INSERT INTO `admin_menu` VALUES (17, 14, 17, '通知公告', 'fa-bell', 'notice', '', 1, '2021-01-24 19:05:30', '2021-01-27 23:28:48');
-INSERT INTO `admin_menu` VALUES (18, 0, 18, '运营中心', 'fa-modx', NULL, '', 1, '2021-01-24 19:11:15', '2021-01-27 23:28:47');
-INSERT INTO `admin_menu` VALUES (19, 18, 19, '平台管理', 'fa-sitemap', 'platform', '', 1, '2021-01-27 23:25:50', '2021-01-30 16:47:41');
-INSERT INTO `admin_menu` VALUES (20, 18, 20, '栏目管理', 'fa-font-awesome', 'channel', '', 1, '2021-01-27 23:27:33', '2021-01-27 23:28:47');
-INSERT INTO `admin_menu` VALUES (21, 18, 21, '布局管理', 'fa-building', 'layout', '', 1, '2021-01-27 23:40:06', '2021-01-27 23:54:19');
-INSERT INTO `admin_menu` VALUES (22, 18, 22, '广告管理', 'fa-audio-description', 'advert', '', 1, '2021-01-27 23:50:43', '2021-01-27 23:50:43');
-INSERT INTO `admin_menu` VALUES (23, 22, 23, '位置管理', 'fa-map-pin', 'advert/position', '', 1, '2021-01-27 23:38:36', '2021-01-27 23:38:36');
-INSERT INTO `admin_menu` VALUES (24, 22, 24, '广告管理', 'fa-list', 'advert/data', '', 1, '2021-01-27 23:38:36', '2021-01-27 23:38:36');
+INSERT INTO `admin_menu` VALUES (14, 0, 14, '广告管理', 'fa-audio-description', 'advert', '', 1, '2021-01-27 23:50:43', '2021-01-27 23:50:43');
+INSERT INTO `admin_menu` VALUES (15, 14, 15, '位置管理', 'fa-map-pin', 'advert/position', '', 1, '2021-01-27 23:38:36', '2021-01-27 23:38:36');
+INSERT INTO `admin_menu` VALUES (16, 14, 16, '广告管理', 'fa-list', 'advert/data', '', 1, '2021-01-27 23:38:36', '2021-01-27 23:38:36');
+INSERT INTO `admin_menu` VALUES (17, 0, 17, '应用中心', 'fa-paper-plane', NULL, '', 1, '2021-01-27 23:28:20', '2021-01-27 23:28:47');
+INSERT INTO `admin_menu` VALUES (18, 17, 18, '应用管理', 'fa-paper-plane-o', 'application', '', 1, '2021-01-27 23:44:58', '2021-01-27 23:44:58');
+INSERT INTO `admin_menu` VALUES (19, 17, 19, '内容管理', 'fa-copy', 'content', '', 1, '2021-01-27 23:46:49', '2021-01-27 23:46:49');
+INSERT INTO `admin_menu` VALUES (20, 17, 20, '通知公告', 'fa-bell', 'notice', '', 1, '2021-01-24 19:05:30', '2021-01-27 23:28:48');
+INSERT INTO `admin_menu` VALUES (21, 0, 21, '运营中心', 'fa-modx', NULL, '', 1, '2021-01-24 19:11:15', '2021-01-27 23:28:47');
+INSERT INTO `admin_menu` VALUES (22, 21, 22, '平台管理', 'fa-sitemap', 'platform', '', 1, '2021-01-27 23:25:50', '2021-01-30 16:47:41');
+INSERT INTO `admin_menu` VALUES (23, 21, 23, '栏目管理', 'fa-font-awesome', 'channel', '', 1, '2021-01-27 23:27:33', '2021-01-27 23:28:47');
+INSERT INTO `admin_menu` VALUES (24, 21, 24, '布局管理', 'fa-building', 'layout', '', 1, '2021-01-27 23:40:06', '2021-01-27 23:54:19');
+
 COMMIT;
 
 -- ----------------------------
@@ -298,7 +299,7 @@ CREATE TABLE `advert_data` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() COMMENT '创建时间',
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT '更新时间',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `advert_data_pin_id_unique` (`pin_id`) USING BTREE
+  NORMAL KEY `advert_data_pin_id_normal` (`pin_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
@@ -310,7 +311,6 @@ CREATE TABLE `advert_position` (
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
   `flag` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '标题',
   `desc` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '描述',
-  `channel_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT '栏目ID',
   `order` tinyint(3) unsigned NOT NULL DEFAULT 0 COMMENT '排序',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() COMMENT '创建时间',
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT '更新时间',
@@ -373,6 +373,171 @@ CREATE TABLE `channel` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- ----------------------------
+-- Table structure for content
+-- ----------------------------
+DROP TABLE IF EXISTS `content`;
+CREATE TABLE `content` (
+                           `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+                           `title` varchar(255) CHARACTER SET utf8mb4 NOT NULL DEFAULT '' COMMENT '标题',
+                           `subtitle` varchar(255) CHARACTER SET utf8mb4 DEFAULT '' COMMENT '副标题',
+                           `category_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT '分类ID',
+                           `image` varchar(255) CHARACTER SET utf8mb4 DEFAULT '' COMMENT '图标',
+                           `content` text CHARACTER SET utf8mb4 DEFAULT '' COMMENT '内容',
+                           `type` varchar(64) CHARACTER SET utf8mb4 NOT NULL DEFAULT 'h5' COMMENT 'URL类型',
+                           `appid` varchar(64) CHARACTER SET utf8mb4 DEFAULT '' COMMENT 'AppID',
+                           `url` varchar(255) CHARACTER SET utf8mb4 DEFAULT '' COMMENT 'URL',
+                           `order` tinyint(3) unsigned NOT NULL DEFAULT 0 COMMENT '排序',
+                           `status` tinyint(1) unsigned NOT NULL DEFAULT 1 COMMENT '状态',
+                           `created_at` timestamp NOT NULL DEFAULT current_timestamp() COMMENT '创建时间',
+                           `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT '更新时间',
+                           PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='信息数据表';
+
+-- ----------------------------
+-- Table structure for failed_jobs
+-- ----------------------------
+DROP TABLE IF EXISTS `failed_jobs`;
+CREATE TABLE `failed_jobs` (
+                               `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+                               `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+                               `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+                               `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+                               `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+                               `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+                               `failed_at` timestamp NOT NULL DEFAULT current_timestamp(),
+                               PRIMARY KEY (`id`) USING BTREE,
+                               UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ----------------------------
+-- Table structure for layout
+-- ----------------------------
+DROP TABLE IF EXISTS `layout`;
+CREATE TABLE `layout` (
+    `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `channel_id` int(10) unsigned DEFAULT 0 COMMENT '栏目ID',
+    `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
+    `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '标题',
+    `subtitle` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '副标题',
+    `type` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '类型',
+    `target_ids` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '目标ID',
+    `status` tinyint(1) unsigned NOT NULL DEFAULT 1 COMMENT '状态',
+    `remark` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '备注',
+    `created_at` timestamp NOT NULL DEFAULT current_timestamp() COMMENT '创建时间',
+    `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT '更新时间',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ----------------------------
+-- Table structure for migrations
+-- ----------------------------
+DROP TABLE IF EXISTS `migrations`;
+CREATE TABLE `migrations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ----------------------------
+-- Table structure for password_resets
+-- ----------------------------
+DROP TABLE IF EXISTS `password_resets`;
+CREATE TABLE `password_resets` (
+   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+   `created_at` timestamp NULL DEFAULT NULL,
+   PRIMARY KEY (`email`),
+   KEY `password_resets_email_index` (`email`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ----------------------------
+-- Records of password_resets
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for platform
+-- ----------------------------
+DROP TABLE IF EXISTS `platform`;
+CREATE TABLE `platform` (
+    `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `name` varchar(255) CHARACTER SET utf8mb4 NOT NULL DEFAULT '' COMMENT '名称',
+    `app_id` varchar(64) CHARACTER SET utf8mb4 DEFAULT '' COMMENT 'App ID',
+    `app_secret` varchar(64) CHARACTER SET utf8mb4 DEFAULT '' COMMENT 'App Secret',
+    `status` tinyint(1) unsigned NOT NULL DEFAULT 1 COMMENT '状态（0关闭 1正常）',
+    `created_at` timestamp NOT NULL DEFAULT current_timestamp() COMMENT '创建时间',
+    `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT '更新时间',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ----------------------------
+-- Table structure for dictionary
+-- ----------------------------
+DROP TABLE IF EXISTS `dictionary`;
+CREATE TABLE `dictionary` (
+    `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
+    `key` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '键名',
+    `value` text COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '键值',
+    `status` tinyint(1) unsigned NOT NULL DEFAULT 1 COMMENT '状态 0停用 1正常',
+    `remark` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '备注',
+    `is_system` tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '是否系统',
+    `created_at` timestamp NOT NULL DEFAULT current_timestamp() COMMENT '创建时间',
+    `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT '更新时间',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `system_dict_key_unique` (`key`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ----------------------------
+-- Records of dictionary
+-- ----------------------------
+BEGIN;
+INSERT INTO `dictionary` VALUES (1, '用户性别', 'user_sex', '[\"\\u5973\",\"\\u7537\"]', 1, '用户性别', 1, '2021-02-03 16:40:15', '2021-02-24 10:23:04');
+INSERT INTO `dictionary` VALUES (2, '区域等级', 'china_region_level', '[\"\\u7701\\u7ea7\",\"\\u5e02\\u7ea7\",\"\\u533a\\/\\u53bf\",\"\\u8857\\u9053\\/\\u9547\",\"\\u5c45\\u59d4\\/\\u6751\\u59d4\"]', 1, '区域等级', 1, '2021-02-03 18:25:18', '2021-02-24 10:23:06');
+INSERT INTO `dictionary` VALUES (3, '链接类型', 'link_type', '{\"h5\":\"H5\",\"wechat\":\"\\u5fae\\u4fe1\\u5c0f\\u7a0b\\u5e8f\"}', 1, '链接类型', 1, '2021-02-03 18:26:21', '2021-02-24 10:23:07');
+INSERT INTO `dictionary` VALUES (4, '认证等级', 'auth_level', '[\"\\u6e38\\u5ba2\",\"\\u5b9e\\u540d\",\"\\u5b9e\\u4eba\"]', 1, '认证等级', 1, '2021-02-03 18:26:42', '2021-02-24 10:23:07');
+INSERT INTO `dictionary` VALUES (5, '系统配置', 'system_config', '{\"site_name\":\"\\u6570\\u636e\\u7ba1\\u7406\\u5e73\\u53f0\",\"timezone\":\"Asia\\/Shanghai\"}', 1, '系统配置', 1, '2021-02-05 22:55:45', '2021-02-24 10:23:08');
+INSERT INTO `dictionary` VALUES (6, '分类组别', 'category_group', '{\"application\":\"\\u5e94\\u7528\",\"content\":\"\\u5185\\u5bb9\"}', 1, '分类组别', 1, '2021-02-23 22:43:28', '2021-02-24 10:24:58');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for system_notice
+-- ----------------------------
+DROP TABLE IF EXISTS `system_notice`;
+CREATE TABLE `system_notice` (
+    `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '标题',
+    `from` tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '来源 0 内部 1外部',
+    `status` tinyint(1) unsigned NOT NULL DEFAULT 1 COMMENT '状态 0 停用 1正常',
+    `top` tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '置顶 0否 1是',
+    `content` text COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '内容',
+    `created_at` timestamp NOT NULL DEFAULT current_timestamp() COMMENT '创建时间',
+    `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT '更新时间',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ----------------------------
+-- Table structure for users
+-- ----------------------------
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+    `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+    `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+    `email_verified_at` timestamp NULL DEFAULT NULL,
+    `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+    `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `created_at` timestamp NULL DEFAULT NULL,
+    `updated_at` timestamp NULL DEFAULT NULL,
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE KEY `users_email_unique` (`email`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 -- ----------------------------
 -- Table structure for china_region
@@ -4550,168 +4715,5 @@ INSERT INTO `china_region` VALUES (783246, 2, 7110805025214, 7110767901015, 633,
 INSERT INTO `china_region` VALUES (783328, 2, 7110805025214, 7111770338702, 648, '05', '西螺镇', '西螺', '台湾省,云林,西螺', 'Xiluo Township', 120.480738, 23.664943);
 INSERT INTO `china_region` VALUES (783478, 2, 7110805025214, 7113126346648, 655, '05', '元长乡', '元长', '台湾省,云林,元长', 'Yuanchang Township', 120.480738, 23.664943);
 COMMIT;
-
--- ----------------------------
--- Table structure for content
--- ----------------------------
-DROP TABLE IF EXISTS `content`;
-CREATE TABLE `content` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `title` varchar(255) CHARACTER SET utf8mb4 NOT NULL DEFAULT '' COMMENT '标题',
-  `subtitle` varchar(255) CHARACTER SET utf8mb4 DEFAULT '' COMMENT '副标题',
-  `category_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT '分类ID',
-  `image` varchar(255) CHARACTER SET utf8mb4 DEFAULT '' COMMENT '图标',
-  `content` text CHARACTER SET utf8mb4 DEFAULT '' COMMENT '内容',
-  `type` varchar(64) CHARACTER SET utf8mb4 NOT NULL DEFAULT 'h5' COMMENT 'URL类型',
-  `appid` varchar(64) CHARACTER SET utf8mb4 DEFAULT '' COMMENT 'AppID',
-  `url` varchar(255) CHARACTER SET utf8mb4 DEFAULT '' COMMENT 'URL',
-  `order` tinyint(3) unsigned NOT NULL DEFAULT 0 COMMENT '排序',
-  `status` tinyint(1) unsigned NOT NULL DEFAULT 1 COMMENT '状态',
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp() COMMENT '创建时间',
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT '更新时间',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='信息数据表';
-
--- ----------------------------
--- Table structure for failed_jobs
--- ----------------------------
-DROP TABLE IF EXISTS `failed_jobs`;
-CREATE TABLE `failed_jobs` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- ----------------------------
--- Table structure for layout
--- ----------------------------
-DROP TABLE IF EXISTS `layout`;
-CREATE TABLE `layout` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `channel_id` int(10) unsigned DEFAULT 0 COMMENT '栏目ID',
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '标题',
-  `subtitle` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '副标题',
-  `type` tinyint(3) unsigned NOT NULL DEFAULT 1 COMMENT '类型',
-  `target_ids` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '目标ID',
-  `status` tinyint(1) unsigned NOT NULL DEFAULT 1 COMMENT '状态',
-  `remark` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '备注',
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp() COMMENT '创建时间',
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT '更新时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- ----------------------------
--- Table structure for migrations
--- ----------------------------
-DROP TABLE IF EXISTS `migrations`;
-CREATE TABLE `migrations` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int(11) NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- ----------------------------
--- Table structure for password_resets
--- ----------------------------
-DROP TABLE IF EXISTS `password_resets`;
-CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`email`),
-  KEY `password_resets_email_index` (`email`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- ----------------------------
--- Records of password_resets
--- ----------------------------
-BEGIN;
-COMMIT;
-
--- ----------------------------
--- Table structure for platform
--- ----------------------------
-DROP TABLE IF EXISTS `platform`;
-CREATE TABLE `platform` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `name` varchar(255) CHARACTER SET utf8mb4 NOT NULL DEFAULT '' COMMENT '名称',
-  `app_id` varchar(64) CHARACTER SET utf8mb4 DEFAULT '' COMMENT 'App ID',
-  `app_secret` varchar(64) CHARACTER SET utf8mb4 DEFAULT '' COMMENT 'App Secret',
-  `status` tinyint(1) unsigned NOT NULL DEFAULT 1 COMMENT '状态（0关闭 1正常）',
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp() COMMENT '创建时间',
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT '更新时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- ----------------------------
--- Table structure for dictionary
--- ----------------------------
-DROP TABLE IF EXISTS `dictionary`;
-CREATE TABLE `dictionary` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
-  `key` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '键名',
-  `value` text COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '键值',
-  `status` tinyint(1) unsigned NOT NULL DEFAULT 1 COMMENT '状态 0停用 1正常',
-  `remark` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '备注',
-  `is_system` tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '是否系统',
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp() COMMENT '创建时间',
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT '更新时间',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `system_dict_key_unique` (`key`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- ----------------------------
--- Records of dictionary
--- ----------------------------
-BEGIN;
-INSERT INTO `dictionary` VALUES (1, '用户性别', 'user_sex', '[\"\\u5973\",\"\\u7537\"]', 1, '用户性别', 1, '2021-02-03 16:40:15', '2021-02-24 10:23:04');
-INSERT INTO `dictionary` VALUES (2, '区域等级', 'china_region_level', '[\"\\u7701\\u7ea7\",\"\\u5e02\\u7ea7\",\"\\u533a\\/\\u53bf\",\"\\u8857\\u9053\\/\\u9547\",\"\\u5c45\\u59d4\\/\\u6751\\u59d4\"]', 1, '区域等级', 1, '2021-02-03 18:25:18', '2021-02-24 10:23:06');
-INSERT INTO `dictionary` VALUES (3, '链接类型', 'link_type', '{\"h5\":\"H5\",\"wechat\":\"\\u5fae\\u4fe1\\u5c0f\\u7a0b\\u5e8f\"}', 1, '链接类型', 1, '2021-02-03 18:26:21', '2021-02-24 10:23:07');
-INSERT INTO `dictionary` VALUES (4, '认证等级', 'auth_level', '[\"\\u6e38\\u5ba2\",\"\\u5b9e\\u540d\",\"\\u5b9e\\u4eba\"]', 1, '认证等级', 1, '2021-02-03 18:26:42', '2021-02-24 10:23:07');
-INSERT INTO `dictionary` VALUES (5, '系统配置', 'system_config', '{\"site_name\":\"\\u6570\\u636e\\u7ba1\\u7406\\u5e73\\u53f0\",\"timezone\":\"Asia\\/Shanghai\"}', 1, '系统配置', 1, '2021-02-05 22:55:45', '2021-02-24 10:23:08');
-INSERT INTO `dictionary` VALUES (6, '分类组别', 'category_group', '{\"application\":\"\\u5e94\\u7528\",\"content\":\"\\u5185\\u5bb9\"}', 1, '分类组别', 1, '2021-02-23 22:43:28', '2021-02-24 10:24:58');
-COMMIT;
-
--- ----------------------------
--- Table structure for system_notice
--- ----------------------------
-DROP TABLE IF EXISTS `system_notice`;
-CREATE TABLE `system_notice` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '标题',
-  `from` tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '来源 0 内部 1外部',
-  `status` tinyint(1) unsigned NOT NULL DEFAULT 1 COMMENT '状态 0 停用 1正常',
-  `top` tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '置顶 0否 1是',
-  `content` text COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '内容',
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp() COMMENT '创建时间',
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT '更新时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- ----------------------------
--- Table structure for users
--- ----------------------------
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE `users` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `users_email_unique` (`email`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 SET FOREIGN_KEY_CHECKS = 1;
