@@ -15,8 +15,8 @@ class AdvertPosition extends Model
         $this->attributes['flag'] = strtolower($value);
     }
 
-    public function channel()
+    public function data()
     {
-        return $this->hasOne(Channel::class, 'id', 'channel_id');
+        return $this->hasOne(Channel::class, 'id', 'pin_id');
     }
 }

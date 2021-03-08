@@ -18,9 +18,8 @@ class AdvertPositionController extends AdminController
      */
     protected function grid()
     {
-        return Grid::make(new AdvertPosition(['channel']), function (Grid $grid) {
+        return Grid::make(new AdvertPosition(), function (Grid $grid) {
             $grid->column('id')->sortable();
-            $grid->column('channel.title', trans('advert-position.fields.channel'));
             $grid->column('name');
             $grid->column('flag');
             $grid->column('order');
@@ -43,12 +42,11 @@ class AdvertPositionController extends AdminController
      */
     protected function detail($id)
     {
-        return Show::make($id, new AdvertPosition(['channel']), function (Show $show) {
+        return Show::make($id, new AdvertPosition(), function (Show $show) {
             $show->field('id');
             $show->field('name');
             $show->field('flag');
             $show->field('desc');
-            $show->field('channel.title', trans('advert-position.fields.channel'));
             $show->field('order');
             $show->field('created_at');
             $show->field('updated_at');
@@ -63,18 +61,13 @@ class AdvertPositionController extends AdminController
     protected function form()
     {
         return Form::make(new AdvertPosition(), function (Form $form) {
-            $channel_id = isset(request()->all()['channel_id']) ? request()->all()['channel_id'] : '';
-
-            $form->select('channel_id')->options(
-                ChannelModels::selectOptions()
-            )->default(0)->required();
             $form->text('name')->required();
 
             $form->text('flag')
                 ->help('栏目ID+标识，须唯一值，仅支持英文与下划组"_"组成')
                 ->required()
                 ->creationRules(
-                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]+$/', "unique:advert_position,flag,null,null,channel_id,{$channel_id}"],
+                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]+$/', "unique:advert_position,flag,null,null"],
                     [
                         'min' => trans('admin.validation.minlength'),
                         'max' => trans('admin.validation.maxlength'),
@@ -83,7 +76,7 @@ class AdvertPositionController extends AdminController
                     ]
                 )
                 ->updateRules(
-                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]+$/', "unique:advert_position,flag,{{id}},id,channel_id,{$channel_id}"],
+                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]+$/', "unique:advert_position,flag,{{id}},id}"],
                     [
                         'min' => trans('admin.validation.minlength'),
                         'max' => trans('admin.validation.maxlength'),
