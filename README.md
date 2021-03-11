@@ -175,6 +175,14 @@ php artisan admin:reset-password
 数据管理平台（DataMan）基于遵循 [MIT](https://opensource.org/licenses/MIT) 开源协议的 Dcat-Admin 框架二次开发。
 
 ## 鸣谢
+没有它们就没有 DataMan：
+
+`JetBrains` 提供优秀的IDE。
+
+<a href="https://www.jetbrains.com/?from=dataman" target="_blank">
+    <img src="https://dss1.bdstatic.com/6OF1bjeh1BF3odCf/it/u=2654092554,2008831619&fm=74&app=80&f=PNG&size=f121,121" />
+</a>
+
 [Laravel](https://laravel.com/) ，优雅的 PHP Web 框架。
 
 [Dcat Admin](https://dcatadmin.com) ，高颜值、高效率的后台开发框架。
