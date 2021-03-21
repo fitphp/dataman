@@ -5,6 +5,11 @@ use App\Admin\Actions;
 use Dcat\Admin\Layout\Navbar;
 
 Admin::navbar(function (Navbar $navbar) {
+    // ajax请求不执行
+    if (! Dcat\Admin\Support\Helper::isAjaxRequest()) {
+        // $navbar->right(Actions\SettingConfig::make()->render());
+    }
+
     $navbar->right(Actions\ClearCache::make()->render());
 });
 

@@ -63,6 +63,8 @@ return [
         'namespace' => 'App\\Admin\\Controllers',
 
         'middleware' => ['web', 'admin'],
+
+        'enable_session_middleware' => false,
     ],
 
     /*

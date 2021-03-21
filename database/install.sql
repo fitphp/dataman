@@ -92,8 +92,8 @@ INSERT INTO `admin_menu` VALUES (19, 17, 19, '内容管理', 'fa-copy', 'content
 INSERT INTO `admin_menu` VALUES (20, 17, 20, '通知公告', 'fa-bell', 'notice', '', 1, '2021-01-24 19:05:30', '2021-01-27 23:28:48');
 INSERT INTO `admin_menu` VALUES (21, 0, 21, '运营中心', 'fa-modx', NULL, '', 1, '2021-01-24 19:11:15', '2021-01-27 23:28:47');
 INSERT INTO `admin_menu` VALUES (22, 21, 22, '平台管理', 'fa-sitemap', 'platform', '', 1, '2021-01-27 23:25:50', '2021-01-30 16:47:41');
-INSERT INTO `admin_menu` VALUES (23, 21, 23, '栏目管理', 'fa-font-awesome', 'channel', '', 1, '2021-01-27 23:27:33', '2021-01-27 23:28:47');
-INSERT INTO `admin_menu` VALUES (24, 21, 24, '布局管理', 'fa-building', 'layout', '', 1, '2021-01-27 23:40:06', '2021-01-27 23:54:19');
+INSERT INTO `admin_menu` VALUES (23, 21, 23, '栏目管理', 'feather icon-layers', 'channel', '', 1, '2021-01-27 23:27:33', '2021-01-27 23:28:47');
+INSERT INTO `admin_menu` VALUES (24, 21, 24, '布局管理', 'feather icon-layout', 'layout', '', 1, '2021-01-27 23:40:06', '2021-01-27 23:54:19');
 
 COMMIT;
 
@@ -380,20 +380,20 @@ CREATE TABLE `channel` (
 -- ----------------------------
 DROP TABLE IF EXISTS `content`;
 CREATE TABLE `content` (
-                           `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
-                           `title` varchar(255) CHARACTER SET utf8mb4 NOT NULL DEFAULT '' COMMENT '标题',
-                           `subtitle` varchar(255) CHARACTER SET utf8mb4 DEFAULT '' COMMENT '副标题',
-                           `category_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT '分类ID',
-                           `image` varchar(255) CHARACTER SET utf8mb4 DEFAULT '' COMMENT '图标',
-                           `content` text CHARACTER SET utf8mb4 DEFAULT '' COMMENT '内容',
-                           `type` varchar(64) CHARACTER SET utf8mb4 NOT NULL DEFAULT 'h5' COMMENT 'URL类型',
-                           `appid` varchar(64) CHARACTER SET utf8mb4 DEFAULT '' COMMENT 'AppID',
-                           `url` varchar(255) CHARACTER SET utf8mb4 DEFAULT '' COMMENT 'URL',
-                           `order` tinyint(3) unsigned NOT NULL DEFAULT 0 COMMENT '排序',
-                           `status` tinyint(1) unsigned NOT NULL DEFAULT 1 COMMENT '状态',
-                           `created_at` timestamp NOT NULL DEFAULT current_timestamp() COMMENT '创建时间',
-                           `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT '更新时间',
-                           PRIMARY KEY (`id`) USING BTREE
+   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+   `title` varchar(255) CHARACTER SET utf8mb4 NOT NULL DEFAULT '' COMMENT '标题',
+   `subtitle` varchar(255) CHARACTER SET utf8mb4 DEFAULT '' COMMENT '副标题',
+   `category_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT '分类ID',
+   `image` varchar(255) CHARACTER SET utf8mb4 DEFAULT '' COMMENT '图标',
+   `content` text CHARACTER SET utf8mb4 DEFAULT '' COMMENT '内容',
+   `type` varchar(64) CHARACTER SET utf8mb4 NOT NULL DEFAULT 'h5' COMMENT 'URL类型',
+   `appid` varchar(64) CHARACTER SET utf8mb4 DEFAULT '' COMMENT 'AppID',
+   `url` varchar(255) CHARACTER SET utf8mb4 DEFAULT '' COMMENT 'URL',
+   `order` tinyint(3) unsigned NOT NULL DEFAULT 0 COMMENT '排序',
+   `status` tinyint(1) unsigned NOT NULL DEFAULT 1 COMMENT '状态',
+   `created_at` timestamp NOT NULL DEFAULT current_timestamp() COMMENT '创建时间',
+   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT '更新时间',
+   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='信息数据表';
 
 -- ----------------------------
@@ -401,15 +401,15 @@ CREATE TABLE `content` (
 -- ----------------------------
 DROP TABLE IF EXISTS `failed_jobs`;
 CREATE TABLE `failed_jobs` (
-                               `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-                               `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-                               `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-                               `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-                               `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-                               `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-                               `failed_at` timestamp NOT NULL DEFAULT current_timestamp(),
-                               PRIMARY KEY (`id`) USING BTREE,
-                               UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`) USING BTREE
+   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+   `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+   `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+   `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+   `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+   `failed_at` timestamp NOT NULL DEFAULT current_timestamp(),
+   PRIMARY KEY (`id`) USING BTREE,
+   UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
