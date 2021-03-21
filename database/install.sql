@@ -87,14 +87,8 @@ INSERT INTO `admin_menu` VALUES (14, 0, 14, '广告管理', 'fa-audio-descriptio
 INSERT INTO `admin_menu` VALUES (15, 14, 15, '位置管理', 'fa-map-pin', 'advert/position', '', 1, '2021-01-27 23:38:36', '2021-01-27 23:38:36');
 INSERT INTO `admin_menu` VALUES (16, 14, 16, '广告管理', 'fa-list', 'advert/data', '', 1, '2021-01-27 23:38:36', '2021-01-27 23:38:36');
 INSERT INTO `admin_menu` VALUES (17, 0, 17, '应用中心', 'fa-paper-plane', NULL, '', 1, '2021-01-27 23:28:20', '2021-01-27 23:28:47');
-INSERT INTO `admin_menu` VALUES (18, 17, 18, '应用管理', 'fa-paper-plane-o', 'application', '', 1, '2021-01-27 23:44:58', '2021-01-27 23:44:58');
-INSERT INTO `admin_menu` VALUES (19, 17, 19, '内容管理', 'fa-copy', 'content', '', 1, '2021-01-27 23:46:49', '2021-01-27 23:46:49');
-INSERT INTO `admin_menu` VALUES (20, 17, 20, '通知公告', 'fa-bell', 'notice', '', 1, '2021-01-24 19:05:30', '2021-01-27 23:28:48');
-INSERT INTO `admin_menu` VALUES (21, 0, 21, '运营中心', 'fa-modx', NULL, '', 1, '2021-01-24 19:11:15', '2021-01-27 23:28:47');
-INSERT INTO `admin_menu` VALUES (22, 21, 22, '平台管理', 'fa-sitemap', 'platform', '', 1, '2021-01-27 23:25:50', '2021-01-30 16:47:41');
-INSERT INTO `admin_menu` VALUES (23, 21, 23, '栏目管理', 'fa-font-awesome', 'channel', '', 1, '2021-01-27 23:27:33', '2021-01-27 23:28:47');
-INSERT INTO `admin_menu` VALUES (24, 21, 24, '布局管理', 'fa-building', 'layout', '', 1, '2021-01-27 23:40:06', '2021-01-27 23:54:19');
-
+INSERT INTO `admin_menu` VALUES (18, 17, 18, '内容管理', 'fa-copy', 'content', '', 1, '2021-01-27 23:46:49', '2021-01-27 23:46:49');
+INSERT INTO `admin_menu` VALUES (19, 17, 19, '通知公告', 'fa-bell', 'notice', '', 1, '2021-01-24 19:05:30', '2021-01-27 23:28:48');
 COMMIT;
 
 -- ----------------------------
