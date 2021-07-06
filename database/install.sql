@@ -94,7 +94,7 @@ INSERT INTO `admin_menu` VALUES (21, 0, 21, '运营中心', 'fa-modx', NULL, '',
 INSERT INTO `admin_menu` VALUES (22, 21, 22, '平台管理', 'fa-sitemap', 'platform', '', 1, '2021-01-27 23:25:50', '2021-01-30 16:47:41');
 INSERT INTO `admin_menu` VALUES (23, 21, 23, '栏目管理', 'feather icon-layers', 'channel', '', 1, '2021-01-27 23:27:33', '2021-01-27 23:28:47');
 INSERT INTO `admin_menu` VALUES (24, 21, 24, '布局管理', 'feather icon-layout', 'layout', '', 1, '2021-01-27 23:40:06', '2021-01-27 23:54:19');
-
+INSERT INTO `admin_menu` VALUES (25, 21, 25, '意见反馈', 'fa-bug', 'feedback', '', 1, '2021-01-27 23:40:06', '2021-01-27 23:54:19');
 COMMIT;
 
 -- ----------------------------
@@ -490,20 +490,35 @@ CREATE TABLE `dictionary` (
     `created_at` timestamp NOT NULL DEFAULT current_timestamp() COMMENT '创建时间',
     `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT '更新时间',
     PRIMARY KEY (`id`),
-    UNIQUE KEY `system_dict_key_unique` (`key`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    UNIQUE KEY `dict_key_unique` (`key`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of dictionary
 -- ----------------------------
 BEGIN;
-INSERT INTO `dictionary` VALUES (1, '用户性别', 'user_sex', '[\"\\u5973\",\"\\u7537\"]', 1, '用户性别', 1, '2021-02-03 16:40:15', '2021-02-24 10:23:04');
-INSERT INTO `dictionary` VALUES (2, '区域等级', 'china_region_level', '[\"\\u7701\\u7ea7\",\"\\u5e02\\u7ea7\",\"\\u533a\\/\\u53bf\",\"\\u8857\\u9053\\/\\u9547\",\"\\u5c45\\u59d4\\/\\u6751\\u59d4\"]', 1, '区域等级', 1, '2021-02-03 18:25:18', '2021-02-24 10:23:06');
-INSERT INTO `dictionary` VALUES (3, '链接类型', 'link_type', '{\"h5\":\"H5\",\"wechat\":\"\\u5fae\\u4fe1\\u5c0f\\u7a0b\\u5e8f\"}', 1, '链接类型', 1, '2021-02-03 18:26:21', '2021-02-24 10:23:07');
+INSERT INTO `dictionary` VALUES (1, '用户性别', 'user_sex', '{\"a\":\"a1\",\"b\":\"b1\",\"S#fdsf\":\"gffsd\"}', 1, '用户性别', 1, '2021-02-03 16:40:15', '2021-05-21 00:28:18');
+INSERT INTO `dictionary` VALUES (2, '区域等级', 'china_region_level', '[\"\\u7701\\u7ea7\",\"\\u5e02\\u7ea7\",\"\\u533a\\/\\u53bf\",\"\\u8857\\u9053\\/\\u9547\",\"\\u5c45\\u59d4\\/\\u6751\\u59d4\",\"\\u7ec4\"]', 1, '区域等级', 1, '2021-02-03 18:25:18', '2021-05-20 14:52:50');
+INSERT INTO `dictionary` VALUES (3, '链接类型', 'link_type', '{\"h5\":\"H5\",\"wechat\":\"\\u5fae\\u4fe1\\u5c0f\\u7a0b\\u5e8f\",\"alipay\":\"\\u652f\\u4ed8\\u5b9d\"}', 1, '链接类型', 1, '2021-02-03 18:26:21', '2021-06-17 17:50:11');
 INSERT INTO `dictionary` VALUES (4, '认证等级', 'auth_level', '[\"\\u6e38\\u5ba2\",\"\\u5b9e\\u540d\",\"\\u5b9e\\u4eba\"]', 1, '认证等级', 1, '2021-02-03 18:26:42', '2021-02-24 10:23:07');
 INSERT INTO `dictionary` VALUES (5, '系统配置', 'system_config', '{\"site_name\":\"\\u6570\\u636e\\u7ba1\\u7406\\u5e73\\u53f0\",\"timezone\":\"Asia\\/Shanghai\"}', 1, '系统配置', 1, '2021-02-05 22:55:45', '2021-02-24 10:23:08');
-INSERT INTO `dictionary` VALUES (6, '分类组别', 'category_group', '{\"application\":\"\\u5e94\\u7528\",\"content\":\"\\u5185\\u5bb9\"}', 1, '分类组别', 1, '2021-02-23 22:43:28', '2021-02-24 10:24:58');
+INSERT INTO `dictionary` VALUES (6, '分类组别', 'category_group', '{\"application\":\"\\u5e94\\u7528\",\"content\":\"\\u5185\\u5bb9\"}', 1, '分类组别', 1, '2021-02-23 22:43:28', '2021-02-24 11:05:01');
+INSERT INTO `dictionary` VALUES (7, '反馈类型', 'feedback_type', '{\"account\":\"\\u8d26\\u53f7\",\"content\":\"\\u5185\\u5bb9\",\"product\":\"\\u4ea7\\u54c1\",\"other\":\"\\u5176\\u5b83\"}', 1, '反馈类型', 1, '2021-07-06 19:16:10', '2021-07-06 19:16:55');
 COMMIT;
+
+-- ----------------------------
+-- Table structure for feedback
+-- ----------------------------
+DROP TABLE IF EXISTS `feedback`;
+CREATE TABLE `feedback` (
+    `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `type` varchar(64) NOT NULL COMMENT '类型，来源字典',
+    `content` varchar(255) NOT NULL COMMENT '反馈内容',
+    `contact` varchar(64) DEFAULT NULL COMMENT '联系方式',
+    `created_at` timestamp NOT NULL DEFAULT current_timestamp() COMMENT '创建时间',
+    `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT '更新时间',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=`` DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Table structure for system_notice
