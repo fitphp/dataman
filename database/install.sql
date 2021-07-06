@@ -299,7 +299,7 @@ CREATE TABLE `advert_data` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() COMMENT '创建时间',
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT '更新时间',
   PRIMARY KEY (`id`),
-  NORMAL KEY `advert_data_pin_id_normal` (`pin_id`) USING BTREE
+  KEY `advert_data_pin_id_normal` (`pin_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
@@ -491,7 +491,7 @@ CREATE TABLE `dictionary` (
     `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT '更新时间',
     PRIMARY KEY (`id`),
     UNIQUE KEY `dict_key_unique` (`key`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of dictionary
@@ -518,7 +518,7 @@ CREATE TABLE `feedback` (
     `created_at` timestamp NOT NULL DEFAULT current_timestamp() COMMENT '创建时间',
     `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT '更新时间',
     PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=`` DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Table structure for system_notice
