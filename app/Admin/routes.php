@@ -24,6 +24,7 @@ Route::group([
     $router->resource('/advert/position', 'AdvertPositionController'); // 广告位置
     $router->resource('/advert/data', 'AdvertDataController'); // 广告数据
     $router->resource('/application', 'ApplicationController'); // 应用
+    $router->resource('/feedback', 'FeedbackController'); // 意见反馈
 
     $router->get('/media', 'MediaController@index')->name('media.index');
     $router->get('/media/download', 'MediaController@download')->name('media.download');
