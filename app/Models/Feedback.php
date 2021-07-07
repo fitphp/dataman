@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Feedback extends Model
 {
-	use HasDateTimeFormatter;    }
+	use HasDateTimeFormatter;
+
+    protected $table = 'feedback';
+
+    public function setNameAttribute($value) {
+        $this->attributes['name'] = strtolower($value);
+    }
+
+    public function platform()
+    {
+        return $this->belongsTo(Platform::class);
+    }
+}

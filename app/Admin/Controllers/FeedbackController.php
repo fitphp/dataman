@@ -4,6 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Admin\Repositories\Feedback;
 use App\Models\Dictionary as DictionaryModel;
+use App\Models\Platform as PlatformModels;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
@@ -20,6 +21,7 @@ class FeedbackController extends AdminController
     {
         return Grid::make(new Feedback(), function (Grid $grid) {
             $grid->column('id')->sortable();
+            $grid->column('platform.name', trans('feedback.fields.platform_name'));
             $grid->column('type')->using(
                 DictionaryModel::getValueByKey('feedback_type')
             )->label();;
@@ -30,6 +32,8 @@ class FeedbackController extends AdminController
 
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
+                $filter->equal('platform_id')
+                    ->select(PlatformModels::pluck('name','id'));
 
             });
         });
@@ -46,6 +50,8 @@ class FeedbackController extends AdminController
     {
         return Show::make($id, new Feedback(), function (Show $show) {
             $show->field('id');
+            $show->field('parent_id');
+            $show->field('platform.name');
             $show->field('type')->using(
                 DictionaryModel::getValueByKey('feedback_type')
             );;
@@ -65,6 +71,9 @@ class FeedbackController extends AdminController
     {
         return Form::make(new Feedback(), function (Form $form) {
             $form->display('id');
+            $form->select('platform_id', trans('feedback.fields.platform_id'))
+                ->options(PlatformModels::pluck('name','id'))
+                ->default(0)->required();
             $form->select('type')->options(
                 DictionaryModel::getValueByKey('feedback_type')
             );
