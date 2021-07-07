@@ -6,7 +6,7 @@
     <img src="https://img.shields.io/badge/License-MIT-blue" />
 </p>
 
-[演示地址](https://dataman.fitphp.com) 账号：admin 密码: admin
+[演示地址](https://dataman.fitphp.com) 账号：test 密码: test
 
 ## 简介
 数据管理平台（DataMan）是一个轻量的、现代设计风格的移动端数据管理系统。
@@ -19,11 +19,7 @@
 [![Stargazers over time](https://whnb.wang/img/fitphp/dataman)](https://whnb.wang/fitphp/dataman)
 
 ### 特点
-经典的 LNMP 环境即可运行。
-
-使用先进的 Web 框架进行开发。
-
-简洁优雅的使用体验。
+经典的 LNMP 环境即可运行；使用先进的 Web 框架进行开发；简洁优雅的使用体验。
 
   - [x] 配置管理（字典管理）
   - [x] 附件管理
@@ -31,6 +27,7 @@
   - [x] 应用管理
   - [x] 内容管理
   - [x] 平台管理
+  - [x] 意见反馈
   - [x] 栏目管理：频道与页面
   - [x] 分类管理：无限级分类
   - [x] 通知公告

@@ -221,9 +221,8 @@ return [
     'copied'                    => '已复制',
     'auth_failed'               => '账号或密码错误',
     'validation'               => [
-        'match'     => ':attribute 与规则不匹配。',
+        'match'     => '与 :attribute 不匹配。',
         'minlength' => ':attribute 字符长度不能少于 :min。',
         'maxlength' => ':attribute 字符长度不能超出 :max。',
-        'unique'    => '已有相同 :attribute 存在，系统内须唯一。',
     ],
 ];
