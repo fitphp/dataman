@@ -89,7 +89,7 @@ class AdvertDataController extends AdminController
             $form->column(6, function (Form $form) {
                 $form->radio('type')->options(
                     DictionaryModel::getValueByKey('link_type')
-                )->default('h5');
+                )->default('url');
                 $form->text('appid');
                 $form->url('url');
                 $form->radio('status')->options($this->status)->default(1);

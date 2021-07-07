@@ -102,7 +102,7 @@ class ContentController extends AdminController
             $form->image('image');
             $form->radio('type')
                 ->options(DictionaryModel::getValueByKey('link_type'))
-                ->default('h5')
+                ->default('url')
                 ->required();
             $form->text('appid');
             $form->url('url')->required();

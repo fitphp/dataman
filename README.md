@@ -6,7 +6,7 @@
     <img src="https://img.shields.io/badge/License-MIT-blue" />
 </p>
 
-[演示地址](https://dataman.fitphp.com) 账号：test 密码: test
+[演示地址](https://dataman.fitphp.com) 账号：test 密码: test123
 
 ## 简介
 数据管理平台（DataMan）是一个轻量的、现代设计风格的移动端数据管理系统。

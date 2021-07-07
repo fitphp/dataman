@@ -13,6 +13,7 @@ Route::group([
 ], function (Router $router) {
 
     $router->get('/', 'HomeController@index');
+    $router->resource('/statistics', 'StatisticsController'); // 统计
     $router->resource('/layout', 'LayoutController'); // 布局
     $router->resource('/notice', 'NoticeController'); // 通知
     $router->resource('/channel', 'ChannelController');  // 栏目

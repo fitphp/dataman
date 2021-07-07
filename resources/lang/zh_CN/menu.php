@@ -9,7 +9,7 @@ return [
         'permission'            => '权限',
         'menu'                  => '菜单',
         'operation_log'         => '操作日志',
-        'helpers'               => '开发工具',
+        'helpers'               => '开发',
         'extensions'            => '扩展',
         'scaffold'              => '代码生成器',
         'icons'                 => '图标',

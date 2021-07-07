@@ -111,9 +111,9 @@ class ApplicationController extends AdminController
             )->required();
             $form->radio('type')->options(
                 DictionaryModel::getValueByKey('link_type')
-            )->default('h5');
+            )->default('url')->required();
+            $form->url('url')->required();
             $form->text('appid');
-            $form->url('url')->required();;
             $form->number('order')->default(0);
             $form->select('auth')->options(
                 DictionaryModel::getValueByKey('auth_level')
