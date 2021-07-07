@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Admin\Repositories\AdvertPosition;
+use App\Models\Platform as PlatformModels;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
@@ -19,6 +20,7 @@ class AdvertPositionController extends AdminController
     {
         return Grid::make(new AdvertPosition(['data']), function (Grid $grid) {
             $grid->column('id')->sortable();
+            $grid->column('platform.name', trans('advert-position.fields.platform_name'));
             $grid->column('name');
             $grid->column('flag');
             $grid->column('order');
@@ -27,6 +29,8 @@ class AdvertPositionController extends AdminController
 
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
+                $filter->equal('platform_id')
+                    ->select(PlatformModels::pluck('name','id'));
                 $filter->like('name');
             });
         });
@@ -43,6 +47,8 @@ class AdvertPositionController extends AdminController
     {
         return Show::make($id, new AdvertPosition(), function (Show $show) {
             $show->field('id');
+            $show->field('parent_id');
+            $show->field('platform.name');
             $show->field('name');
             $show->field('flag');
             $show->field('desc');
@@ -61,7 +67,9 @@ class AdvertPositionController extends AdminController
     {
         return Form::make(new AdvertPosition(), function (Form $form) {
             $form->text('name')->required();
-
+            $form->select('platform_id', trans('feedback.fields.platform_id'))
+                ->options(PlatformModels::pluck('name','id'))
+                ->default(0)->required();
             $form->text('flag')
                 ->help('栏目ID+标识，须唯一值，仅支持英文与下划组"_"组成')
                 ->required()

@@ -12,4 +12,8 @@ class Notice extends Model
 	use HasDateTimeFormatter;
     protected $table = 'system_notice';
 
+    public function platform()
+    {
+        return $this->belongsTo(Platform::class);
+    }
 }

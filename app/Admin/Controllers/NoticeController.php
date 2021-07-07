@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Admin\Repositories\Notice;
+use App\Models\Platform as PlatformModels;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
@@ -26,6 +27,7 @@ class NoticeController extends AdminController
     {
         return Grid::make(new Notice(), function (Grid $grid) {
             $grid->column('id')->sortable();
+            $grid->column('platform.name', trans('notice.fields.platform_name'));
             $grid->column('title');
             $grid->from()->using($this->form)->label($this->form_label);
             $grid->top()->using($this->top)->label($this->top_label);
@@ -34,6 +36,8 @@ class NoticeController extends AdminController
 
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
+                $filter->equal('platform_id')
+                    ->select(PlatformModels::pluck('name','id'));
                 $filter->like('title', trans('notice.fields.title'));
             });
         });
@@ -50,6 +54,7 @@ class NoticeController extends AdminController
     {
         return Show::make($id, new Notice(), function (Show $show) {
             $show->field('id');
+            $show->field('platform.name');
             $show->field('title');
             $show->from()->using($this->form);
             $show->top()->using($this->top);
@@ -70,6 +75,9 @@ class NoticeController extends AdminController
         return Form::make(new Notice(), function (Form $form) {
             $form->row(function (Form\Row $form) {
                 $form->text('title')->required();
+                $form->select('platform_id', trans('notice.fields.platform_id'))
+                    ->options(PlatformModels::pluck('name','id'))
+                    ->default(0)->required();
                 $form->editor('content');
             });
             $form->row(function (Form\Row $form) {

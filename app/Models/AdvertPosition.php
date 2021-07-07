@@ -19,4 +19,9 @@ class AdvertPosition extends Model
     {
         return $this->belongsTo(AdvertData::class, 'id', 'pin_id');
     }
+
+    public function platform()
+    {
+        return $this->belongsTo(Platform::class);
+    }
 }

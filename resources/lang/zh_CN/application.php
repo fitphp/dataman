@@ -6,6 +6,8 @@ return [
     ],
     'fields' => [
         'title' => '标题',
+        'platform_id' => '平台ID',
+        'platform_name' => '平台名称',
         'subtitle' => '副标题',
         'image' => '图标',
         'category_ids' => '分类ID',

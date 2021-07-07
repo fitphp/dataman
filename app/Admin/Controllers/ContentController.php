@@ -5,6 +5,7 @@ namespace App\Admin\Controllers;
 use App\Admin\Repositories\Content;
 use App\Models\Dictionary as DictionaryModel;
 use App\Models\Category as CategoryModels;
+use App\Models\Platform as PlatformModels;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
@@ -27,6 +28,7 @@ class ContentController extends AdminController
             $grid->export()->xlsx();
 
             $grid->column('id')->sortable();
+            $grid->column('platform.name', trans('content.fields.platform_name'));
             $grid->column('category.title', trans('content.category.title'))->label();
             $grid->column('image')->width(40);
             $grid->column('title');
@@ -63,6 +65,7 @@ class ContentController extends AdminController
     {
         return Show::make($id, new Content(), function (Show $show) {
             $show->field('id');
+            $show->field('platform.name');
             $show->field('title');
             $show->field('subtitle');
             $show->field('category_id');
@@ -88,6 +91,9 @@ class ContentController extends AdminController
     protected function form()
     {
         return Form::make(new Content(), function (Form $form) {
+            $form->select('platform_id', trans('content.fields.platform_id'))
+                ->options(PlatformModels::pluck('name','id'))
+                ->default(0)->required();
             $form->select('category_id')->options(
                 CategoryModels::selectOptions()
             )->default(0)->required();

@@ -66,7 +66,7 @@ class PlatformController extends AdminController
     {
         return Form::make(new Platform(), function (Form $form) {
             $form->display('id');
-            $form->text('name');
+            $form->text('name')->required();
             $form->text('app_id')
                 ->help('用于区分来源平台，系统唯一值，支持由英文、数字、"."、"-"、"_"组成')
                 ->required()

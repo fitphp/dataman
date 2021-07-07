@@ -16,4 +16,9 @@ class Content extends Model
     {
         return $this->hasOne(Category::class, 'id', 'category_id');
     }
+
+    public function platform()
+    {
+        return $this->belongsTo(Platform::class);
+    }
 }

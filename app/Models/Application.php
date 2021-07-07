@@ -25,4 +25,9 @@ class Application extends Model
     {
         return $this->belongsTo(Category::class, 'category_ids', 'id');
     }
+
+    public function platform()
+    {
+        return $this->belongsTo(Platform::class);
+    }
 }

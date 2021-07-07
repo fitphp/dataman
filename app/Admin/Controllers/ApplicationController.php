@@ -5,6 +5,7 @@ namespace App\Admin\Controllers;
 use App\Admin\Repositories\Application;
 use App\Models\Category as CategoryModels;
 use App\Models\Dictionary as DictionaryModel;
+use App\Models\Platform as PlatformModels;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
@@ -27,6 +28,7 @@ class ApplicationController extends AdminController
             $grid->export()->xlsx();
 
             $grid->column('id')->sortable();
+            $grid->column('platform.name', trans('application.fields.platform_name'));
             $grid->column('auth')->using(
                 DictionaryModel::getValueByKey('auth_level')
             )->label();
@@ -71,6 +73,7 @@ class ApplicationController extends AdminController
     {
         return Show::make($id, new Application(), function (Show $show) {
             $show->field('id');
+            $show->field('platform.name');
             $show->field('title');
             $show->field('subtitle');
             $show->field('image');
@@ -97,6 +100,9 @@ class ApplicationController extends AdminController
     protected function form()
     {
         return Form::make(new Application(), function (Form $form) {
+            $form->select('platform_id', trans('application.fields.platform_id'))
+                ->options(PlatformModels::pluck('name','id'))
+                ->default(0)->required();
             $form->text('title')->required();
             $form->text('subtitle');
             $form->image('image');
