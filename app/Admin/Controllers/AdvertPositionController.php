@@ -22,7 +22,7 @@ class AdvertPositionController extends AdminController
             $grid->column('id')->sortable();
             $grid->column('platform.name', trans('advert-position.fields.platform_name'));
             $grid->column('name');
-            $grid->column('flag');
+            $grid->column('title');
             $grid->column('order');
             $grid->column('desc');
             $grid->column('updated_at')->sortable();
@@ -32,6 +32,7 @@ class AdvertPositionController extends AdminController
                 $filter->equal('platform_id')
                     ->select(PlatformModels::pluck('name','id'));
                 $filter->like('name');
+                $filter->like('title');
             });
         });
     }
@@ -50,7 +51,7 @@ class AdvertPositionController extends AdminController
             $show->field('parent_id');
             $show->field('platform.name');
             $show->field('name');
-            $show->field('flag');
+            $show->field('title');
             $show->field('desc');
             $show->field('order');
             $show->field('created_at');
@@ -66,11 +67,10 @@ class AdvertPositionController extends AdminController
     protected function form()
     {
         return Form::make(new AdvertPosition(), function (Form $form) {
-            $form->text('name')->required();
-            $form->select('platform_id', trans('feedback.fields.platform_id'))
+            $form->select('platform_id', trans('feedback.fields.platform_name'))
                 ->options(PlatformModels::pluck('name','id'))
                 ->default(0)->required();
-            $form->text('flag')
+            $form->text('name')
                 ->help('栏目ID+标识，须唯一值，仅支持英文与下划组"_"组成')
                 ->required()
                 ->creationRules(
@@ -79,7 +79,7 @@ class AdvertPositionController extends AdminController
                         'min' => trans('admin.validation.minlength'),
                         'max' => trans('admin.validation.maxlength'),
                         'regex' => trans('admin.validation.match'),
-                        'unique' => trans('advert-position.validation.unique.flag')
+                        'unique' => trans('advert-position.validation.unique.name')
                     ]
                 )
                 ->updateRules(
@@ -88,10 +88,10 @@ class AdvertPositionController extends AdminController
                         'min' => trans('admin.validation.minlength'),
                         'max' => trans('admin.validation.maxlength'),
                         'regex' => trans('admin.validation.match'),
-                        'unique' => trans('advert-position.validation.unique.flag')
+                        'unique' => trans('advert-position.validation.unique.name')
                     ]
                 );
-
+            $form->text('title')->required();
             $form->text('desc');
             $form->number('order')->default(0);
 

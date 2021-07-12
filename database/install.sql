@@ -338,7 +338,7 @@ CREATE TABLE `advert_position` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `platform_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT '平台ID',
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
-  `flag` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '标题',
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '标题',
   `desc` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '描述',
   `order` tinyint(3) unsigned NOT NULL DEFAULT 0 COMMENT '排序',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() COMMENT '创建时间',

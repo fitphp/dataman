@@ -8,7 +8,7 @@ return [
         'name' => '名称',
         'platform_id' => '平台ID',
         'platform_name' => '平台名称',
-        'flag' => '标识',
+        'title' => '标题',
         'desc' => '描述',
         'channel' => '栏目',
         'channel_id' => '栏目ID',

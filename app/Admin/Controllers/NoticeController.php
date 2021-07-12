@@ -74,10 +74,10 @@ class NoticeController extends AdminController
     {
         return Form::make(new Notice(), function (Form $form) {
             $form->row(function (Form\Row $form) {
-                $form->text('title')->required();
-                $form->select('platform_id', trans('notice.fields.platform_id'))
+                $form->select('platform_id', trans('notice.fields.platform_name'))
                     ->options(PlatformModels::pluck('name','id'))
                     ->default(0)->required();
+                $form->text('title')->required();
                 $form->editor('content');
             });
             $form->row(function (Form\Row $form) {

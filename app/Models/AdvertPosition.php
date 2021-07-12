@@ -11,8 +11,8 @@ class AdvertPosition extends Model
 	use HasDateTimeFormatter;
     protected $table = 'advert_position';
 
-    public function setFlagAttribute($value) {
-        $this->attributes['flag'] = strtolower($value);
+    public function setTitleAttribute($value) {
+        $this->attributes['title'] = strtolower($value);
     }
 
     public function data()
