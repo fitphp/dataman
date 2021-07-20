@@ -30,14 +30,14 @@ class AdvertService
         } else {
             $positions = AdvertPosition::where(['channel_id' => $channel_id])
                 ->orderBy('order')
-                ->get(['id', 'name', 'flag', 'desc'])
+                ->get(['id', 'name', 'title', 'desc'])
                 ->toArray();
             foreach ($positions as $position) {
                 $items = AdvertData::where(['pin_id' => $position['id']])
                     ->get()
                     ->toArray();
-                $advert[$position['flag']] = $position;
-                $advert[$position['flag']]['items'] = $items;
+                $advert[$position['name']] = $position;
+                $advert[$position['name']]['items'] = $items;
             }
 
             if ($cache) {
@@ -47,14 +47,14 @@ class AdvertService
         }
     }
 
-    public function getByPositionFlag($flag, $cache = true)
+    public function getByPositionName($name, $cache = true)
     {
-        $key = "dmp:ad:flag:{$flag}";
+        $key = "dmp:ad:name:{$name}";
         if (Cache::has($key) && $cache) {
             return json_decode(Cache::get($key), true);
         } else {
-            $position = AdvertPosition::where(['flag' => $flag])
-                ->first(['id', 'flag'])->toArray();
+            $position = AdvertPosition::where(['name' => $name])
+                ->first(['id', 'name'])->toArray();
             $advert = AdvertData::where(['pin_id' => $position['id']])->get()->toArray();
 
             if ($cache) {
@@ -65,11 +65,11 @@ class AdvertService
         }
     }
 
-    public function getByPositionFlags($flags, $cache = true)
+    public function getByPositionNames($names, $cache = true)
     {
         $advert = [];
-        foreach ($flags as $flag) {
-            $advert[$flag] = $this->getByPositionFlag($flag, $cache);
+        foreach ($names as $name) {
+            $advert[$name] = $this->getByPositionName($name, $cache);
         }
 
         return $advert;

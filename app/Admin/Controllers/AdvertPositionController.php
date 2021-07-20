@@ -18,7 +18,7 @@ class AdvertPositionController extends AdminController
      */
     protected function grid()
     {
-        return Grid::make(new AdvertPosition(['data']), function (Grid $grid) {
+        return Grid::make(new AdvertPosition(['platform']), function (Grid $grid) {
             $grid->column('id')->sortable();
             $grid->column('platform.name', trans('advert-position.fields.platform_name'));
             $grid->column('name');
@@ -74,7 +74,7 @@ class AdvertPositionController extends AdminController
                 ->help('栏目ID+标识，须唯一值，仅支持英文与下划组"_"组成')
                 ->required()
                 ->creationRules(
-                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]+$/', "unique:advert_position,flag,null,null"],
+                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]+$/', "unique:advert_position,title,null,null"],
                     [
                         'min' => trans('admin.validation.minlength'),
                         'max' => trans('admin.validation.maxlength'),
@@ -83,7 +83,7 @@ class AdvertPositionController extends AdminController
                     ]
                 )
                 ->updateRules(
-                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]+$/', "unique:advert_position,flag,{{id}},id}"],
+                    ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]+$/', "unique:advert_position,title,{{id}},id}"],
                     [
                         'min' => trans('admin.validation.minlength'),
                         'max' => trans('admin.validation.maxlength'),

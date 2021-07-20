@@ -22,6 +22,6 @@ class AdvertPosition extends Model
 
     public function platform()
     {
-        return $this->belongsTo(Platform::class);
+        return $this->belongsTo(Platform::class, 'platform_id', 'id');
     }
 }
