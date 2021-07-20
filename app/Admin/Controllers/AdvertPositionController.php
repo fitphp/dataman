@@ -26,6 +26,7 @@ class AdvertPositionController extends AdminController
             $grid->column('order');
             $grid->column('desc');
             $grid->column('updated_at')->sortable();
+            $grid->display('广告列表')->link();
 
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');

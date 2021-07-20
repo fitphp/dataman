@@ -24,7 +24,7 @@ class AdvertDataController extends AdminController
     {
         return Grid::make(new AdvertData(['position']), function (Grid $grid) {
             $grid->column('id')->sortable();
-            $grid->column('position.name', trans('advert-data.type.name'));
+            $grid->column('position.title', trans('advert-data.type.title'));
             $grid->column('image');
             $grid->column('title');
             $grid->type()->using(DictionaryModel::getValueByKey('link_type'))->label();
@@ -78,10 +78,10 @@ class AdvertDataController extends AdminController
         return Form::make(new AdvertData(), function (Form $form) {
 
             $form->column(6, function (Form $form) {
-                $form->text('title')->required();
-                $form->select('pin_id', trans('advert-data.type.name'))
-                    ->options(AdvertPositionModels::pluck('name', 'id'))
+                $form->select('pin_id', trans('advert-data.type.title'))
+                    ->options(AdvertPositionModels::pluck('title', 'id'))
                     ->required();
+                $form->text('title')->required();
                 $form->text('desc');
                 $form->image('image');
             });

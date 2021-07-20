@@ -17,8 +17,8 @@ use Dcat\Admin\Http\Controllers\AdminController;
 
 class ChannelController extends AdminController
 {
-    protected $type = ['app' => '应用', 'content' => '内容', 'notice' => '通知', 'advert' => '广告'];
-    protected $type_label = [ 'app' => 'success', 'content' => 'info', 'notice' => 'primary', 'advert' => 'default'];
+    protected $type = ['category' => '类目', 'app' => '应用', 'content' => '内容', 'notice' => '通知', 'advert' => '广告'];
+    protected $type_label = ['category' => 'default', 'app' => 'primary', 'content' => 'success', 'notice' => 'info', 'advert' => 'default'];
     protected $status = [0 => '关闭', 1 => '正常'];
     protected $status_label = [0 => 'danger', 1 => 'success'];
 
@@ -30,16 +30,15 @@ class ChannelController extends AdminController
     protected function grid()
     {
         return Grid::make(new Channel(['platform']), function (Grid $grid) {
-            $grid->column('id')->sortable();
+            $grid->column('id');
             $grid->column('parent_id');
             $grid->column('platform.name', trans('channel.fields.platform_name'));
-            $grid->column('name');
-            $grid->column('title');
-            $grid->column('subtitle');
             $grid->column('image');
-            $grid->column('order');
-            $grid->column('created_at');
-            $grid->column('updated_at')->sortable();
+            $grid->column('name');
+            $grid->column('title')->tree();
+            $grid->column('type')->using($this->type)->label($this->type_label);
+            $grid->column('order')->orderable();
+            $grid->column('updated_at');
 
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
@@ -161,7 +160,7 @@ class ChannelController extends AdminController
                             ->options(AdvertPositionModels::pluck('name', 'title'));
                     })
                     ->options($this->type)
-                    ->default(0);
+                    ->default('category');
 
                 $form->image('image', trans('channel.fields.image'));
 

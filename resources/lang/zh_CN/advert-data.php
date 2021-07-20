@@ -18,7 +18,7 @@ return [
         'end_at' => '结束时间',
     ],
     'type' => [
-        'name' => '位置名称',
+        'title' => '位置标题',
     ],
     'options' => [
     ],
