@@ -16,6 +16,9 @@ return [
         'appid' => 'AppID',
         'url' => 'URL',
         'order' => '排序',
+        'from' => '来源',
+        'start_at' => '开始时间',
+        'end_at' => '结束时间',
         'status' => '状态',
     ],
     'category' => [

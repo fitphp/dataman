@@ -13,6 +13,8 @@ use Dcat\Admin\Http\Controllers\AdminController;
 
 class ContentController extends AdminController
 {
+    protected $form = [0 => '内部', 1 => '外部'];
+    protected $form_label = [0 => 'success',  1 => 'primary'];
     protected $status = [0 => '关闭', 1 => '正常'];
     protected $status_label = [0 => 'danger', 1 => 'success'];
 
@@ -91,24 +93,44 @@ class ContentController extends AdminController
     protected function form()
     {
         return Form::make(new Content(), function (Form $form) {
-            $form->select('platform_id', trans('content.fields.platform_id'))
-                ->options(PlatformModels::pluck('name','id'))
-                ->default(0)->required();
-            $form->select('category_id')->options(
-                CategoryModels::selectOptions()
-            )->default(0)->required();
-            $form->text('title')->required();
-            $form->text('subtitle');
-            $form->image('image');
-            $form->radio('type')
-                ->options(DictionaryModel::getValueByKey('link_type'))
-                ->default('url')
-                ->required();
-            $form->text('appid');
-            $form->url('url')->required();
-            $form->number('order')->default(0);
-            $form->radio('status')->options($this->status)->default(1);
-            $form->editor('content');
+            $form->row(function (Form\Row $form) {
+                $form->width(6)->select('platform_id', trans('content.fields.platform_id'))
+                    ->options(PlatformModels::pluck('name','id'))
+                    ->default(0)->required();
+                $form->width(6)->select('category_id')->options(
+                    CategoryModels::selectOptions()
+                )->default(0)->required();
+            });
+
+            $form->row(function (Form\Row $form) {
+                $form->width(6)->text('title')->required();
+                $form->width(6)->text('subtitle');
+            });
+
+            $form->row(function (Form\Row $form) {
+                $form->image('image');
+            });
+
+            $form->row(function (Form\Row $form) {
+                $form->width(4)->radio('type')
+                    ->options(DictionaryModel::getValueByKey('link_type'))
+                    ->default('url')
+                    ->required();
+                $form->width(4)->radio('from')->options($this->form)->default(0);
+                $form->width(4)->radio('status')->options($this->status)->default(1);
+                $form->width(4)->text('appid');
+                $form->width(8)->url('url')->required();
+            });
+
+            $form->row(function (Form\Row $form) {
+                $form->width(4)->number('order')->default(0);
+                $form->width(4)->datetime('start_at')->default(date('Y-m-d H:i:s'));
+                $form->width(4)->datetime('end_at')->default('2099-12-30 23:59:59');
+            });
+
+            $form->row(function (Form\Row $form) {
+                $form->editor('content');
+            });
 
             $form->disableCreatingCheck();
             $form->disableEditingCheck();

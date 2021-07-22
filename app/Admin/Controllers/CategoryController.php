@@ -31,9 +31,8 @@ class CategoryController extends AdminController
             $grid->column('group')->using(
                 DictionaryModel::getValueByKey('category_group')
             )->label();
-            $grid->column('parent_id');
             $grid->column('image');
-            $grid->column('title');
+            $grid->column('title')->tree();;
             $grid->column('name');
             $grid->column('order');
             $grid->column('updated_at')->sortable();

@@ -31,7 +31,6 @@ class ChannelController extends AdminController
     {
         return Grid::make(new Channel(['platform']), function (Grid $grid) {
             $grid->column('id');
-            $grid->column('parent_id');
             $grid->column('platform.name', trans('channel.fields.platform_name'));
             $grid->column('image');
             $grid->column('name');
@@ -120,19 +119,19 @@ class ChannelController extends AdminController
                     ->creationRules(
                         ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]+$/', "unique:channel"],
                         [
-                            'min' => trans('admin.validation.minlength'),
-                            'max' => trans('admin.validation.maxlength'),
-                            'regex' => trans('admin.validation.match'),
-                            'unique' => trans('admin.validation.unique')
+                            'min' => trans('最少需要4字符'),
+                            'max' => trans('最多支持32位字符'),
+                            'regex' => trans('不符合命名规则'),
+                            'unique' => trans('所属平台已存在该名称')
                         ]
                     )
                     ->updateRules(
                         ['required', 'min:4', 'max:32', 'regex:/^[a-zA-Z_]+$/', "unique:channel,name,{{id}},id"],
                         [
-                            'min' => trans('admin.validation.minlength'),
-                            'max' => trans('admin.validation.maxlength'),
-                            'regex' => trans('admin.validation.match'),
-                            'unique' => trans('admin.validation.unique'),
+                            'min' => trans('最少需要4字节'),
+                            'max' => trans('最多支持32位字符'),
+                            'regex' => trans('不符合命名规则'),
+                            'unique' => trans('所属平台已存在该名称'),
                         ]
                     );
 
