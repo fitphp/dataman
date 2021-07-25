@@ -26,7 +26,7 @@ class CategoryService
         if (Cache::has($key)) {
             return json_decode(Cache::get($key), true);
         } else {
-            $category = Category::find($id, ['id','image','name', 'title'])
+            $category = Category::find($id, ['id','image','name', 'title', 'group'])
                 ->toArray();
 
             Cache::put($key, json_encode($category));

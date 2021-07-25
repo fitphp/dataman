@@ -3,8 +3,6 @@
 namespace App\Models;
 
 use Dcat\Admin\Traits\HasDateTimeFormatter;
-
-use Dcat\Admin\Traits\ModelTree;
 use Illuminate\Database\Eloquent\Model;
 
 class Content extends Model

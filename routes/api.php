@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\LayoutController;
+use App\Http\Controllers\ChannelController;
 use App\Http\Controllers\ChinaRegionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +21,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::prefix('v1')->group(function () {
-    Route::get('/layouts', [LayoutController::class, 'show']);
+    Route::get('/layouts', [ChannelController::class, 'layout']);
     Route::get('/region/china', [ChinaRegionController::class, 'show']);
 });

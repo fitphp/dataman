@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Dcat\Admin\Traits\HasDateTimeFormatter;
-
 use Illuminate\Database\Eloquent\Model;
 
 class Application extends Model
@@ -21,7 +20,7 @@ class Application extends Model
         return explode(',', $value);
     }
 
-    public function Category()
+    public function category()
     {
         return $this->belongsTo(Category::class, 'category_ids', 'id');
     }

@@ -25,7 +25,7 @@ class ContentController extends AdminController
      */
     protected function grid()
     {
-        return Grid::make(new Content(['category']), function (Grid $grid) {
+        return Grid::make(new Content(['platform','category']), function (Grid $grid) {
             // 启用导出功能
             $grid->export()->xlsx();
 
@@ -124,8 +124,8 @@ class ContentController extends AdminController
 
             $form->row(function (Form\Row $form) {
                 $form->width(4)->number('order')->default(0);
-                $form->width(4)->datetime('start_at')->default(date('Y-m-d H:i:s'));
-                $form->width(4)->datetime('end_at')->default('2099-12-30 23:59:59');
+                $form->width(4)->datetime('start_at');
+                $form->width(4)->datetime('end_at');
             });
 
             $form->row(function (Form\Row $form) {
