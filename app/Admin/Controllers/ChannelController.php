@@ -2,6 +2,9 @@
 
 namespace App\Admin\Controllers;
 
+use App\Admin\Renderable\ApplicationTable;
+use App\Admin\Renderable\CategoryTable;
+use App\Admin\Renderable\ContentTable;
 use App\Models\Application as ApplicationModels;
 use App\Models\Channel as Models;
 use App\Models\Content as ContentModels;
@@ -15,8 +18,8 @@ use Dcat\Admin\Http\Controllers\AdminController;
 
 class ChannelController extends AdminController
 {
-    protected $type = ['index' => '目录', 'app' => '应用', 'content' => '内容', 'category' => '分类'];
-    protected $type_label = ['index' => 'default', 'app' => 'primary', 'content' => 'success', 'category' => 'info'];
+    protected $type = ['index' => '目录', 'app' => '应用', 'content' => '内容'];
+    protected $type_label = ['index' => 'default', 'app' => 'primary', 'content' => 'success'];
     protected $status = [0 => '关闭', 1 => '正常'];
     protected $status_label = [0 => 'danger', 1 => 'success'];
 
@@ -137,20 +140,18 @@ class ChannelController extends AdminController
 
             $form->column(7, function (Form $form) {
                 $form->radio('type')
-                    ->when('app', function (Form $form) {
-                        $form->listbox('target_ids', '应用')
-                            ->options(ApplicationModels::pluck('title', 'id'));
-                    })
-                    ->when('content', function (Form $form) {
-                        $form->listbox('target_ids', '内容')
-                            ->options(ContentModels::pluck('title', 'id'));
-                    })
-                    ->when('category', function (Form $form) {
-                        $form->select('target_ids', '分类')
-                            ->options(CategoryModels::pluck('title', 'id'))
-                            ->default(0);
-                    })
                     ->options($this->type)
+                    ->when('app', function (Form $form) {
+                        $form->multipleSelectTable("target_ids", '应用')
+                            ->title('应用列表')
+                            ->from(ApplicationTable::make())
+                            ->model(ApplicationModels::class, 'id', 'title');
+                    })->when('content', function (Form $form) {
+                        $form->multipleSelectTable("target_ids", '内容')
+                            ->title('内容列表')
+                            ->from(ContentTable::make())
+                            ->model(ContentModels::class, 'id', 'title');
+                    })
                     ->default('index');
 
                 $form->image('image', trans('channel.fields.image'));
